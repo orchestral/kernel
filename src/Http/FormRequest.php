@@ -1,6 +1,8 @@
 <?php namespace Orchestra\Http;
 
 use Illuminate\Foundation\Http\FormRequest as Request;
+use Illuminate\Http\Exception\HttpResponseException;
+use Illuminate\Validation\Factory as ValidationFactory;
 use Orchestra\Support\Traits\ValidationTrait;
 
 class FormRequest extends Request
@@ -12,6 +14,7 @@ class FormRequest extends Request
      *
      * @param  \Illuminate\Validation\Factory  $factory
      * @return void
+     * @throws \Illuminate\Http\Exception\HttpResponseException
      */
     public function validate(ValidationFactory $factory)
     {
@@ -44,8 +47,8 @@ class FormRequest extends Request
             'DELETE' => 'destroy',
         ];
 
-        if (in_array($method, $available)) {
-            $this->onValidationScenario($available[$method]);
+        if (in_array($current, $available)) {
+            $this->onValidationScenario($available[$current]);
         }
     }
 
