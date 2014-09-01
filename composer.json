@@ -1,0 +1,31 @@
+{
+	"name": "orchestra/http",
+	"description": "HTTP Component for Orchestra Platform 2",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Mior Muhammad Zaki",
+			"email": "crynobone@gmail.com",
+			"homepage": "https://github.com/crynobone"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Orchestra\\Http\\": "src/Http"
+		}
+	},
+	"require": {
+		"php": ">=5.4.0",
+		"orchestra/support": "2.3.*"
+	},
+	"require-dev": {
+		"mockery/mockery": "0.9.*",
+		"laravel/framework": "4.3.*"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "2.3-dev"
+		}
+	},
+	"minimum-stability": "dev"
+}
