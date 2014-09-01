@@ -20,7 +20,8 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"laravel/framework": "4.3.*"
+		"laravel/framework": "4.3.*",
+		"orchestra/extension": "2.3.*"
 	},
 	"extra": {
 		"branch-alias": {
