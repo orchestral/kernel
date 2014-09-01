@@ -203,7 +203,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $app  = $this->getApplicationMocks();
         $app['config'] = $config = m::mock('\Illuminate\Config\Repository');
 
-        $stub = m::mock('\Orchestra\Foundation\Abstractable\RouteManager[group]', [$app]);
+        $stub = m::mock('\Orchestra\Http\RouteManager[group]', [$app]);
 
         $closure = function () {
 
