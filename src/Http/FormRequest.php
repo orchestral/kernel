@@ -24,7 +24,7 @@ class FormRequest extends Request
 
         if ($resolver->fails()) {
             throw new HttpResponseException($this->response(
-                $this->formatErrors($instance)
+                $this->formatErrors($resolver)
             ));
         } elseif ($this->failsAuthorization()) {
             throw new HttpResponseException($this->forbiddenResponse());
