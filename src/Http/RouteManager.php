@@ -20,7 +20,7 @@ abstract class RouteManager
      *
      * @var array
      */
-    protected $routes = array();
+    protected $routes = [];
 
     /**
      * Construct a new instance.
@@ -69,7 +69,7 @@ abstract class RouteManager
         // an extension or simply handling root path.
         empty($package) && $package = "app";
 
-        return array($package, $route);
+        return [$package, $route];
     }
 
     /**
@@ -81,19 +81,19 @@ abstract class RouteManager
      * @param  \Closure|null    $callback
      * @return array
      */
-    public function group($name, $default, $attributes = array(), Closure $callback = null)
+    public function group($name, $default, $attributes = [], Closure $callback = null)
     {
         $route = $this->route($name, $default);
 
         if ($attributes instanceof Closure) {
             $callback   = $attributes;
-            $attributes = array();
+            $attributes = [];
         }
 
-        $attributes = array_merge($attributes, array(
+        $attributes = array_merge($attributes, [
             'prefix' => $route->prefix(),
             'domain' => $route->domain(),
-        ));
+        ]);
 
         if (is_callable($callback)) {
             $this->app['router']->group($attributes, $callback);
@@ -159,7 +159,7 @@ abstract class RouteManager
         // Boot the application.
         $this->boot();
 
-        if (in_array($name, array('orchestra', 'orchestra/foundation'))) {
+        if (in_array($name, ['orchestra', 'orchestra/foundation'])) {
             $name = 'orchestra';
         }
 
@@ -189,7 +189,7 @@ abstract class RouteManager
     }
 
     /**
-     * Generte route by name.
+     * Generate route by name.
      *
      * @param  string   $name
      * @param  string   $default
@@ -199,7 +199,7 @@ abstract class RouteManager
     {
         // Orchestra Platform routing is managed by `orchestra/foundation::handles`
         // and can be manage using configuration.
-        if (in_array($name, array('orchestra'))) {
+        if (in_array($name, ['orchestra'])) {
             return new RouteGenerator(
                 $this->app['config']->get('orchestra/foundation::handles', $default),
                 $this->app['request']
