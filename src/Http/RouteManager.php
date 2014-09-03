@@ -11,7 +11,7 @@ abstract class RouteManager
     /**
      * Application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $app;
 
