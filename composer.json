@@ -16,11 +16,12 @@
 	},
 	"require": {
 		"php": ">=5.4.0",
+		"illuminate/contracts": "4.3.*",
 		"orchestra/support": "2.3.*"
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"laravel/framework": "4.3.*",
+		"illuminate/container": "4.3.*",
 		"orchestra/extension": "2.3.*"
 	},
 	"extra": {

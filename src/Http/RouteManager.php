@@ -1,7 +1,7 @@
 <?php namespace Orchestra\Http;
 
 use Closure;
-use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\NamespacedItemResolver;
 use Orchestra\Extension\RouteGenerator;
 use Orchestra\Support\Str;
@@ -25,7 +25,7 @@ abstract class RouteManager
     /**
      * Construct a new instance.
      *
-     * @param  \Illuminate\Foundation\Application   $app
+     * @param  \Illuminate\Contracts\Foundation\Application   $app
      */
     public function __construct(Application $app)
     {
