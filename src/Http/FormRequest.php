@@ -10,27 +10,15 @@ class FormRequest extends Request
     use ValidationTrait;
 
     /**
-     * Validate the form request according to its rules.
+     * Get the validator instance for the request.
      *
-     * @param  \Illuminate\Validation\Factory  $factory
-     * @return void
-     * @throws \Illuminate\Http\Exception\HttpResponseException
+     * @return \Illuminate\Validation\Validator
      */
-    public function validate(ValidationFactory $factory)
+    protected function getValidatorInstance()
     {
         $this->setupValidationScenario();
 
-        $resolver = $this->runValidation($this->input());
-
-        if ($resolver->fails()) {
-            throw new HttpResponseException($this->response(
-                $this->formatErrors($resolver)
-            ));
-        } elseif ($this->failsAuthorization()) {
-            throw new HttpResponseException($this->forbiddenResponse());
-        }
-
-        $this->runFinalValidationChecks();
+        return $this->runValidation($this->input());
     }
 
     /**
