@@ -1,6 +1,6 @@
 {
 	"name": "orchestra/http",
-	"description": "HTTP Component for Orchestra Platform 2",
+	"description": "HTTP Component for Orchestra Platform",
 	"license": "MIT",
 	"authors": [
 		{
