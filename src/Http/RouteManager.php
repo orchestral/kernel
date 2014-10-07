@@ -1,10 +1,10 @@
 <?php namespace Orchestra\Http;
 
 use Closure;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Support\NamespacedItemResolver;
-use Orchestra\Extension\RouteGenerator;
 use Orchestra\Support\Str;
+use Orchestra\Extension\RouteGenerator;
+use Illuminate\Support\NamespacedItemResolver;
+use Illuminate\Contracts\Foundation\Application;
 
 abstract class RouteManager
 {
