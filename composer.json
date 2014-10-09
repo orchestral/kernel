@@ -11,7 +11,8 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Orchestra\\Http\\": "src/Http"
+			"Orchestra\\Http\\": "src/Http",
+			"Orchestra\\Routing\\": "src/Routing"
 		}
 	},
 	"require": {
@@ -21,7 +22,6 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"illuminate/container": "5.0.*",
 		"laravel/framework": "5.0.*",
 		"orchestra/extension": "3.0.*"
 	},
