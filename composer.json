@@ -11,8 +11,7 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Orchestra\\Http\\": "src/Http",
-			"Orchestra\\Routing\\": "src/Routing"
+			"Orchestra\\Http\\": "src/Http"
 		}
 	},
 	"require": {
