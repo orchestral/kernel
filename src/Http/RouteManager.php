@@ -77,7 +77,7 @@ abstract class RouteManager
      *
      * @param  string           $name
      * @param  string           $default
-     * @param  array            $attributes
+     * @param  array|\Closure   $attributes
      * @param  \Closure|null    $callback
      * @return array
      */
@@ -139,12 +139,19 @@ abstract class RouteManager
     /**
      * Register the given Closure with the "group" function namespace set.
      *
-     * @param  \Closure  $callback
+     * @param  string|null      $namespace
+     * @param  \Closure|null    $callback
      * @return void
      */
-    public function namespaced(Closure $callback)
+    public function namespaced($namespace, Closure $callback)
     {
-        $this->group('orchestra/foundation', 'orchestra', [], $callback);
+        $attributes = [];
+
+        if (! empty($namespace) && $namespace != '\\') {
+            $attributes['namespace'] = $namespace;
+        }
+
+        $this->group('orchestra/foundation', 'orchestra', $attributes, $callback);
     }
 
     /**

@@ -226,9 +226,13 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         };
 
-        $stub->shouldReceive('group')->once()->with('orchestra/foundation', 'orchestra', [], $closure)->andReturn([]);
+        $stub->shouldReceive('group')->times(3)->with('orchestra/foundation', 'orchestra', [], $closure)->andReturn([]);
+        $stub->shouldReceive('group')->once()->with('orchestra/foundation', 'orchestra', ['namespace' => 'Foo'], $closure)->andReturn([]);
 
-        $this->assertNull($stub->namespaced($closure));
+        $this->assertNull($stub->namespaced('', $closure));
+        $this->assertNull($stub->namespaced('\\', $closure));
+        $this->assertNull($stub->namespaced(null, $closure));
+        $this->assertNull($stub->namespaced('Foo', $closure));
     }
 
     /**
