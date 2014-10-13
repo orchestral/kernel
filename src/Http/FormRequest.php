@@ -1,9 +1,7 @@
 <?php namespace Orchestra\Http;
 
 use Orchestra\Support\Traits\ValidationTrait;
-use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Foundation\Http\FormRequest as Request;
-use Illuminate\Validation\Factory as ValidationFactory;
 
 class FormRequest extends Request
 {
