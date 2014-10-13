@@ -67,7 +67,7 @@ abstract class RouteManager
         // If package is empty, we should consider that the route is using
         // app (or root path), it doesn't matter at this stage if app is
         // an extension or simply handling root path.
-        empty($package) && $package = "app";
+        empty($package) && $package = 'app';
 
         return [$package, $route];
     }
@@ -95,7 +95,7 @@ abstract class RouteManager
             'domain' => $route->domain(),
         ]);
 
-        if (is_callable($callback)) {
+        if (! is_null($callback)) {
             $this->app['router']->group($attributes, $callback);
         }
 
