@@ -1,5 +1,5 @@
 {
-	"name": "orchestra/kernel",
+	"name": "orchestra/http",
 	"description": "HTTP Component for Orchestra Platform",
 	"license": "MIT",
 	"authors": [
@@ -11,18 +11,13 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Orchestra\\Http\\": "src/Http"
+			"Orchestra\\Http\\": ""
 		}
 	},
 	"require": {
 		"php": ">=5.4.0",
 		"illuminate/contracts": "5.0.*",
 		"orchestra/support-core": "3.0.*"
-	},
-	"require-dev": {
-		"mockery/mockery": "0.9.*",
-		"laravel/framework": "5.0.*",
-		"orchestra/extension": "3.0.*"
 	},
 	"extra": {
 		"branch-alias": {
