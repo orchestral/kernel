@@ -24,6 +24,9 @@
 		"laravel/framework": "5.0.*",
 		"orchestra/extension": "3.0.*"
 	},
+	"replace": {
+		"orchestra/http": "self.version"
+	},
 	"extra": {
 		"branch-alias": {
 			"dev-master": "3.0-dev"
