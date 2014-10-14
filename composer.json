@@ -26,6 +26,7 @@
 		"orchestra/extension": "3.0.*"
 	},
 	"replace": {
+		"orchestra/contracts": "self.version",
 		"orchestra/http": "self.version"
 	},
 	"extra": {
