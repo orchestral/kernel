@@ -22,8 +22,7 @@
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"laravel/framework": "5.0.*",
-		"orchestra/extension": "3.0.*"
+		"laravel/framework": "5.0.*"
 	},
 	"replace": {
 		"orchestra/contracts": "self.version",

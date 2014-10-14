@@ -133,7 +133,7 @@ abstract class RouteManager
      *
      * @param  string   $name
      * @param  string   $default
-     * @return \Orchestra\Extension\RouteGenerator
+     * @return \Orchestra\Contracts\Extension\RouteGenerator
      */
     public function route($name, $default = '/')
     {
