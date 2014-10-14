@@ -2,7 +2,6 @@
 
 use Closure;
 use Orchestra\Support\Str;
-use Orchestra\Extension\RouteGenerator;
 use Illuminate\Support\NamespacedItemResolver;
 use Illuminate\Contracts\Foundation\Application;
 
@@ -31,13 +30,6 @@ abstract class RouteManager
     {
         $this->app = $app;
     }
-
-    /**
-     * Start the application.
-     *
-     * @return object
-     */
-    abstract public function boot();
 
     /**
      *  Return locate handles configuration for a package/app.
@@ -137,24 +129,6 @@ abstract class RouteManager
     }
 
     /**
-     * Register the given Closure with the "group" function namespace set.
-     *
-     * @param  string|null      $namespace
-     * @param  \Closure|null    $callback
-     * @return void
-     */
-    public function namespaced($namespace, Closure $callback)
-    {
-        $attributes = [];
-
-        if (! empty($namespace) && $namespace != '\\') {
-            $attributes['namespace'] = $namespace;
-        }
-
-        $this->group('orchestra/foundation', 'orchestra', $attributes, $callback);
-    }
-
-    /**
      * Get extension route.
      *
      * @param  string   $name
@@ -163,13 +137,6 @@ abstract class RouteManager
      */
     public function route($name, $default = '/')
     {
-        // Boot the application.
-        $this->boot();
-
-        if (in_array($name, ['orchestra', 'orchestra/foundation'])) {
-            $name = 'orchestra';
-        }
-
         if (! isset($this->routes[$name])) {
             $this->routes[$name] = $this->generateRouteByName($name, $default);
         }
@@ -200,19 +167,10 @@ abstract class RouteManager
      *
      * @param  string   $name
      * @param  string   $default
-     * @return \Orchestra\Extension\RouteGenerator
+     * @return \Orchestra\Contracts\Extension\RouteGenerator
      */
     protected function generateRouteByName($name, $default)
     {
-        // Orchestra Platform routing is managed by `orchestra/foundation::handles`
-        // and can be manage using configuration.
-        if (in_array($name, ['orchestra'])) {
-            return new RouteGenerator(
-                $this->app['config']->get('orchestra/foundation::handles', $default),
-                $this->app['request']
-            );
-        }
-
         return $this->app['orchestra.extension']->route($name, $default);
     }
 }

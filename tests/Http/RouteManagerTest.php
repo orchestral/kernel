@@ -18,7 +18,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->app = m::mock('\Illuminate\Contracts\Foundation\Application', '\Illuminate\Container\Container');
+        $this->app = m::mock('\Illuminate\Contracts\Foundation\Application', '\ArrayAccess');
         $_SERVER['RouteManagerTest@callback'] = null;
 
         Facade::clearResolvedInstances();
@@ -32,6 +32,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->app);
         unset($_SERVER['RouteManagerTest@callback']);
+
         m::close();
     }
 
@@ -57,13 +58,17 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGroupMethod()
     {
-        $app    = $this->getApplicationMocks();
-        $config = m::mock('\Illuminate\Config\Repository');
+        $app       = $this->getApplicationMocks();
+        $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
+        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
-        $app->shouldReceive('offsetGet')->with('config')->andReturn($config);
+        $app->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension);
 
-        $config->shouldReceive('get')->once()
-            ->with('orchestra/foundation::handles', 'admin')->andReturn('admin');
+        $extension->shouldReceive('route')->once()
+            ->with('admin', 'admin')->andReturn($appRoute);
+
+        $appRoute->shouldReceive('prefix')->once()->andReturn('admin')
+            ->shouldReceive('domain')->once()->andReturnNull();
 
         $stub = new StubRouteManager($app);
 
@@ -73,7 +78,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
             'domain' => null,
         );
 
-        $this->assertEquals($expected, $stub->group('orchestra', 'admin', array('before' => 'auth')));
+        $this->assertEquals($expected, $stub->group('admin', 'admin', array('before' => 'auth')));
     }
 
     /**
@@ -84,12 +89,18 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGroupMethodWithClosure()
     {
-        $app    = $this->getApplicationMocks();
-        $config = m::mock('\Illuminate\Config\Repository');
-        $router = m::mock('\Illuminate\Routing\Router');
+        $app       = $this->getApplicationMocks();
+        $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
+        $router    = m::mock('\Illuminate\Routing\Router');
+        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
-        $app->shouldReceive('offsetGet')->with('config')->andReturn($config)
+        $app->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension)
             ->shouldReceive('offsetGet')->with('router')->andReturn($router);
+
+        $extension->shouldReceive('route')->once()->with('admin', 'admin')->andReturn($appRoute);
+
+        $appRoute->shouldReceive('prefix')->once()->andReturn('admin')
+            ->shouldReceive('domain')->once()->andReturnNull();
 
         $group = array(
             'before' => 'auth',
@@ -99,13 +110,11 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $callback = function () { };
 
-        $config->shouldReceive('get')->once()
-            ->with('orchestra/foundation::handles', 'admin')->andReturn('admin');
         $router->shouldReceive('group')->once()->with($group, $callback)->andReturnNull();
 
         $stub = new StubRouteManager($app);
 
-        $this->assertEquals($group, $stub->group('orchestra', 'admin', array('before' => 'auth'), $callback));
+        $this->assertEquals($group, $stub->group('admin', 'admin', array('before' => 'auth'), $callback));
     }
 
     /**
@@ -116,12 +125,18 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGroupMethodWithClosureAndNotArray()
     {
-        $app    = $this->getApplicationMocks();
-        $config = m::mock('\Illuminate\Config\Repository');
-        $router = m::mock('\Illuminate\Routing\Router');
+        $app       = $this->getApplicationMocks();
+        $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
+        $router    = m::mock('\Illuminate\Routing\Router');
+        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
-        $app->shouldReceive('offsetGet')->with('config')->andReturn($config)
+        $app->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension)
             ->shouldReceive('offsetGet')->with('router')->andReturn($router);
+
+        $extension->shouldReceive('route')->once()->with('admin', 'admin')->andReturn($appRoute);
+
+        $appRoute->shouldReceive('prefix')->once()->andReturn('admin')
+            ->shouldReceive('domain')->once()->andReturnNull();
 
         $group = array(
             'prefix' => 'admin',
@@ -130,13 +145,11 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $callback = function () { };
 
-        $config->shouldReceive('get')->once()
-            ->with('orchestra/foundation::handles', 'admin')->andReturn('admin');
         $router->shouldReceive('group')->once()->with($group, $callback)->andReturnNull();
 
         $stub = new StubRouteManager($app);
 
-        $this->assertEquals($group, $stub->group('orchestra', 'admin', $callback));
+        $this->assertEquals($group, $stub->group('admin', 'admin', $callback));
     }
 
     /**
@@ -147,21 +160,19 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     public function testHandlesMethod()
     {
         $app       = $this->getApplicationMocks();
-        $config    = m::mock('\Illuminate\Config\Repository');
-        $extension = m::mock('\Orchestra\Extension\Factory');
+        $config    = m::mock('\Illuminate\Contracts\Config\Repository');
+        $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
         $url       = m::mock('\Illuminate\Routing\UrlGenerator');
 
         $app->shouldReceive('offsetGet')->with('config')->andReturn($config)
             ->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension)
             ->shouldReceive('offsetGet')->with('url')->andReturn($url);
 
-        $appRoute = m::mock('\Orchestra\Extension\RouteGenerator')->makePartial();
-
-        $config->shouldReceive('get')->once()
-            ->with('orchestra/foundation::handles', '/')->andReturn('admin');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
         $appRoute->shouldReceive('to')->once()->with('/')->andReturn('/')
-            ->shouldReceive('to')->once()->with('info?foo=bar')->andReturn('info?foo=bar');
+            ->shouldReceive('to')->once()->with('info?foo=bar')->andReturn('info?foo=bar')
+            ->shouldReceive('to')->once()->with('http://localhost/admin')->andReturn('http://localhost/admin');
         $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
         $url->shouldReceive('to')->once()->with('/')->andReturn('/')
             ->shouldReceive('to')->once()->with('info?foo=bar')->andReturn('info?foo=bar');
@@ -170,8 +181,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('/', $stub->handles('app::/'));
         $this->assertEquals('info?foo=bar', $stub->handles('info?foo=bar'));
-        $this->assertEquals('http://localhost/admin/installer', $stub->handles('orchestra::installer'));
-        $this->assertEquals('http://localhost/admin/installer', $stub->handles('orchestra::installer/'));
+        $this->assertEquals('http://localhost/admin', $stub->handles('http://localhost/admin'));
     }
 
     /**
@@ -191,11 +201,9 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension)
             ->shouldReceive('offsetGet')->with('url')->andReturn($url);
 
-        $appRoute = m::mock('\Orchestra\Extension\RouteGenerator')->makePartial();
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
-        $config->shouldReceive('get')->once()
-            ->with('orchestra/foundation::handles', '/')->andReturn('admin');
-        $request->shouldReceive('path')->twice()->andReturn('/');
+        $request->shouldReceive('path')->never()->andReturn('/');
         $appRoute->shouldReceive('is')->once()->with('/')->andReturn(true)
             ->shouldReceive('is')->once()->with('info?foo=bar')->andReturn(true);
         $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
@@ -204,35 +212,6 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($stub->is('app::/'));
         $this->assertTrue($stub->is('info?foo=bar'));
-        $this->assertFalse($stub->is('orchestra::login'));
-        $this->assertFalse($stub->is('orchestra::login'));
-    }
-
-    /**
-     * Test Orchestra\Foundation\RouteManager::namespaced() method.
-     *
-     * @test
-     */
-    public function testNamespacedMethod()
-    {
-        $app    = $this->getApplicationMocks();
-        $config = m::mock('\Illuminate\Config\Repository');
-
-        $app->shouldReceive('offsetGet')->with('config')->andReturn($config);
-
-        $stub = m::mock('\Orchestra\Http\RouteManager[group]', [$app]);
-
-        $closure = function () {
-
-        };
-
-        $stub->shouldReceive('group')->times(3)->with('orchestra/foundation', 'orchestra', [], $closure)->andReturn([]);
-        $stub->shouldReceive('group')->once()->with('orchestra/foundation', 'orchestra', ['namespace' => 'Foo'], $closure)->andReturn([]);
-
-        $this->assertNull($stub->namespaced('', $closure));
-        $this->assertNull($stub->namespaced('\\', $closure));
-        $this->assertNull($stub->namespaced(null, $closure));
-        $this->assertNull($stub->namespaced('Foo', $closure));
     }
 
     /**
@@ -290,10 +269,8 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     }
 }
 
+
 class StubRouteManager extends RouteManager
 {
-    public function boot()
-    {
-        //
-    }
+    
 }
