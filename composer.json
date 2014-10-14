@@ -1,6 +1,6 @@
 {
 	"name": "orchestra/kernel",
-	"description": "HTTP Component for Orchestra Platform",
+	"description": "Kernel for Orchestra Platform",
 	"license": "MIT",
 	"authors": [
 		{
