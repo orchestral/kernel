@@ -1,49 +1,14 @@
 <?php namespace Orchestra\Routing;
 
-use Closure;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
-use Illuminate\Routing\Router;
-use Illuminate\Support\Collection;
-use Illuminate\Routing\Stack\Stack;
-use Illuminate\Container\Container;
 use Orchestra\Contracts\Routing\CallableController;
-use Illuminate\Routing\RouteDependencyResolverTrait;
 use Orchestra\Contracts\Routing\StackableController;
 use Orchestra\Contracts\Routing\FilterableController;
 use Illuminate\Routing\Controller as IlluminateController;
 
-class ControllerDispatcher
+class ControllerDispatcher extends \Illuminate\Routing\ControllerDispatcher
 {
-    use RouteDependencyResolverTrait;
-
-    /**
-     * The router instance.
-     *
-     * @var \Illuminate\Routing\Router  $router
-     */
-    protected $router;
-
-    /**
-     * The IoC container instance.
-     *
-     * @var \Illuminate\Container\Container
-     */
-    protected $container;
-
-    /**
-     * Create a new controller dispatcher instance.
-     *
-     * @param  \Illuminate\Routing\Router  $router
-     * @param  \Illuminate\Container\Container  $container
-     */
-    public function __construct(Router $router, Container $container = null)
-    {
-        $this->router = $router;
-        $this->container = $container;
-    }
-
     /**
      * Dispatch a request to a given controller and method.
      *
@@ -97,49 +62,19 @@ class ControllerDispatcher
     }
 
     /**
-     * Call the given controller instance method.
-     *
-     * @param  object  $instance
-     * @param  \Illuminate\Routing\Route  $route
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
-     * @param  bool  $runMiddleware
-     * @return mixed
-     */
-    protected function callWithinStack($instance, $route, $request, $method, $runMiddleware)
-    {
-        $middleware = $runMiddleware ? $this->getMiddleware($instance) : [];
-
-        // Here we will make a stack onion instance to execute this request in, which gives
-        // us the ability to define middlewares on controllers. We will return the given
-        // response back out so that "after" filters can be run after the middlewares.
-
-        $stack = function ($request) use ($instance, $route, $method) {
-            return $this->call($instance, $route, $method);
-        };
-
-        return (new Stack($stack, $middleware))->setContainer($this->container)->run($request);
-    }
-
-    /**
      * Get the middleware for the controller instance.
      *
-     * @param  \Orchestra\Contracts\Routing\StackableController|object  $instance
+     * @param  object  $instance
+     * @param  string  $method
      * @return array
      */
-    protected function getMiddleware($instance)
+    protected function getMiddleware($instance, $method)
     {
         if (! ($instance instanceof StackableController || $instance instanceof IlluminateController)) {
             return [];
         }
 
-        $middleware = $this->router->getMiddleware();
-
-        $collection = Collection::make($instance->getMiddleware());
-
-        return $collection->map(function ($m) use ($middleware) {
-            return array_get($middleware, $m, $m);
-        })->all();
+        return parent::getMiddleware($instance, $method);
     }
 
     /**
@@ -152,171 +87,14 @@ class ControllerDispatcher
      */
     protected function call($instance, $route, $method)
     {
+        if ($instance instanceof CallableController || $instance instanceof IlluminateController) {
+            return parent::callAction($instance, $route, $method);
+        }
+
         $parameters = $this->resolveClassMethodDependencies(
             $route->parametersWithoutNulls(), $instance, $method
         );
 
-        if ($instance instanceof CallableController || $instance instanceof IlluminateController) {
-            return $instance->callAction($method, $parameters);
-        }
-
         return call_user_func_array([$instance, $method], $parameters);
-    }
-
-    /**
-     * Call the "before" filters for the controller.
-     *
-     * @param  object  $instance
-     * @param  \Illuminate\Routing\Route  $route
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
-     * @return mixed
-     */
-    protected function before($instance, $route, $request, $method)
-    {
-        foreach ($instance->getBeforeFilters() as $filter) {
-            if ($this->filterApplies($filter, $request, $method)) {
-                // Here we will just check if the filter applies. If it does we will call the filter
-                // and return the responses if it isn't null. If it is null, we will keep hitting
-                // them until we get a response or are finished iterating through this filters.
-                $response = $this->callFilter($filter, $route, $request);
-
-                if (! is_null($response)) {
-                    return $response;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Apply the applicable after filters to the route.
-     *
-     * @param  object  $instance
-     * @param  \Illuminate\Routing\Route  $route
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
-     * @return mixed
-     */
-    protected function assignAfter($instance, $route, $request, $method)
-    {
-        foreach ($instance->getAfterFilters() as $filter) {
-            // If the filter applies, we will add it to the route, since it has already been
-            // registered with the router by the controller, and will just let the normal
-            // router take care of calling these filters so we do not duplicate logic.
-            if ($this->filterApplies($filter, $request, $method)) {
-                $route->after($this->getAssignableAfter($filter));
-            }
-        }
-    }
-
-    /**
-     * Get the assignable after filter for the route.
-     *
-     * @param  \Closure|string  $filter
-     * @return string
-     */
-    protected function getAssignableAfter($filter)
-    {
-        if ($filter['original'] instanceof Closure) {
-            return $filter['filter'];
-        }
-
-        return $filter['original'];
-    }
-
-    /**
-     * Determine if the given filter applies to the request.
-     *
-     * @param  array  $filter
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
-     * @return bool
-     */
-    protected function filterApplies($filter, $request, $method)
-    {
-        foreach (['Only', 'Except', 'On'] as $type) {
-            if ($this->{"filterFails{$type}"}($filter, $request, $method)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Determine if the filter fails the "only" constraint.
-     *
-     * @param  array  $filter
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
-     * @return bool
-     */
-    protected function filterFailsOnly($filter, $request, $method)
-    {
-        if (! isset($filter['options']['only'])) {
-            return false;
-        }
-
-        return ! in_array($method, (array) $filter['options']['only']);
-    }
-
-    /**
-     * Determine if the filter fails the "except" constraint.
-     *
-     * @param  array  $filter
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
-     * @return bool
-     */
-    protected function filterFailsExcept($filter, $request, $method)
-    {
-        if (! isset($filter['options']['except'])) {
-            return false;
-        }
-
-        return in_array($method, (array) $filter['options']['except']);
-    }
-
-    /**
-     * Determine if the filter fails the "on" constraint.
-     *
-     * @param  array  $filter
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $method
-     * @return bool
-     */
-    protected function filterFailsOn($filter, $request, $method)
-    {
-        $on = Arr::get($filter, 'options.on');
-
-        if (is_null($on)) {
-            return false;
-        }
-
-        // If the "on" is a string, we will explode it on the pipe so you can set any
-        // amount of methods on the filter constraints and it will still work like
-        // you specified an array. Then we will check if the method is in array.
-        if (is_string($on)) {
-            $on = explode('|', $on);
-        }
-
-        return ! in_array(strtolower($request->getMethod()), $on);
-    }
-
-    /**
-     * Call the given controller filter method.
-     *
-     * @param  array  $filter
-     * @param  \Illuminate\Routing\Route  $route
-     * @param  \Illuminate\Http\Request  $request
-     * @return mixed
-     */
-    protected function callFilter($filter, $route, $request)
-    {
-        return $this->router->callRouteFilter(
-            $filter['filter'], $filter['parameters'], $route, $request
-        );
     }
 }
