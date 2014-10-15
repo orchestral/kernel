@@ -10,8 +10,9 @@ use Illuminate\Routing\Stack\Stack;
 use Illuminate\Container\Container;
 use Orchestra\Contracts\Routing\CallableController;
 use Illuminate\Routing\RouteDependencyResolverTrait;
-use Orchestra\Contracts\Routing\FilterableController;
 use Orchestra\Contracts\Routing\StackableController;
+use Orchestra\Contracts\Routing\FilterableController;
+use Illuminate\Routing\Controller as IlluminateController;
 
 class ControllerDispatcher
 {
@@ -62,7 +63,7 @@ class ControllerDispatcher
         // to the route so that they will be run by the routers after this processing.
         $instance = $this->makeController($controller);
 
-        if ($instance instanceof FilterableController) {
+        if ($instance instanceof FilterableController || $instance instanceof IlluminateController) {
             $this->assignAfter($instance, $route, $request, $method);
 
             $response = $this->before($instance, $route, $request, $method);
@@ -90,6 +91,7 @@ class ControllerDispatcher
     protected function makeController($controller)
     {
         Controller::setRouter($this->router);
+        IlluminateController::setRouter($this->router);
 
         return $this->container->make($controller);
     }
@@ -97,7 +99,7 @@ class ControllerDispatcher
     /**
      * Call the given controller instance method.
      *
-     * @param  \Orchestra\Routing\Controller  $instance
+     * @param  object  $instance
      * @param  \Illuminate\Routing\Route  $route
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $method
@@ -127,7 +129,7 @@ class ControllerDispatcher
      */
     protected function getMiddleware($instance)
     {
-        if (! $instance instanceof StackableController) {
+        if (! ($instance instanceof StackableController || $instance instanceof IlluminateController)) {
             return [];
         }
 
@@ -143,7 +145,7 @@ class ControllerDispatcher
     /**
      * Call the given controller instance method.
      *
-     * @param  \Orchestra\Routing\Controller  $instance
+     * @param  object  $instance
      * @param  \Illuminate\Routing\Route  $route
      * @param  string  $method
      * @return mixed
@@ -154,7 +156,7 @@ class ControllerDispatcher
             $route->parametersWithoutNulls(), $instance, $method
         );
 
-        if ($instance instanceof CallableController) {
+        if ($instance instanceof CallableController || $instance instanceof IlluminateController) {
             return $instance->callAction($method, $parameters);
         }
 
@@ -164,7 +166,7 @@ class ControllerDispatcher
     /**
      * Call the "before" filters for the controller.
      *
-     * @param  \Orchestra\Contracts\Routing\FilterableController  $instance
+     * @param  object  $instance
      * @param  \Illuminate\Routing\Route  $route
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $method
@@ -191,7 +193,7 @@ class ControllerDispatcher
     /**
      * Apply the applicable after filters to the route.
      *
-     * @param  \Orchestra\Contracts\Routing\FilterableController  $instance
+     * @param  object  $instance
      * @param  \Illuminate\Routing\Route  $route
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $method
