@@ -12,7 +12,8 @@
 	"autoload": {
 		"psr-4": {
 			"Orchestra\\Contracts\\": "src/Contracts/",
-			"Orchestra\\Http\\": "src/Http/"
+			"Orchestra\\Http\\": "src/Http/",
+			"Orchestra\\Routing\\": "src/Routing/"
 		}
 	},
 	"require": {
