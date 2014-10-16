@@ -27,7 +27,8 @@
 	},
 	"replace": {
 		"orchestra/contracts": "self.version",
-		"orchestra/http": "self.version"
+		"orchestra/http": "self.version",
+		"orchestra/routing": "self.version"
 	},
 	"extra": {
 		"branch-alias": {
