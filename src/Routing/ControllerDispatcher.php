@@ -88,7 +88,7 @@ class ControllerDispatcher extends \Illuminate\Routing\ControllerDispatcher
     protected function call($instance, $route, $method)
     {
         if ($instance instanceof CallableController || $instance instanceof IlluminateController) {
-            return parent::callAction($instance, $route, $method);
+            return parent::call($instance, $route, $method);
         }
 
         $parameters = $this->resolveClassMethodDependencies(
