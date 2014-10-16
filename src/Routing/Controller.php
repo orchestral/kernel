@@ -4,7 +4,7 @@ use Closure;
 use BadMethodCallException;
 use InvalidArgumentException;
 use Illuminate\Routing\Route;
-use Illuminate\Routing\Router;
+use Illuminate\Routing\Router as IlluminateRouter;
 use Orchestra\Contracts\Routing\CallableController;
 use Orchestra\Contracts\Routing\StackableController;
 use Orchestra\Contracts\Routing\FilterableController;
@@ -138,7 +138,7 @@ abstract class Controller implements CallableController, FilterableController, S
      */
     protected function isInstanceFilter($filter)
     {
-        if (is_string($filter) && starts_with($filter, '@'))  {
+        if (is_string($filter) && starts_with($filter, '@')) {
             if (method_exists($this, substr($filter, 1))) {
                 return true;
             }
@@ -231,7 +231,7 @@ abstract class Controller implements CallableController, FilterableController, S
      * @param  \Illuminate\Routing\Router  $router
      * @return void
      */
-    public static function setRouter(Router $router)
+    public static function setRouter(IlluminateRouter $router)
     {
         static::$router = $router;
     }
