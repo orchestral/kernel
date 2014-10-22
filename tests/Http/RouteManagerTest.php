@@ -1,8 +1,8 @@
 <?php namespace Orchestra\Http\TestCase;
 
 use Mockery as m;
-use Illuminate\Support\Facades\Facade;
 use Orchestra\Http\RouteManager;
+use Illuminate\Support\Facades\Facade;
 
 class RouteManagerTest extends \PHPUnit_Framework_TestCase
 {
