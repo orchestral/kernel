@@ -1,7 +1,33 @@
 <?php namespace Orchestra\Routing;
 
+use Illuminate\Http\Request;
+
 class RoutingServiceProvider extends \Illuminate\Routing\RoutingServiceProvider
 {
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerRequestOnConsole();
+
+        parent::register();
+    }
+
+    /**
+     * Register the requst on console interface.
+     *
+     * @return void
+     */
+    protected function registerRequestOnConsole()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->app->instance('request', Request::createFromGlobals());
+        }
+    }
+
     /**
      * Register the router instance.
      *
