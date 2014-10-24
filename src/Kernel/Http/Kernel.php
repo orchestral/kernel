@@ -16,6 +16,6 @@ class Kernel extends HttpKernel
         'Illuminate\Foundation\Bootstrap\RegisterFacades',
         'Illuminate\Foundation\Bootstrap\RegisterProviders',
         'Illuminate\Foundation\Bootstrap\BootProviders',
-        'Orchestra\Extension\Bootstrap\BootEnvironment',
+        'Orchestra\Extension\Bootstrap\LoadExtension',
     ];
 }
