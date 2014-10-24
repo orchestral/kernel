@@ -3,7 +3,7 @@
 use Illuminate\Events\EventServiceProvider;
 use Orchestra\Routing\RoutingServiceProvider;
 use Illuminate\Foundation\Application as Foundation;
-use Orchestra\Contracts\Kernel\DeferrableServiceContainer;
+use Orchestra\Contracts\Foundation\DeferrableServiceContainer;
 
 class Application extends Foundation implements DeferrableServiceContainer
 {
