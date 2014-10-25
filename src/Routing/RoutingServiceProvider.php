@@ -23,8 +23,12 @@ class RoutingServiceProvider extends \Illuminate\Routing\RoutingServiceProvider
      */
     protected function registerRequestOnConsole()
     {
-        if ($this->app->runningInConsole()) {
-            $this->app->instance('request', Request::createFromGlobals());
+        $app = $this->app;
+
+        if ($app->runningInConsole()) {
+            $url = $app['config']->get('app.url', 'http://localhost');
+
+            $app->instance('request', Request::create($url, 'GET', [], [], [], $_SERVER));
         }
     }
 
