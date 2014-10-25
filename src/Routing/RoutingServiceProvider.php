@@ -1,7 +1,5 @@
 <?php namespace Orchestra\Routing;
 
-use Illuminate\Http\Request;
-
 class RoutingServiceProvider extends \Illuminate\Routing\RoutingServiceProvider
 {
     /**
