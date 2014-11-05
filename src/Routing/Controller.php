@@ -7,5 +7,5 @@ use Orchestra\Contracts\Routing\FilterableController;
 
 abstract class Controller extends BaseController implements CallableController, FilterableController, StackableController
 {
-
+    //
 }

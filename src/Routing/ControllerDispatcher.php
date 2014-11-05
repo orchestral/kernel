@@ -5,7 +5,6 @@ use Illuminate\Routing\Route;
 use Orchestra\Contracts\Routing\CallableController;
 use Orchestra\Contracts\Routing\StackableController;
 use Orchestra\Contracts\Routing\FilterableController;
-use Illuminate\Routing\Controller as IlluminateController;
 
 class ControllerDispatcher extends \Illuminate\Routing\ControllerDispatcher
 {
@@ -37,11 +36,8 @@ class ControllerDispatcher extends \Illuminate\Routing\ControllerDispatcher
         // If no before filters returned a response we'll call the method on the controller
         // to get the response to be returned to the router. We will then return it back
         // out for processing by this router and the after filters can be called then.
-        if (is_null($response))
-        {
-            $response = $this->callWithinStack(
-                $instance, $route, $request, $method, $runMiddleware
-            );
+        if (is_null($response)) {
+            $response = $this->callWithinStack($instance, $route, $request, $method);
         }
 
         return $response;
@@ -56,7 +52,6 @@ class ControllerDispatcher extends \Illuminate\Routing\ControllerDispatcher
     protected function makeController($controller)
     {
         Controller::setRouter($this->router);
-        IlluminateController::setRouter($this->router);
 
         return $this->container->make($controller);
     }
@@ -91,9 +86,7 @@ class ControllerDispatcher extends \Illuminate\Routing\ControllerDispatcher
             return parent::call($instance, $route, $method);
         }
 
-        $parameters = $this->resolveClassMethodDependencies(
-            $route->parametersWithoutNulls(), $instance, $method
-        );
+        $parameters = $this->resolveClassMethodDependencies($route->parametersWithoutNulls(), $instance, $method);
 
         return call_user_func_array([$instance, $method], $parameters);
     }
