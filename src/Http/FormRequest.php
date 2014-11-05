@@ -16,7 +16,7 @@ class FormRequest extends Request
     {
         $this->setupValidationScenario();
 
-        return $this->runValidation($this->input());
+        return $this->runValidation($this->formatInput());
     }
 
     /**
