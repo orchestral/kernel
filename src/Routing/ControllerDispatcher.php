@@ -5,6 +5,7 @@ use Illuminate\Routing\Route;
 use Orchestra\Contracts\Routing\CallableController;
 use Orchestra\Contracts\Routing\StackableController;
 use Orchestra\Contracts\Routing\FilterableController;
+use Illuminate\Routing\Controller as IlluminateController;
 
 class ControllerDispatcher extends \Illuminate\Routing\ControllerDispatcher
 {
@@ -15,10 +16,9 @@ class ControllerDispatcher extends \Illuminate\Routing\ControllerDispatcher
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $controller
      * @param  string  $method
-     * @param  bool  $runMiddleware
      * @return mixed
      */
-    public function dispatch(Route $route, Request $request, $controller, $method, $runMiddleware = true)
+    public function dispatch(Route $route, Request $request, $controller, $method)
     {
         $response = null;
 
