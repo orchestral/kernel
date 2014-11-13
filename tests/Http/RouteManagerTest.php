@@ -52,7 +52,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Foundation\RouteManager::group() method.
+     * Test Orchestra\Http\RouteManager::group() method.
      *
      * @test
      */
@@ -82,7 +82,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Foundation\RouteManager::group() method
+     * Test Orchestra\Http\RouteManager::group() method
      * with closure.
      *
      * @test
@@ -118,7 +118,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Foundation\RouteManager::group() method
+     * Test Orchestra\Http\RouteManager::group() method
      * with closure and not array.
      *
      * @test
@@ -153,7 +153,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Foundation\RouteManager::handles() method.
+     * Test Orchestra\Http\RouteManager::handles() method.
      *
      * @test
      */
@@ -185,7 +185,43 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Foundation\RouteManager::is() method.
+     * Test Orchestra\Http\RouteManager::handles() method
+     * with CSRF Token.
+     *
+     * @test
+     */
+    public function testHandlesMethodWithCsrfToken()
+    {
+        $app       = $this->getApplicationMocks();
+        $config    = m::mock('\Illuminate\Contracts\Config\Repository');
+        $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
+        $session   = m::mock('\Illuminate\Session\Store');
+        $url       = m::mock('\Illuminate\Routing\UrlGenerator');
+
+        $app->shouldReceive('offsetGet')->with('config')->andReturn($config)
+            ->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('offsetGet')->with('session')->andReturn($session)
+            ->shouldReceive('offsetGet')->with('url')->andReturn($url);
+
+        $appRoute = m::mock('\Orchestra\Extension\RouteGenerator')->makePartial();
+
+        $appRoute->shouldReceive('to')->once()->with('/?_token=StAGiQ')->andReturn('/?_token=StAGiQ')
+            ->shouldReceive('to')->once()->with('info?foo=bar&_token=StAGiQ')->andReturn('info?foo=bar&_token=StAGiQ');
+        $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
+        $session->shouldReceive('getToken')->twice()->andReturn('StAGiQ');
+        $url->shouldReceive('to')->once()->with('/?_token=StAGiQ')->andReturn('/?_token=StAGiQ')
+            ->shouldReceive('to')->once()->with('info?foo=bar&_token=StAGiQ')->andReturn('info?foo=bar&_token=StAGiQ');
+
+        $stub = new StubRouteManager($app);
+
+        $options = array('csrf' => true);
+
+        $this->assertEquals('/?_token=StAGiQ', $stub->handles('app::/', $options));
+        $this->assertEquals('info?foo=bar&_token=StAGiQ', $stub->handles('info?foo=bar', $options));
+    }
+
+    /**
+     * Test Orchestra\Http\RouteManager::is() method.
      *
      * @test
      */
@@ -215,7 +251,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test Orchestra\Foundation\RouteManager::when() method.
+     * Test Orchestra\Http\RouteManager::when() method.
      *
      * @test
      */
