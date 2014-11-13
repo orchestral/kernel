@@ -171,6 +171,7 @@ abstract class RouteManager
     {
         return $this->app['orchestra.extension']->route($name, $default);
     }
+
     /**
      * Prepare valid route, since we already extract package from route
      * we can re-append query string to route value.
