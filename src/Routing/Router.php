@@ -13,7 +13,7 @@ class Router extends \Illuminate\Routing\Router
      * Call the given filter with the request and response.
      *
      * @param  string  $filter
-     * @param  \Illuminate\Http\Request   $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Http\Response  $response
      * @return mixed
      */
@@ -33,7 +33,7 @@ class Router extends \Illuminate\Routing\Router
      * @param  array  $parameters
      * @param  \Illuminate\Routing\Route  $route
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Http\Response|null $response
+     * @param  \Illuminate\Http\Response|null  $response
      * @return mixed
      */
     public function callRouteFilter($filter, $parameters, $route, $request, $response = null)
