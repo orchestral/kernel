@@ -12,7 +12,10 @@
 	"autoload": {
 		"psr-4": {
 			"Orchestra\\": "src/"
-		}
+		},
+		"files": [
+			"src/Routing/helpers.php"
+		]
 	},
 	"require": {
 		"php": ">=5.4.0",
