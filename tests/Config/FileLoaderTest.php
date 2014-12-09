@@ -33,7 +33,7 @@ class FileLoaderTest extends \PHPUnit_Framework_TestCase
         $loader->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/app.php')->andReturn(true);
         $loader->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/local/app.php')->andReturn(true);
         $loader->getFilesystem()->shouldReceive('getRequire')->once()->with(__DIR__.'/app.php')->andReturn(array('foo' => 'bar', 'providers' => ['AppProvider']));
-        $loader->getFilesystem()->shouldReceive('getRequire')->once()->with(__DIR__.'/local/app.php')->andReturn(array('foo' => 'blah', 'baz' => 'boom', 'providers' => ['SomeProvider']));
+        $loader->getFilesystem()->shouldReceive('getRequire')->once()->with(__DIR__.'/local/app.php')->andReturn(array('foo' => 'blah', 'baz' => 'boom', 'providers' => [1 => 'SomeProvider']));
         $array = $loader->load('local', 'app', null);
 
         $this->assertEquals(array('foo' => 'blah', 'baz' => 'boom', 'providers' => ['AppProvider', 'SomeProvider']), $array);

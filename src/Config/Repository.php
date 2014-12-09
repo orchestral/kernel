@@ -2,6 +2,7 @@
 
 use Closure;
 use ArrayAccess;
+use Illuminate\Support\Arr;
 use Illuminate\Support\NamespacedItemResolver;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
 
@@ -50,7 +51,8 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function __construct(LoaderInterface $loader, $environment)
     {
-        $this->loader = $loader;
+        $this->setLoader($loader);
+
         $this->environment = $environment;
     }
 
@@ -98,7 +100,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
 
         $this->load($group, $namespace, $collection);
 
-        return array_get($this->items[$collection], $item, $default);
+        return Arr::get($this->items[$collection], $item, $default);
     }
 
     /**
@@ -108,8 +110,12 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * @param  mixed   $value
      * @return void
      */
-    public function set($key, $value)
+    public function set($key, $value = null)
     {
+        if (is_array($key)) {
+            return $this->setItems($key);
+        }
+
         list($namespace, $group, $item) = $this->parseKey($key);
 
         $collection = $this->getCollection($group, $namespace);
@@ -122,7 +128,44 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         if (is_null($item)) {
             $this->items[$collection] = $value;
         } else {
-            array_set($this->items[$collection], $item, $value);
+            Arr::set($this->items[$collection], $item, $value);
+        }
+    }
+
+    /**
+     * Prepend a value onto an array configuration value.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return void
+     */
+    public function prepend($key, $value)
+    {
+        $this->set($key, array_unshift($this->get($key), $value));
+    }
+
+    /**
+     * Push a value onto an array configuration value.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return void
+     */
+    public function push($key, $value)
+    {
+        $this->set($key, array_push($this->get($key), $value));
+    }
+
+    /**
+     * Set a given collections of configuration value.
+     *
+     * @param  array  $items
+     * @return void
+     */
+    protected function setItems(array $items)
+    {
+        foreach ($items as $key => $value) {
+            $this->set($key, $value);
         }
     }
 
@@ -233,10 +276,10 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         // callback so that we can cascade an application package configuration.
         $this->addNamespace($namespace, $hint);
 
-        $this->afterLoading($namespace, function ($group, $items) use ($package) {
-            $env = $this->getEnvironment();
+        $this->afterLoading($namespace, function ($me, $group, $items) use ($package) {
+            $env = $me->getEnvironment();
 
-            $loader = $this->getLoader();
+            $loader = $me->getLoader();
 
             return $loader->cascadePackage($env, $package, $group, $items);
         });

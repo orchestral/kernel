@@ -112,27 +112,26 @@ class FileLoader implements LoaderInterface
         // We'll first check to see if we have determined if this namespace and
         // group combination have been checked before. If they have, we will
         // just return the cached result so we don't have to hit the disk.
-        if (isset($this->exists[$key])) {
-            return $this->exists[$key];
+        if (! isset($this->exists[$key])) {
+
+            $path = $this->getPath($namespace);
+
+            // To check if a group exists, we will simply get the path based on the
+            // namespace, and then check to see if this files exists within that
+            // namespace. False is returned if no path exists for a namespace.
+            if (is_null($path)) {
+                return $this->exists[$key] = false;
+            }
+
+            $file = "{$path}/{$group}.php";
+
+            // Finally, we can simply check if this file exists. We will also cache
+            // the value in an array so we don't have to go through this process
+            // again on subsequent checks for the existing of the config file.
+            $this->exists[$key] = $this->files->exists($file);
         }
 
-        $path = $this->getPath($namespace);
-
-        // To check if a group exists, we will simply get the path based on the
-        // namespace, and then check to see if this files exists within that
-        // namespace. False is returned if no path exists for a namespace.
-        if (is_null($path)) {
-            return $this->exists[$key] = false;
-        }
-
-        $file = "{$path}/{$group}.php";
-
-        // Finally, we can simply check if this file exists. We will also cache
-        // the value in an array so we don't have to go through this process
-        // again on subsequent checks for the existing of the config file.
-        $exists = $this->files->exists($file);
-
-        return $this->exists[$key] = $exists;
+        return $this->exists[$key];
     }
 
     /**
