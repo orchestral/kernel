@@ -27,6 +27,7 @@
 		"laravel/framework": "5.0.*"
 	},
 	"replace": {
+		"orchestra/config": "self.version",
 		"orchestra/contracts": "self.version",
 		"orchestra/http": "self.version",
 		"orchestra/routing": "self.version"
