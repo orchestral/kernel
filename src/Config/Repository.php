@@ -4,9 +4,10 @@ use Closure;
 use ArrayAccess;
 use Illuminate\Support\Arr;
 use Illuminate\Support\NamespacedItemResolver;
+use Orchestra\Contracts\Config\PackageRepository;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
 
-class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigContract
+class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigContract, PackageRepository
 {
     /**
      * The loader implementation.
@@ -276,7 +277,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         // callback so that we can cascade an application package configuration.
         $this->addNamespace($namespace, $hint);
 
-        $this->afterLoading($namespace, function ($me, $group, $items) use ($package) {
+        $this->afterLoading($namespace, function (Repository $me, $group, $items) use ($package) {
             $env = $me->getEnvironment();
 
             $loader = $me->getLoader();
@@ -363,7 +364,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     /**
      * Set the loader implementation.
      *
-     * @param  \Illuminate\Config\LoaderInterface  $loader
+     * @param  \Orchestra\Config\LoaderInterface  $loader
      * @return void
      */
     public function setLoader(LoaderInterface $loader)
