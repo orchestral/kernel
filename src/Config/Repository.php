@@ -397,7 +397,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      *
      * @return array
      */
-    public function getItems()
+    public function all()
     {
         return $this->items;
     }
