@@ -12,7 +12,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     /**
      * The loader implementation.
      *
-     * @var \Illuminate\Config\LoaderInterface
+     * @var \Orchestra\Config\LoaderInterface
      */
     protected $loader;
 
@@ -78,7 +78,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function hasGroup($key)
     {
-        list($namespace, $group, $item) = $this->parseKey($key);
+        list($namespace, $group) = $this->parseKey($key);
 
         return $this->loader->exists($group, $namespace);
     }
@@ -142,7 +142,9 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function prepend($key, $value)
     {
-        $this->set($key, array_unshift($this->get($key), $value));
+        $config = array_unshift($this->get($key), $value);
+
+        $this->set($key, $config);
     }
 
     /**
@@ -154,7 +156,9 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function push($key, $value)
     {
-        $this->set($key, array_push($this->get($key), $value));
+        $config = array_push($this->get($key), $value);
+
+        $this->set($key, $config);
     }
 
     /**
@@ -296,7 +300,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     protected function getPackageNamespace($package, $namespace)
     {
         if (is_null($namespace)) {
-            list($vendor, $namespace) = explode('/', $package);
+            list(, $namespace) = explode('/', $package);
         }
 
         return $namespace;
