@@ -4,24 +4,13 @@ use Closure;
 use ArrayAccess;
 use Illuminate\Support\Arr;
 use Illuminate\Support\NamespacedItemResolver;
+use Orchestra\Config\Traits\CascadingConfigTrait;
 use Orchestra\Contracts\Config\PackageRepository;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
 
 class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigContract, PackageRepository
 {
-    /**
-     * The loader implementation.
-     *
-     * @var \Orchestra\Config\LoaderInterface
-     */
-    protected $loader;
-
-    /**
-     * The current environment.
-     *
-     * @var string
-     */
-    protected $environment;
+    use CascadingConfigTrait;
 
     /**
      * All of the configuration items.
@@ -330,60 +319,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         $namespace = $namespace ?: '*';
 
         return $namespace.'::'.$group;
-    }
-
-    /**
-     * Add a new namespace to the loader.
-     *
-     * @param  string  $namespace
-     * @param  string  $hint
-     * @return void
-     */
-    public function addNamespace($namespace, $hint)
-    {
-        $this->loader->addNamespace($namespace, $hint);
-    }
-
-    /**
-     * Returns all registered namespaces with the config
-     * loader.
-     *
-     * @return array
-     */
-    public function getNamespaces()
-    {
-        return $this->loader->getNamespaces();
-    }
-
-    /**
-     * Get the loader implementation.
-     *
-     * @return \Illuminate\Config\LoaderInterface
-     */
-    public function getLoader()
-    {
-        return $this->loader;
-    }
-
-    /**
-     * Set the loader implementation.
-     *
-     * @param  \Orchestra\Config\LoaderInterface  $loader
-     * @return void
-     */
-    public function setLoader(LoaderInterface $loader)
-    {
-        $this->loader = $loader;
-    }
-
-    /**
-     * Get the current configuration environment.
-     *
-     * @return string
-     */
-    public function getEnvironment()
-    {
-        return $this->environment;
     }
 
     /**
