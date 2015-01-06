@@ -142,9 +142,9 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function prepend($key, $value)
     {
-        $config = array_unshift($this->get($key), $value);
+        $config = $this->get($key);
 
-        $this->set($key, $config);
+        $this->set($key, array_unshift($config, $value));
     }
 
     /**
@@ -156,9 +156,9 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function push($key, $value)
     {
-        $config = array_push($this->get($key), $value);
+        $config = $this->get($key);
 
-        $this->set($key, $config);
+        $this->set($key, array_push($config, $value));
     }
 
     /**
