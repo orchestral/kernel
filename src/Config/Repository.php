@@ -3,14 +3,15 @@
 use Closure;
 use ArrayAccess;
 use Illuminate\Support\Arr;
+use Orchestra\Config\Traits\LoadingTrait;
+use Orchestra\Config\Traits\CascadingTrait;
 use Illuminate\Support\NamespacedItemResolver;
-use Orchestra\Config\Traits\CascadingConfigTrait;
 use Orchestra\Contracts\Config\PackageRepository;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
 
 class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigContract, PackageRepository
 {
-    use CascadingConfigTrait;
+    use CascadingTrait, LoadingTrait;
 
     /**
      * All of the configuration items.
@@ -25,13 +26,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * @var array
      */
     protected $packages = [];
-
-    /**
-     * The after load callbacks for namespaces.
-     *
-     * @var array
-     */
-    protected $afterLoad = [];
 
     /**
      * Create a new configuration repository.
@@ -195,21 +189,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     }
 
     /**
-     * Call the after load callback for a namespace.
-     *
-     * @param  string  $namespace
-     * @param  string  $group
-     * @param  array   $items
-     * @return array
-     */
-    protected function callAfterLoad($namespace, $group, $items)
-    {
-        $callback = $this->afterLoad[$namespace];
-
-        return call_user_func($callback, $this, $group, $items);
-    }
-
-    /**
      * Parse an array of namespaced segments.
      *
      * @param  string  $key
@@ -296,18 +275,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     }
 
     /**
-     * Register an after load callback for a given namespace.
-     *
-     * @param  string   $namespace
-     * @param  \Closure  $callback
-     * @return void
-     */
-    public function afterLoading($namespace, Closure $callback)
-    {
-        $this->afterLoad[$namespace] = $callback;
-    }
-
-    /**
      * Get the collection identifier.
      *
      * @param  string  $group
@@ -319,16 +286,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         $namespace = $namespace ?: '*';
 
         return $namespace.'::'.$group;
-    }
-
-    /**
-     * Get the after load callback array.
-     *
-     * @return array
-     */
-    public function getAfterLoadCallbacks()
-    {
-        return $this->afterLoad;
     }
 
     /**
