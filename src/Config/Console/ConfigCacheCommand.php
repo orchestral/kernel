@@ -14,14 +14,13 @@ class ConfigCacheCommand extends BaseCommand
      */
     protected function setRealSessionDriver(array $config)
     {
-        $files = $this->laravel->make('files');
         $environment = $this->laravel->environment();
         $configPath = $this->laravel->configPath();
 
-        $session = $files->getRequire("{$files}/session.php");
+        $session = $this->files->getRequire("{$configPath}/session.php");
 
-        if ($files->exists($file = "{$configPath}/{$environment}/session.php")) {
-            $session = array_replace_recursive($session, $files->getRequire($file));
+        if ($this->files->exists($file = "{$configPath}/{$environment}/session.php")) {
+            $session = array_replace_recursive($session, $this->files->getRequire($file));
         }
 
         $config['*::session']['driver'] = $session['driver'];
