@@ -1,7 +1,6 @@
 <?php namespace Orchestra\Config\Console;
 
 use Symfony\Component\Finder\Finder;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Console\ConfigCacheCommand as BaseCommand;
 
 class ConfigCacheCommand extends BaseCommand
@@ -56,13 +55,13 @@ class ConfigCacheCommand extends BaseCommand
     /**
      * Get all of the configuration files for the application.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
      * @return array
      */
-    protected function getConfigurationFiles(Application $app)
+    protected function getConfigurationFiles()
     {
         $files = [];
-        $found = Finder::create()->files()->name('*.php')->depth('== 0')->in($app->configPath());
+        $configPath = $this->laravel->configPath();
+        $found = Finder::create()->files()->name('*.php')->depth('== 0')->in($configPath);
 
         foreach ($found as $file) {
             $files[] = basename($file->getRealPath(), '.php');
