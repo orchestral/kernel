@@ -62,8 +62,9 @@ class ConfigCacheCommand extends BaseCommand
     protected function getConfigurationFiles(Application $app)
     {
         $files = [];
+        $found = Finder::create()->files()->name('*.php')->depth('== 0')->in($app->configPath());
 
-        foreach (Finder::create()->files()->name('*.php')->depth('== 0')->in($app->configPath()) as $file) {
+        foreach ($found as $file) {
             $files[] = basename($file->getRealPath(), '.php');
         }
 
