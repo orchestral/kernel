@@ -16,7 +16,6 @@
 	},
 	"require": {
 		"php": ">=5.4.0",
-		"illuminate/contracts": "5.0.*",
 		"illuminate/filesystem": "5.0.*",
 		"orchestra/contracts": "3.0.*"
 	},
