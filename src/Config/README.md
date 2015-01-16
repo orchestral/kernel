@@ -1,4 +1,4 @@
-Configuration Component for Orchestra Platform
+Configuration Component for Laravel and Orchestra Platform
 ==============
 
 Config Component is a configuration with environment based support for Laravel 5 and above. The component is actually based from Laravel 4 configuration.

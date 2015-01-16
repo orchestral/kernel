@@ -1,6 +1,6 @@
 {
 	"name": "orchestra/config",
-	"description": "Configuration Component for Orchestra Platform",
+	"description": "Configuration Component for Laravel and Orchestra Platform",
 	"license": "MIT",
 	"authors": [
 		{
