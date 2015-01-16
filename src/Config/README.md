@@ -49,3 +49,31 @@ $app->singleton(
     'Orchestra\Config\Bootstrap\LoadConfiguration'
 );
 ```
+
+### Configuration Caching Support
+
+Config Component also bring `php artisan config:cache` support to speed up configuration loading, in order to do this you need to replace `Illuminate\Foundation\Provider\ArtisanServiceProvider` with a new `App\Providers\ArtisanServiceProvider`:
+
+```php
+<?php namespace App\Providers;
+
+use Orchestra\Config\Console\ConfigCacheCommand;
+use Illuminate\Foundation\Providers\ArtisanServiceProvider as ServiceProvider;
+
+class ArtisanServiceProvider extends ServiceProvider
+{
+    /**
+     * Register the command.
+     *
+     * @return void
+     */
+    protected function registerConfigCacheCommand()
+    {
+        $this->app->singleton('command.config.cache', function ($app) {
+            return new ConfigCacheCommand($app['files']);
+        });
+    }
+}
+```
+
+Don't forget to update your `config/app.php` to replaces `Illuminate\Foundation\Provider\ArtisanServiceProvider` with `App\Providers\ArtisanServiceProvider`.
