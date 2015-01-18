@@ -52,7 +52,7 @@ $app->singleton(
 
 ### Configuration Caching Support
 
-Config Component also bring `php artisan config:cache` support to speed up configuration loading, in order to do this you need to replace `Illuminate\Foundation\Provider\ArtisanServiceProvider` with a new `App\Providers\ArtisanServiceProvider`:
+Config Component also bring `php artisan config:cache` support to speed up configuration loading (do note that the built-in command should work just fine). In order to do this you need to replace `Illuminate\Foundation\Provider\ArtisanServiceProvider` with a new `App\Providers\ArtisanServiceProvider`:
 
 ```php
 <?php namespace App\Providers;
