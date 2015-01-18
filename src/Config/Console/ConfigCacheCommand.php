@@ -25,7 +25,25 @@ class ConfigCacheCommand extends BaseCommand
             $app['config'][$file];
         }
 
-        return $app['config']->all();
+        return $this->parseFreshConfiguration($app['config']->all());
+    }
+
+    /**
+     * Nominalize global namespace config key.
+     *
+     * @param  array  $config
+     * @return array
+     */
+    protected function parseFreshConfiguration(array $config)
+    {
+        foreach ($config as $key => $value) {
+            if (strpos($key, '*::') === 0) {
+                $config[substr($key, 3)] = $value;
+                unset($config[$key]);
+            }
+        }
+
+        return $config;
     }
 
     /**
@@ -47,7 +65,7 @@ class ConfigCacheCommand extends BaseCommand
             $session = array_replace_recursive($session, $this->files->getRequire($file));
         }
 
-        $config['*::session']['driver'] = $session['driver'];
+        $config['session']['driver'] = $session['driver'];
 
         return $config;
     }
