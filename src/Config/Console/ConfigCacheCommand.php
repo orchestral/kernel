@@ -44,7 +44,7 @@ class ConfigCacheCommand extends BaseCommand
             } elseif (strpos($key, '::config') !== false) {
                 $namespace = substr($key, 0, -8);
                 foreach ($value as $innerKey => $innerValue) {
-                    $config["{$namespace}::{$innerKey}"] = $innerKey;
+                    $config["{$namespace}::{$innerKey}"] = $innerValue;
                 }
 
                 unset($config[$key]);
