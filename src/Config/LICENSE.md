@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) <Taylor Otwell>
+Copyright (C) Taylor Otwell
 Copyright (C) 2014 Mior Muhammad Zaki <http://git.io/crynobone>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
