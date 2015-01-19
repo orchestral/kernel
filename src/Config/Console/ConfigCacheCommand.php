@@ -18,7 +18,7 @@ class ConfigCacheCommand extends BaseCommand
 
         $files = array_merge(
             $app['config']->get('compile.config', []),
-            $this->getConfigurationFiles($app)
+            $this->getConfigurationFiles()
         );
 
         foreach ($files as $file) {
@@ -55,7 +55,7 @@ class ConfigCacheCommand extends BaseCommand
     }
 
     /**
-     * Set the "real" session driver on the configuratoin array.
+     * Set the "real" session driver on the configuration array.
      *
      * Typically the SessionManager forces the driver to "array" in CLI environment.
      *
