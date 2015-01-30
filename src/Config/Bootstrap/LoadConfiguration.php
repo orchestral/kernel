@@ -29,5 +29,7 @@ class LoadConfiguration
         }
 
         date_default_timezone_set($config['app.timezone']);
+
+        mb_internal_encoding('UTF-8');
     }
 }
