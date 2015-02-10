@@ -1,6 +1,8 @@
 <?php namespace Orchestra\Routing;
 
-class Router extends \Illuminate\Routing\Router
+use Illuminate\Routing\Router as BaseRouter;
+
+class Router extends BaseRouter
 {
     /**
      * Indicates if the router is running filters.

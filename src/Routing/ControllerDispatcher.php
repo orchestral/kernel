@@ -6,8 +6,9 @@ use Orchestra\Contracts\Routing\CallableController;
 use Orchestra\Contracts\Routing\StackableController;
 use Orchestra\Contracts\Routing\FilterableController;
 use Illuminate\Routing\Controller as IlluminateController;
+use Illuminate\Routing\ControllerDispatcher as BaseDispatcher;
 
-class ControllerDispatcher extends \Illuminate\Routing\ControllerDispatcher
+class ControllerDispatcher extends BaseDispatcher
 {
     /**
      * Dispatch a request to a given controller and method.
