@@ -1,6 +1,8 @@
 <?php namespace Orchestra\Routing;
 
-class RoutingServiceProvider extends \Illuminate\Routing\RoutingServiceProvider
+use Illuminate\Routing\RoutingServiceProvider as ServiceProvider;
+
+class RoutingServiceProvider extends ServiceProvider
 {
     /**
      * Register the router instance.
