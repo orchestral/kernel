@@ -5,6 +5,10 @@ title: Kernel Change Log
 
 # Version 3.0 {#v3-0}
 
+## v3.0.1@dev {#v3-0-1}
+
+* Add `orchestra/database` to replace clause in `composer.json`.
+
 ## v3.0.0 {#v3-0-0}
 
 * Initial release for Laravel Framework v5.0.
