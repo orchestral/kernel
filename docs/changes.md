@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 # Version 3.0 {#v3-0}
 
+## v3.0.1 {#v3-0-1}
+
+* Add `orchestra/database` to replace clause in `composer.json`.
+* Add `Orchestra\Database\CacheDecorator`.
+
 ## v3.0.0 {#v3-0-0}
 
 * Initial release for Laravel Framework v5.0.
