@@ -8,6 +8,16 @@ class FormRequest extends Request
     use ValidationTrait;
 
     /**
+     * Get validation rules.
+     *
+     * @return array
+     */
+    public function getValidationRules()
+    {
+        return $this->container->call([$this, 'rules']);
+    }
+
+    /**
      * Get the validator instance for the request.
      *
      * @return \Illuminate\Validation\Validator
@@ -15,8 +25,12 @@ class FormRequest extends Request
     protected function getValidatorInstance()
     {
         $this->setupValidationScenario();
+        $this->setupValidationParameters();
 
-        return $this->runValidation($this->formatInput());
+        $this->validationFactory = $this->container->make('Illuminate\Contracts\Validation\Factory');
+        $this->validationDispatcher = $this->container->make('Illuminate\Contracts\Events\Dispatcher');
+
+        return $this->runValidation($this->all());
     }
 
     /**
@@ -39,12 +53,14 @@ class FormRequest extends Request
     }
 
     /**
-     * Get validation rules.
+     * Setup validation scenario based on request method.
      *
-     * @return array
+     * @return void
      */
-    public function getValidationRules()
+    protected function setupValidationParameters()
     {
-        return $this->container->call([$this, 'rules']);
+        $parameters = $this->route()->parametersWithoutNulls();
+
+        $this->bindToValidation($parameters);
     }
 }

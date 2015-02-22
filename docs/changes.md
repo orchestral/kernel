@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 # Version 3.0 {#v3-0}
 
+## v3.0.2@dev {#v3-0-2}
+
+* HTTP:
+  - Bind route parameters to `Orchestra\Http\FormRequest`.
+
 ## v3.0.1 {#v3-0-1}
 
 * Add `orchestra/database` to replace clause in `composer.json`.
