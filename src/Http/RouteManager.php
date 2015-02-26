@@ -100,17 +100,19 @@ abstract class RouteManager
      */
     public function handles($path, array $options = [])
     {
+        $url = $this->app['url'];
+
+        if ($url->isValidUrl($path)) {
+            return $path;
+        }
+
         list($package, $route) = $this->locate($path, $options);
 
         // Get the path from route configuration, and append route.
         $locate = $this->route($package)->to($route);
         empty($locate) && $locate = '/';
 
-        if (Str::startsWith($locate, 'http')) {
-            return $locate;
-        }
-
-        return $this->app['url']->to($locate);
+        return $url->to($locate);
     }
 
     /**
