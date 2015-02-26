@@ -173,7 +173,10 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $appRoute->shouldReceive('to')->once()->with('/')->andReturn('/')
             ->shouldReceive('to')->once()->with('info?foo=bar')->andReturn('info?foo=bar');
         $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
-        $url->shouldReceive('to')->once()->with('/')->andReturn('/')
+        $url->shouldReceive('isValidUrl')->with('app::/')->andReturn(false)
+            ->shouldReceive('isValidUrl')->once()->with('info?foo=bar')->andReturn(false)
+            ->shouldReceive('isValidUrl')->once()->with('http://localhost/admin')->andReturn(true)
+            ->shouldReceive('to')->once()->with('/')->andReturn('/')
             ->shouldReceive('to')->once()->with('info?foo=bar')->andReturn('info?foo=bar');
 
         $stub = new StubRouteManager($app);
@@ -208,7 +211,9 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('to')->once()->with('info?foo=bar&_token=StAGiQ')->andReturn('info?foo=bar&_token=StAGiQ');
         $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
         $session->shouldReceive('getToken')->twice()->andReturn('StAGiQ');
-        $url->shouldReceive('to')->once()->with('/?_token=StAGiQ')->andReturn('/?_token=StAGiQ')
+        $url->shouldReceive('isValidUrl')->once()->with('app::/')->andReturn(false)
+            ->shouldReceive('isValidUrl')->once()->with('info?foo=bar')->andReturn(false)
+            ->shouldReceive('to')->once()->with('/?_token=StAGiQ')->andReturn('/?_token=StAGiQ')
             ->shouldReceive('to')->once()->with('info?foo=bar&_token=StAGiQ')->andReturn('info?foo=bar&_token=StAGiQ');
 
         $stub = new StubRouteManager($app);
