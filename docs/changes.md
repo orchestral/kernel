@@ -9,6 +9,7 @@ title: Kernel Change Log
 
 * HTTP:
   - Bind route parameters to `Orchestra\Http\FormRequest`.
+  - `Orchestra\Http\RouteManager::handles()` should ignored valid URL.
 
 ## v3.0.1 {#v3-0-1}
 

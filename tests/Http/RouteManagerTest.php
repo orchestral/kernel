@@ -171,8 +171,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
         $appRoute->shouldReceive('to')->once()->with('/')->andReturn('/')
-            ->shouldReceive('to')->once()->with('info?foo=bar')->andReturn('info?foo=bar')
-            ->shouldReceive('to')->once()->with('http://localhost/admin')->andReturn('http://localhost/admin');
+            ->shouldReceive('to')->once()->with('info?foo=bar')->andReturn('info?foo=bar');
         $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
         $url->shouldReceive('to')->once()->with('/')->andReturn('/')
             ->shouldReceive('to')->once()->with('info?foo=bar')->andReturn('info?foo=bar');
