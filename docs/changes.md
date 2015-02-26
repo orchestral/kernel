@@ -5,7 +5,7 @@ title: Kernel Change Log
 
 # Version 3.0 {#v3-0}
 
-## v3.0.2@dev {#v3-0-2}
+## v3.0.2 {#v3-0-2}
 
 * HTTP:
   - Bind route parameters to `Orchestra\Http\FormRequest`.
