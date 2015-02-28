@@ -1,6 +1,5 @@
 <?php namespace Orchestra\Config;
 
-use Closure;
 use ArrayAccess;
 use Illuminate\Support\Arr;
 use Orchestra\Config\Traits\LoadingTrait;
@@ -26,6 +25,13 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * @var array
      */
     protected $packages = [];
+
+    /**
+     * All of the registered custom packages files.
+     *
+     * @var array
+     */
+    protected $files = [];
 
     /**
      * Create a new configuration repository.
@@ -228,6 +234,42 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         }
 
         return parent::parseNamespacedSegments($key);
+    }
+
+    /**
+     * Parse an array of basic segments.
+     *
+     * @param  array  $segments
+     * @return array
+     */
+    protected function parseBasicSegments(array $segments)
+    {
+        $group = $segments[0];
+        $slice = 1;
+
+        if (count($segments) == 1) {
+            return [null, $group, null];
+        } else {
+            if (in_array("{$group}.{$segments[1]}", $this->files)) {
+                $group = "{$group}/{$segments[1]}";
+                $slice = 2;
+            }
+
+            $item = implode('.', array_slice($segments, $slice));
+
+            return [null, $group, $item];
+        }
+    }
+
+    /**
+     * Register a package with custom file.
+     *
+     * @param  string  $package
+     * @return void
+     */
+    public function file($package)
+    {
+        $this->files[] = str_replace('.', '/', $package);
     }
 
     /**
