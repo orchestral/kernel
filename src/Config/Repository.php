@@ -4,7 +4,6 @@ use ArrayAccess;
 use Illuminate\Support\Arr;
 use Orchestra\Config\Traits\LoadingTrait;
 use Orchestra\Config\Traits\CascadingTrait;
-use Illuminate\Support\NamespacedItemResolver;
 use Orchestra\Contracts\Config\PackageRepository;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
 
@@ -89,6 +88,10 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         $collection = $this->getCollection($group, $namespace);
 
         $this->load($group, $namespace, $collection);
+
+        if (empty($item)) {
+            return $this->items[$collection];
+        }
 
         return Arr::get($this->items[$collection], $item, $default);
     }
@@ -192,75 +195,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         }
 
         $this->items[$collection] = $items;
-    }
-
-    /**
-     * Parse an array of namespaced segments.
-     *
-     * @param  string  $key
-     * @return array
-     */
-    protected function parseNamespacedSegments($key)
-    {
-        list($namespace, $item) = explode('::', $key);
-
-        // If the namespace is registered as a package, we will just assume the group
-        // is equal to the namespace since all packages cascade in this way having
-        // a single file per package, otherwise we'll just parse them as normal.
-        if (in_array($namespace, $this->packages)) {
-            return $this->parsePackageSegments($key, $namespace, $item);
-        }
-
-        return parent::parseNamespacedSegments($key);
-    }
-
-    /**
-     * Parse the segments of a package namespace.
-     *
-     * @param  string  $key
-     * @param  string  $namespace
-     * @param  string  $item
-     * @return array
-     */
-    protected function parsePackageSegments($key, $namespace, $item)
-    {
-        $itemSegments = explode('.', $item);
-
-        // If the configuration file doesn't exist for the given package group we can
-        // assume that we should implicitly use the config file matching the name
-        // of the namespace. Generally packages should use one type or another.
-        if (! $this->loader->exists($itemSegments[0], $namespace)) {
-            return [$namespace, 'config', $item];
-        }
-
-        return parent::parseNamespacedSegments($key);
-    }
-
-    /**
-     * Parse an array of basic segments.
-     *
-     * @param  array  $segments
-     * @return array
-     */
-    protected function parseBasicSegments(array $segments)
-    {
-        $group = $segments[0];
-        $slice = 1;
-
-        if (count($segments) == 1) {
-            return [null, $group, null];
-        } else {
-            $custom = "{$group}/{$segments[1]}";
-
-            if ($this->loader->exists($custom, null)) {
-                $group = $custom;
-                $slice = 2;
-            }
-
-            $item = implode('.', array_slice($segments, $slice));
-
-            return [null, $group, $item];
-        }
     }
 
     /**
