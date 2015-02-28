@@ -1,6 +1,5 @@
 <?php namespace Orchestra\Config\Console;
 
-use Illuminate\Support\Arr;
 use Symfony\Component\Finder\Finder;
 use Illuminate\Foundation\Console\ConfigCacheCommand as BaseCommand;
 
@@ -39,8 +38,7 @@ class ConfigCacheCommand extends BaseCommand
     {
         foreach ($config as $key => $value) {
             if (strpos($key, '*::') === 0) {
-                $collection = str_replace('/', '.', substr($key, 3));
-                Arr::set($config, $collection, $value);
+                $config[substr($key, 3)] = $value;
 
                 unset($config[$key]);
             } elseif (strpos($key, '::config') !== false) {
@@ -89,7 +87,7 @@ class ConfigCacheCommand extends BaseCommand
     {
         $files = [];
         $configPath = $this->laravel->configPath();
-        $found = Finder::create()->files()->name('*.php')->depth('== 0')->in($configPath);
+        $found = Finder::create()->files()->name('*.php')->depth('<= 1')->in($configPath);
 
         foreach ($found as $file) {
             $files[] = basename($file->getRealPath(), '.php');

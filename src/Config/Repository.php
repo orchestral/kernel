@@ -106,22 +106,11 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     public function set($key, $value = null)
     {
         if (is_array($key)) {
-            return $this->setItems($key);
-        }
-
-        list($namespace, $group, $item) = $this->parseKey($key);
-
-        $collection = $this->getCollection($group, $namespace);
-
-        // We'll need to go ahead and lazy load each configuration groups even when
-        // we're just setting a configuration item so that the set item does not
-        // get overwritten if a different item in the group is requested later.
-        $this->load($group, $namespace, $collection);
-
-        if (is_null($item)) {
-            $this->items[$collection] = $value;
+            foreach ($key as $configKey => $configValue) {
+                $this->setSingleItem($configKey, $configValue);
+            }
         } else {
-            Arr::set($this->items[$collection], $item, $value);
+            $this->setSingleItem($key, $value);
         }
     }
 
@@ -136,7 +125,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     {
         $config = $this->get($key);
 
-        $this->set($key, array_unshift($config, $value));
+        $this->setSingleItem($key, array_unshift($config, $value));
     }
 
     /**
@@ -150,21 +139,50 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     {
         $config = $this->get($key);
 
-        $this->set($key, array_push($config, $value));
+        $this->setSingleItem($key, array_push($config, $value));
     }
 
     /**
-     * Set a given collections of configuration value.
+     * Set a given collections of configuration value from cache.
      *
      * @param  array  $items
      * @return void
      */
-    protected function setItems(array $items)
+    public function setFromCache(array $items)
     {
         foreach ($items as $key => $value) {
-            $this->set($key, $value);
+            $this->setSingleItem($key, $value, false);
         }
     }
+
+    /**
+     * Set a given configuration value.
+     *
+     * @param  string  $key
+     * @param  mixed   $value
+     * @param  bool    $load
+     * @return void
+     */
+    protected function setSingleItem($key, $value = null, $load = true)
+    {
+        list($namespace, $group, $item) = $this->parseKey($key);
+
+        $collection = $this->getCollection($group, $namespace);
+
+        // We'll need to go ahead and lazy load each configuration groups even when
+        // we're just setting a configuration item so that the set item does not
+        // get overwritten if a different item in the group is requested later.
+        if ($load) {
+            $this->load($group, $namespace, $collection);
+        }
+
+        if (is_null($item)) {
+            $this->items[$collection] = $value;
+        } else {
+            Arr::set($this->items[$collection], $item, $value);
+        }
+    }
+
 
     /**
      * Load the configuration group for the key.
