@@ -150,9 +150,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function setFromCache(array $items)
     {
-        foreach ($items as $key => $value) {
-            $this->setSingleItem($key, $value, false);
-        }
+        $this->items = $items;
     }
 
     /**

@@ -36,21 +36,6 @@ class ConfigCacheCommand extends BaseCommand
      */
     protected function parseFreshConfiguration(array $config)
     {
-        foreach ($config as $key => $value) {
-            if (strpos($key, '*::') === 0) {
-                $config[substr($key, 3)] = $value;
-
-                unset($config[$key]);
-            } elseif (strpos($key, '::config') !== false) {
-                $namespace = substr($key, 0, -8);
-                foreach ($value as $innerKey => $innerValue) {
-                    $config["{$namespace}::{$innerKey}"] = $innerValue;
-                }
-
-                unset($config[$key]);
-            }
-        }
-
         return $config;
     }
 

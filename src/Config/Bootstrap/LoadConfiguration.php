@@ -25,7 +25,7 @@ class LoadConfiguration
         if (file_exists($cached = $app->getCachedConfigPath()) && ! $app->runningInConsole()) {
             $items = require $cached;
 
-            $config->set($items);
+            $config->setFromCache($items);
         }
 
         date_default_timezone_set($config['app.timezone']);
