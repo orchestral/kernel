@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Config\Console;
 
+use Illuminate\Support\Arr;
 use Symfony\Component\Finder\Finder;
 use Illuminate\Foundation\Console\ConfigCacheCommand as BaseCommand;
 
@@ -38,7 +39,8 @@ class ConfigCacheCommand extends BaseCommand
     {
         foreach ($config as $key => $value) {
             if (strpos($key, '*::') === 0) {
-                $config[substr($key, 3)] = $value;
+                $collection = str_replace('/', '.', substr($key, 3));
+                Arr::set($config, $collection, $value);
 
                 unset($config[$key]);
             } elseif (strpos($key, '::config') !== false) {
