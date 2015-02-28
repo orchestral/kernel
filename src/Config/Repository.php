@@ -250,8 +250,10 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         if (count($segments) == 1) {
             return [null, $group, null];
         } else {
-            if (in_array("{$group}.{$segments[1]}", $this->files)) {
-                $group = "{$group}/{$segments[1]}";
+            $custom = "{$group}/{$segments[1]}";
+
+            if ($this->loader->exists($custom, null)) {
+                $group = $custom;
                 $slice = 2;
             }
 
@@ -259,17 +261,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
 
             return [null, $group, $item];
         }
-    }
-
-    /**
-     * Register a package with custom file.
-     *
-     * @param  string  $package
-     * @return void
-     */
-    public function file($package)
-    {
-        $this->files[] = str_replace('.', '/', $package);
     }
 
     /**
