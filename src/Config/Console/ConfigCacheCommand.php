@@ -72,7 +72,7 @@ class ConfigCacheCommand extends BaseCommand
     {
         $files = [];
         $configPath = $this->laravel->configPath();
-        $found = Finder::create()->files()->name('*.php')->depth('<= 1')->in($configPath);
+        $found = Finder::create()->files()->name('*.php')->depth('== 0')->in($configPath);
 
         foreach ($found as $file) {
             $files[] = basename($file->getRealPath(), '.php');
