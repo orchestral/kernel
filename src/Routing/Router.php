@@ -22,7 +22,7 @@ class Router extends BaseRouter
     protected function callFilter($filter, $request, $response = null)
     {
         if (! $this->filtering) {
-            return null;
+            return;
         }
 
         return parent::callFilter($filter, $request, $response);
@@ -41,7 +41,7 @@ class Router extends BaseRouter
     public function callRouteFilter($filter, $parameters, $route, $request, $response = null)
     {
         if (! $this->filtering) {
-            return null;
+            return;
         }
 
         return parent::callRouteFilter($filter, $parameters, $route, $request, $response);
