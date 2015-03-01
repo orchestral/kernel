@@ -5,7 +5,7 @@ title: Kernel Change Log
 
 # Version 3.0 {#v3-0}
 
-## v3.0.3@dev {#v3-0-3}
+## v3.0.3 {#v3-0-3}
 
 * Config:
   - Allow config to be stored in sub-directories which bring compatibility with Laravel 5 packages.

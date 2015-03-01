@@ -83,7 +83,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         $this->load($group, $namespace, $collection);
 
         if (empty($item)) {
-            return $this->items[$collection];
+            return Arr::get($this->items, $collection, $default);
         }
 
         return Arr::get($this->items[$collection], $item, $default);
