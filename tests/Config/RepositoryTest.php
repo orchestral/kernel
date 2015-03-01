@@ -22,6 +22,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $config = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'app', null)->andReturn($options);
+        $config->getLoader()->shouldReceive('exists')->once()->with('app/bing')->andReturn(false);
 
         $this->assertTrue($config->has('app.bing'));
         $this->assertTrue($config->get('app.bing'));
@@ -32,8 +33,12 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $config = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'app', null)->andReturn($options);
+        $config->getLoader()->shouldReceive('exists')->twice()->with('app/foo')->andReturn(false);
+        $config->getLoader()->shouldReceive('exists')->once()->with('app/baz')->andReturn(false);
+        $config->getLoader()->shouldReceive('exists')->once()->with('app/code')->andReturn(false);
 
         $this->assertEquals('bar', $config->get('app.foo'));
+        $this->assertNull($config->get('app.foo.bar'));
         $this->assertEquals('breeze', $config->get('app.baz.boom'));
         $this->assertEquals('blah', $config->get('app.code', 'blah'));
         $this->assertEquals('blah', $config->get('app.code', function () { return 'blah'; }));
@@ -96,6 +101,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     {
         $config = $this->getRepository();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'foo', null)->andReturn(array('name' => 'dayle'));
+        $config->getLoader()->shouldReceive('exists')->once()->with('foo/name')->andReturn(false);
 
         $config->set('foo.name', 'taylor');
         $this->assertEquals('taylor', $config->get('foo.name'));
