@@ -26,13 +26,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     protected $packages = [];
 
     /**
-     * All of the registered custom packages files.
-     *
-     * @var array
-     */
-    protected $files = [];
-
-    /**
      * Create a new configuration repository.
      *
      * @param  \Orchestra\Config\LoaderInterface  $loader

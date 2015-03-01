@@ -10,6 +10,7 @@ title: Kernel Change Log
 * Config:
   - Allow config to be stored in sub-directories which bring compatibility with Laravel 5 packages.
   - Tweak how cached config are loaded by introducing `Orchestra\Config\Repository::setFromCache()`.
+  - Add `Orchestra\Config\NamespacedItemResolver`.
 
 ## v3.0.2 {#v3-0-2}
 
