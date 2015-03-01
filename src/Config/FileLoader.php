@@ -113,7 +113,6 @@ class FileLoader implements LoaderInterface
         // group combination have been checked before. If they have, we will
         // just return the cached result so we don't have to hit the disk.
         if (! isset($this->exists[$key])) {
-
             $path = $this->getPath($namespace);
 
             // To check if a group exists, we will simply get the path based on the
