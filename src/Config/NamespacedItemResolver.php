@@ -55,7 +55,6 @@ abstract class NamespacedItemResolver extends Resolver
         return $this->parseBasicSegments($segments);
     }
 
-
     /**
      * Parse an array of namespaced segments.
      *
@@ -103,5 +102,5 @@ abstract class NamespacedItemResolver extends Resolver
      *
      * @return \Illuminate\Config\LoaderInterface
      */
-    public abstract function getLoader();
+    abstract public function getLoader();
 }

@@ -1,7 +1,6 @@
 <?php namespace Orchestra\Http;
 
 use Closure;
-use Orchestra\Support\Str;
 use Illuminate\Support\Arr;
 use Illuminate\Support\NamespacedItemResolver;
 use Illuminate\Contracts\Foundation\Application;

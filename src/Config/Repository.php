@@ -174,7 +174,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         }
     }
 
-
     /**
      * Load the configuration group for the key.
      *
