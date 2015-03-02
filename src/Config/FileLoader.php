@@ -40,7 +40,7 @@ class FileLoader implements LoaderInterface
      */
     public function __construct(Filesystem $files, $defaultPath)
     {
-        $this->files = $files;
+        $this->files       = $files;
         $this->defaultPath = $defaultPath;
     }
 
@@ -50,6 +50,7 @@ class FileLoader implements LoaderInterface
      * @param  string  $environment
      * @param  string  $group
      * @param  string  $namespace
+     *
      * @return array
      */
     public function load($environment, $group, $namespace = null)
@@ -91,6 +92,7 @@ class FileLoader implements LoaderInterface
      *
      * @param  array   $items
      * @param  string  $file
+     *
      * @return array
      */
     protected function mergeEnvironment(array $items, $file)
@@ -103,6 +105,7 @@ class FileLoader implements LoaderInterface
      *
      * @param  string  $group
      * @param  string  $namespace
+     *
      * @return bool
      */
     public function exists($group, $namespace = null)
@@ -140,6 +143,7 @@ class FileLoader implements LoaderInterface
      * @param  string  $package
      * @param  string  $group
      * @param  array   $items
+     *
      * @return array
      */
     public function cascadePackage($env, $package, $group, $items)
@@ -171,6 +175,7 @@ class FileLoader implements LoaderInterface
      * @param  string  $env
      * @param  string  $package
      * @param  string  $group
+     *
      * @return string
      */
     protected function getPackagePath($env, $package, $group)
@@ -184,6 +189,7 @@ class FileLoader implements LoaderInterface
      * Get the configuration path for a namespace.
      *
      * @param  string  $namespace
+     *
      * @return string
      */
     protected function getPath($namespace)
@@ -200,6 +206,7 @@ class FileLoader implements LoaderInterface
      *
      * @param  string  $namespace
      * @param  string  $hint
+     *
      * @return void
      */
     public function addNamespace($namespace, $hint)
@@ -222,6 +229,7 @@ class FileLoader implements LoaderInterface
      * Get a file's contents by requiring it.
      *
      * @param  string  $path
+     *
      * @return mixed
      */
     protected function getRequire($path)

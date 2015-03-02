@@ -34,12 +34,13 @@ class ConfigCacheCommand extends BaseCommand
      * Typically the SessionManager forces the driver to "array" in CLI environment.
      *
      * @param  array  $config
+     *
      * @return array
      */
     protected function setRealSessionDriver(array $config)
     {
         $environment = $this->laravel->environment();
-        $configPath = $this->laravel->configPath();
+        $configPath  = $this->laravel->configPath();
 
         $session = $this->files->getRequire("{$configPath}/session.php");
 
@@ -59,9 +60,9 @@ class ConfigCacheCommand extends BaseCommand
      */
     protected function getConfigurationFiles()
     {
-        $files = [];
+        $files      = [];
         $configPath = $this->laravel->configPath();
-        $found = Finder::create()->files()->name('*.php')->depth('== 0')->in($configPath);
+        $found      = Finder::create()->files()->name('*.php')->depth('== 0')->in($configPath);
 
         foreach ($found as $file) {
             $files[] = basename($file->getRealPath(), '.php');

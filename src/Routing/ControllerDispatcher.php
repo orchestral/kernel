@@ -17,6 +17,7 @@ class ControllerDispatcher extends BaseDispatcher
      * @param  \Illuminate\Http\Request  $request
      * @param  string  $controller
      * @param  string  $method
+     *
      * @return mixed
      */
     public function dispatch(Route $route, Request $request, $controller, $method)
@@ -48,6 +49,7 @@ class ControllerDispatcher extends BaseDispatcher
      * Make a controller instance via the IoC container.
      *
      * @param  string  $controller
+     *
      * @return mixed
      */
     protected function makeController($controller)
@@ -62,6 +64,7 @@ class ControllerDispatcher extends BaseDispatcher
      *
      * @param  object  $instance
      * @param  string  $method
+     *
      * @return array
      */
     protected function getMiddleware($instance, $method)
@@ -79,6 +82,7 @@ class ControllerDispatcher extends BaseDispatcher
      * @param  object  $instance
      * @param  \Illuminate\Routing\Route  $route
      * @param  string  $method
+     *
      * @return mixed
      */
     protected function call($instance, $route, $method)

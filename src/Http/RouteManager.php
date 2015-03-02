@@ -36,6 +36,7 @@ abstract class RouteManager
      *
      * @param  string  $path
      * @param  array   $options
+     *
      * @return array
      */
     public function locate($path, array $options = [])
@@ -48,7 +49,7 @@ abstract class RouteManager
             list($path, $query) = explode('?', $path, 2);
         }
 
-        list($package, $route, $item) = with(new NamespacedItemResolver)->parseKey($path);
+        list($package, $route, $item) = with(new NamespacedItemResolver())->parseKey($path);
 
         $route = $this->prepareValidRoute($route, $item, $query, $options);
 
@@ -67,6 +68,7 @@ abstract class RouteManager
      * @param  string  $default
      * @param  array|\Closure  $attributes
      * @param  \Closure|null  $callback
+     *
      * @return array
      */
     public function group($name, $default, $attributes = [], Closure $callback = null)
@@ -95,6 +97,7 @@ abstract class RouteManager
      *
      * @param  string  $path
      * @param  array   $options
+     *
      * @return string
      */
     public function handles($path, array $options = [])
@@ -108,7 +111,7 @@ abstract class RouteManager
         list($package, $route) = $this->locate($path, $options);
 
         // Get the path from route configuration, and append route.
-        $locate = $this->route($package)->to($route);
+        $locate                   = $this->route($package)->to($route);
         empty($locate) && $locate = '/';
 
         return $url->to($locate);
@@ -118,6 +121,7 @@ abstract class RouteManager
      *  Return if handles URL match given string.
      *
      * @param  string  $path
+     *
      * @return bool
      */
     public function is($path)
@@ -132,6 +136,7 @@ abstract class RouteManager
      *
      * @param  string  $name
      * @param  string  $default
+     *
      * @return \Orchestra\Contracts\Extension\RouteGenerator
      */
     public function route($name, $default = '/')
@@ -148,6 +153,7 @@ abstract class RouteManager
      *
      * @param  string  $path
      * @param  mixed   $listener
+     *
      * @return void
      */
     public function when($path, $listener)
@@ -166,6 +172,7 @@ abstract class RouteManager
      *
      * @param  string  $name
      * @param  string  $default
+     *
      * @return \Orchestra\Contracts\Extension\RouteGenerator
      */
     protected function generateRouteByName($name, $default)
@@ -181,6 +188,7 @@ abstract class RouteManager
      * @param  string  $item
      * @param  string  $query
      * @param  array   $options
+     *
      * @return string
      */
     protected function prepareValidRoute($route, $item, $query, array $options)
@@ -190,8 +198,8 @@ abstract class RouteManager
         }
 
         ! empty($item) && $route = "{$route}.{$item}";
-        empty($route) && $route = '';
-        empty($query) || $route = "{$route}?{$query}";
+        empty($route) && $route  = '';
+        empty($query) || $route  = "{$route}?{$query}";
 
         return $route;
     }

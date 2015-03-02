@@ -16,6 +16,7 @@ trait LoadingTrait
      *
      * @param  string  $namespace
      * @param  \Closure  $callback
+     *
      * @return void
      */
     public function afterLoading($namespace, Closure $callback)
@@ -39,6 +40,7 @@ trait LoadingTrait
      * @param  string  $namespace
      * @param  string  $group
      * @param  array   $items
+     *
      * @return array
      */
     protected function callAfterLoad($namespace, $group, $items)

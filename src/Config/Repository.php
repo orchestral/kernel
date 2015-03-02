@@ -42,6 +42,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * Determine if the given configuration value exists.
      *
      * @param  string  $key
+     *
      * @return bool
      */
     public function has($key)
@@ -55,6 +56,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * Determine if a configuration group exists.
      *
      * @param  string  $key
+     *
      * @return bool
      */
     public function hasGroup($key)
@@ -69,6 +71,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      *
      * @param  string  $key
      * @param  mixed   $default
+     *
      * @return mixed
      */
     public function get($key, $default = null)
@@ -94,6 +97,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      *
      * @param  string  $key
      * @param  mixed   $value
+     *
      * @return void
      */
     public function set($key, $value = null)
@@ -112,6 +116,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      *
      * @param  string  $key
      * @param  mixed  $value
+     *
      * @return void
      */
     public function prepend($key, $value)
@@ -126,6 +131,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      *
      * @param  string  $key
      * @param  mixed  $value
+     *
      * @return void
      */
     public function push($key, $value)
@@ -139,6 +145,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * Set a given collections of configuration value from cache.
      *
      * @param  array  $items
+     *
      * @return void
      */
     public function setFromCache(array $items)
@@ -152,6 +159,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * @param  string  $key
      * @param  mixed   $value
      * @param  bool    $load
+     *
      * @return void
      */
     protected function setSingleItem($key, $value = null, $load = true)
@@ -180,6 +188,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * @param  string  $group
      * @param  string  $namespace
      * @param  string  $collection
+     *
      * @return void
      */
     protected function load($group, $namespace, $collection)
@@ -211,6 +220,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * @param  string  $package
      * @param  string  $hint
      * @param  string  $namespace
+     *
      * @return void
      */
     public function package($package, $hint, $namespace = null)
@@ -238,6 +248,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      *
      * @param  string  $package
      * @param  string  $namespace
+     *
      * @return string
      */
     protected function getPackageNamespace($package, $namespace)
@@ -254,6 +265,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      *
      * @param  string  $group
      * @param  string  $namespace
+     *
      * @return string
      */
     protected function getCollection($group, $namespace = null)
@@ -277,6 +289,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * Determine if the given configuration option exists.
      *
      * @param  string  $key
+     *
      * @return bool
      */
     public function offsetExists($key)
@@ -288,6 +301,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * Get a configuration option.
      *
      * @param  string  $key
+     *
      * @return mixed
      */
     public function offsetGet($key)
@@ -300,6 +314,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      *
      * @param  string  $key
      * @param  mixed  $value
+     *
      * @return void
      */
     public function offsetSet($key, $value)
@@ -311,6 +326,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * Unset a configuration option.
      *
      * @param  string  $key
+     *
      * @return void
      */
     public function offsetUnset($key)
