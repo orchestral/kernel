@@ -25,18 +25,7 @@ class ConfigCacheCommand extends BaseCommand
             $app['config'][$file];
         }
 
-        return $this->parseFreshConfiguration($app['config']->all());
-    }
-
-    /**
-     * Nominalize global namespace config key.
-     *
-     * @param  array  $config
-     * @return array
-     */
-    protected function parseFreshConfiguration(array $config)
-    {
-        return $config;
+        return $app['config']->all();
     }
 
     /**
@@ -46,9 +35,9 @@ class ConfigCacheCommand extends BaseCommand
      */
     protected function getConfigurationFiles()
     {
-        $files = [];
+        $files      = [];
         $configPath = $this->laravel->configPath();
-        $found = Finder::create()->files()->name('*.php')->depth('== 0')->in($configPath);
+        $found      = Finder::create()->files()->name('*.php')->depth('== 0')->in($configPath);
 
         foreach ($found as $file) {
             $files[] = basename($file->getRealPath(), '.php');

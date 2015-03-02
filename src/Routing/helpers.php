@@ -6,6 +6,7 @@ if (! function_exists('redirect_with_errors')) {
      *
      * @param  string  $to
      * @param  \Illuminate\Support\MessageBag|array  $errors
+     *
      * @return mixed
      */
     function redirect_with_errors($to, $errors)
@@ -21,6 +22,7 @@ if (! function_exists('redirect_with_message')) {
      * @param  string  $to
      * @param  string  $message
      * @param  string  $type
+     *
      * @return mixed
      */
     function redirect_with_message($to, $message = null, $type = 'success')

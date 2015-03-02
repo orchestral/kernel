@@ -11,6 +11,7 @@ trait ControllerResponseTrait
      * @param  string  $to
      * @param  string  $message
      * @param  string  $type
+     *
      * @return mixed
      */
     public function redirectWithMessage($to, $message = null, $type = 'success')
@@ -23,6 +24,7 @@ trait ControllerResponseTrait
      *
      * @param  string  $to
      * @param  \Illuminate\Support\MessageBag|array  $errors
+     *
      * @return mixed
      */
     public function redirectWithErrors($to, $errors)
@@ -34,6 +36,7 @@ trait ControllerResponseTrait
      * Redirect.
      *
      * @param  string  $to
+     *
      * @return mixed
      */
     public function redirect($to)
@@ -47,7 +50,9 @@ trait ControllerResponseTrait
      * @param  int     $code
      * @param  string  $message
      * @param  array   $headers
+     *
      * @return void
+     *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */

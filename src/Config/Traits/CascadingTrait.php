@@ -23,6 +23,7 @@ trait CascadingTrait
      *
      * @param  string  $namespace
      * @param  string  $hint
+     *
      * @return void
      */
     public function addNamespace($namespace, $hint)
@@ -55,6 +56,7 @@ trait CascadingTrait
      * Set the loader implementation.
      *
      * @param  \Orchestra\Config\LoaderInterface  $loader
+     *
      * @return void
      */
     public function setLoader(LoaderInterface $loader)

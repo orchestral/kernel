@@ -8,6 +8,7 @@ abstract class NamespacedItemResolver extends Resolver
      * Parse a key into namespace, group, and item.
      *
      * @param  string  $key
+     *
      * @return array
      */
     public function parseKey($key)
@@ -40,6 +41,7 @@ abstract class NamespacedItemResolver extends Resolver
      * Parse an array of basic segments.
      *
      * @param  array  $segments
+     *
      * @return array
      */
     protected function parseCustomSegments(array $segments)
@@ -59,6 +61,7 @@ abstract class NamespacedItemResolver extends Resolver
      * Parse an array of namespaced segments.
      *
      * @param  string  $key
+     *
      * @return array
      */
     protected function parseNamespacedSegments($key)
@@ -81,6 +84,7 @@ abstract class NamespacedItemResolver extends Resolver
      * @param  string  $key
      * @param  string  $namespace
      * @param  string  $item
+     *
      * @return array
      */
     protected function parsePackageSegments($key, $namespace, $item)

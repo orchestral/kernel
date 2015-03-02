@@ -8,6 +8,7 @@ interface LoaderInterface
      * @param  string  $environment
      * @param  string  $group
      * @param  string  $namespace
+     *
      * @return array
      */
     public function load($environment, $group, $namespace = null);
@@ -17,6 +18,7 @@ interface LoaderInterface
      *
      * @param  string  $group
      * @param  string  $namespace
+     *
      * @return bool
      */
     public function exists($group, $namespace = null);
@@ -26,6 +28,7 @@ interface LoaderInterface
      *
      * @param  string  $namespace
      * @param  string  $hint
+     *
      * @return void
      */
     public function addNamespace($namespace, $hint);
@@ -45,6 +48,7 @@ interface LoaderInterface
      * @param  string  $package
      * @param  string  $group
      * @param  array   $items
+     *
      * @return array
      */
     public function cascadePackage($environment, $package, $group, $items);

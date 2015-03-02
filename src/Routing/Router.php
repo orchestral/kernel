@@ -17,6 +17,7 @@ class Router extends BaseRouter
      * @param  string  $filter
      * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Http\Response  $response
+     *
      * @return mixed
      */
     protected function callFilter($filter, $request, $response = null)
@@ -36,6 +37,7 @@ class Router extends BaseRouter
      * @param  \Illuminate\Routing\Route  $route
      * @param  \Illuminate\Http\Request  $request
      * @param  \Illuminate\Http\Response|null  $response
+     *
      * @return mixed
      */
     public function callRouteFilter($filter, $parameters, $route, $request, $response = null)
