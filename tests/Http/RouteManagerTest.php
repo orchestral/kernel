@@ -18,7 +18,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->app = m::mock('\Illuminate\Contracts\Foundation\Application', '\ArrayAccess');
+        $this->app                            = m::mock('\Illuminate\Contracts\Foundation\Application', '\ArrayAccess');
         $_SERVER['RouteManagerTest@callback'] = null;
 
         Facade::clearResolvedInstances();
@@ -38,7 +38,6 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Installed setup.
-     *
      */
     private function getApplicationMocks()
     {
@@ -72,13 +71,13 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $stub = new StubRouteManager($app);
 
-        $expected = array(
+        $expected = [
             'before' => 'auth',
             'prefix' => 'admin',
             'domain' => null,
-        );
+        ];
 
-        $this->assertEquals($expected, $stub->group('admin', 'admin', array('before' => 'auth')));
+        $this->assertEquals($expected, $stub->group('admin', 'admin', ['before' => 'auth']));
     }
 
     /**
@@ -102,11 +101,11 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $appRoute->shouldReceive('prefix')->once()->andReturn('admin')
             ->shouldReceive('domain')->once()->andReturnNull();
 
-        $group = array(
+        $group = [
             'before' => 'auth',
             'prefix' => 'admin',
             'domain' => null,
-        );
+        ];
 
         $callback = function () { };
 
@@ -114,7 +113,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $stub = new StubRouteManager($app);
 
-        $this->assertEquals($group, $stub->group('admin', 'admin', array('before' => 'auth'), $callback));
+        $this->assertEquals($group, $stub->group('admin', 'admin', ['before' => 'auth'], $callback));
     }
 
     /**
@@ -138,10 +137,10 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $appRoute->shouldReceive('prefix')->once()->andReturn('admin')
             ->shouldReceive('domain')->once()->andReturnNull();
 
-        $group = array(
+        $group = [
             'prefix' => 'admin',
             'domain' => null,
-        );
+        ];
 
         $callback = function () { };
 
@@ -218,7 +217,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $stub = new StubRouteManager($app);
 
-        $options = array('csrf' => true);
+        $options = ['csrf' => true];
 
         $this->assertEquals('/?_token=StAGiQ', $stub->handles('app::/', $options));
         $this->assertEquals('info?foo=bar&_token=StAGiQ', $stub->handles('info?foo=bar', $options));
@@ -309,8 +308,6 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-
 class StubRouteManager extends RouteManager
 {
-
 }
