@@ -62,7 +62,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('bar', $config->get('namespace::options.foo'));
         $this->assertEquals('breeze', $config->get('namespace::options.baz.boom'));
         $this->assertEquals('blah', $config->get('namespace::options.code', 'blah'));
-        $this->assertEquals('blah', $config->get('namespace::options.code', function() { return 'blah'; }));
+        $this->assertEquals('blah', $config->get('namespace::options.code', function () { return 'blah'; }));
     }
 
     public function testNamespacedAccessedAndPostNamespaceLoadEventIsFired()
@@ -72,6 +72,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'options', 'namespace')->andReturn($options);
         $config->afterLoading('namespace', function ($repository, $group, $items) {
             $items['dayle'] = 'rees';
+
             return $items;
         });
 

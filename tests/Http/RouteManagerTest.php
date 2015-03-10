@@ -38,7 +38,6 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Installed setup.
-     *
      */
     private function getApplicationMocks()
     {
@@ -309,8 +308,6 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-
 class StubRouteManager extends RouteManager
 {
-
 }
