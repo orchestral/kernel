@@ -19,7 +19,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testHasOnTrueReturnsTrue()
     {
-        $config = $this->getRepository();
+        $config  = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'app', null)->andReturn($options);
         $config->getLoader()->shouldReceive('exists')->once()->with('app/bing')->andReturn(false);
@@ -30,7 +30,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testGetReturnsBasicItems()
     {
-        $config = $this->getRepository();
+        $config  = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'app', null)->andReturn($options);
         $config->getLoader()->shouldReceive('exists')->twice()->with('app/foo')->andReturn(false);
@@ -46,7 +46,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testEntireArrayCanBeReturned()
     {
-        $config = $this->getRepository();
+        $config  = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'app', null)->andReturn($options);
 
@@ -55,7 +55,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testLoaderGetsCalledCorrectForNamespaces()
     {
-        $config = $this->getRepository();
+        $config  = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'options', 'namespace')->andReturn($options);
 
@@ -67,7 +67,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testNamespacedAccessedAndPostNamespaceLoadEventIsFired()
     {
-        $config = $this->getRepository();
+        $config  = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'options', 'namespace')->andReturn($options);
         $config->afterLoading('namespace', function ($repository, $group, $items) {
@@ -85,7 +85,7 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testLoaderUsesNamespaceAsGroupWhenUsingPackagesAndGroupDoesntExist()
     {
-        $config = $this->getRepository();
+        $config  = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('addNamespace')->with('namespace', __DIR__);
         $config->getLoader()->shouldReceive('cascadePackage')->andReturnUsing(function ($env, $package, $group, $items) { return $items; });
@@ -101,14 +101,14 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
     public function testItemsCanBeSet()
     {
         $config = $this->getRepository();
-        $config->getLoader()->shouldReceive('load')->once()->with('production', 'foo', null)->andReturn(array('name' => 'dayle'));
+        $config->getLoader()->shouldReceive('load')->once()->with('production', 'foo', null)->andReturn(['name' => 'dayle']);
         $config->getLoader()->shouldReceive('exists')->once()->with('foo/name')->andReturn(false);
 
         $config->set('foo.name', 'taylor');
         $this->assertEquals('taylor', $config->get('foo.name'));
 
         $config = $this->getRepository();
-        $config->getLoader()->shouldReceive('load')->once()->with('production', 'foo', 'namespace')->andReturn(array('name' => 'dayle'));
+        $config->getLoader()->shouldReceive('load')->once()->with('production', 'foo', 'namespace')->andReturn(['name' => 'dayle']);
 
         $config->set('namespace::foo.name', 'taylor');
         $this->assertEquals('taylor', $config->get('namespace::foo.name'));
@@ -116,14 +116,14 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testPackageRegistersNamespaceAndSetsUpAfterLoadCallback()
     {
-        $config = $this->getMock('\Orchestra\Config\Repository', array('addNamespace'), array(m::mock('\Orchestra\Config\LoaderInterface'), 'production'));
+        $config = $this->getMock('\Orchestra\Config\Repository', ['addNamespace'], [m::mock('\Orchestra\Config\LoaderInterface'), 'production']);
         $config->expects($this->once())->method('addNamespace')->with($this->equalTo('rees'), $this->equalTo(__DIR__));
-        $config->getLoader()->shouldReceive('cascadePackage')->once()->with('production', 'dayle/rees', 'group', array('foo'))->andReturn(array('bar'));
+        $config->getLoader()->shouldReceive('cascadePackage')->once()->with('production', 'dayle/rees', 'group', ['foo'])->andReturn(['bar']);
         $config->package('dayle/rees', __DIR__);
         $afterLoad = $config->getAfterLoadCallbacks();
-        $results = call_user_func($afterLoad['rees'], $config, 'group', array('foo'));
+        $results   = call_user_func($afterLoad['rees'], $config, 'group', ['foo']);
 
-        $this->assertEquals(array('bar'), $results);
+        $this->assertEquals(['bar'], $results);
     }
 
     protected function getRepository()
@@ -133,6 +133,6 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     protected function getDummyOptions()
     {
-        return array('foo' => 'bar', 'baz' => array('boom' => 'breeze'), 'bing' => true);
+        return ['foo' => 'bar', 'baz' => ['boom' => 'breeze'], 'bing' => true];
     }
 }
