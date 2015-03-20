@@ -34,7 +34,7 @@
 		"orchestra/routing": "self.version"
 	},
 	"suggest": {
-		"hashids/hashids": "Allow to use HashId as a URL id replacement (~1.0)"
+		"hashids/hashids": "Allow to use HashId as a URL id replacement (~1.0)."
 	},
 	"extra": {
 		"branch-alias": {
