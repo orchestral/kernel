@@ -1,4 +1,4 @@
-<?php namespace Orchestra\Http; 
+<?php namespace Orchestra\Http;
 
 use Hashids\Hashids;
 use Orchestra\Support\Providers\ServiceProvider;

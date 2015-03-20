@@ -111,7 +111,8 @@ abstract class RouteManager
         list($package, $route) = $this->locate($path, $options);
 
         // Get the path from route configuration, and append route.
-        $locate                   = $this->route($package)->to($route);
+        $locate = $this->route($package)->to($route);
+
         empty($locate) && $locate = '/';
 
         return $url->to($locate);
