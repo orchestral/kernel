@@ -30,7 +30,7 @@ class FormRequest extends Request
         $this->validationFactory    = $this->container->make('Illuminate\Contracts\Validation\Factory');
         $this->validationDispatcher = $this->container->make('Illuminate\Contracts\Events\Dispatcher');
 
-        return $this->runValidation($this->all());
+        return $this->runValidation($this->all(), [], $this->messages());
     }
 
     /**

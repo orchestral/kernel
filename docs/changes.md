@@ -5,6 +5,12 @@ title: Kernel Change Log
 
 # Version 3.0 {#v3-0}
 
+## v3.0.4 {#v3-0-4}
+
+* HTTP:
+  - Bind custom messages values to `Orchestra\Http\FormRequest`.
+  - Add `Orchestra\Http\HashIdServiceProvider` which utilize `hashids/hashids` packages to generate unique short ID for URL.
+  
 ## v3.0.3 {#v3-0-3}
 
 * Config:
