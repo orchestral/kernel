@@ -204,7 +204,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
             ->shouldReceive('offsetGet')->with('session')->andReturn($session)
             ->shouldReceive('offsetGet')->with('url')->andReturn($url);
 
-        $appRoute = m::mock('\Orchestra\Extension\RouteGenerator')->makePartial();
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
         $appRoute->shouldReceive('to')->once()->with('/?_token=StAGiQ')->andReturn('/?_token=StAGiQ')
             ->shouldReceive('to')->once()->with('info?foo=bar&_token=StAGiQ')->andReturn('info?foo=bar&_token=StAGiQ');
