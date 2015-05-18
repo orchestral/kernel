@@ -25,7 +25,7 @@
 		"mockery/mockery": "0.9.*",
 		"laravel/framework": "5.1.*",
 		"hashids/hashids": "~1.0",
-		"orchestra/support": "3.1.*"
+		"orchestra/support": "3.2.*"
 	},
 	"replace": {
 		"orchestra/config": "self.version",
