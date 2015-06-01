@@ -22,7 +22,7 @@
 	},
 	"require": {
 		"php": ">=5.5.0",
-		"illuminate/filesystem": "5.1.*",
+		"illuminate/filesystem": "5.2.*",
 		"orchestra/contracts": "3.2.*"
 	},
 	"extra": {
