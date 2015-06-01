@@ -18,6 +18,7 @@ class ResourceRegistrar extends BaseResourceRegistrar
      * @param  string  $base
      * @param  string  $controller
      * @param  array   $options
+     *
      * @return \Illuminate\Routing\Route
      */
     protected function addResourceDelete($name, $base, $controller, $options)
