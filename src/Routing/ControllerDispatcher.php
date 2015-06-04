@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Orchestra\Contracts\Routing\CallableController;
 use Orchestra\Contracts\Routing\StackableController;
-use Orchestra\Contracts\Routing\FilterableController;
 use Illuminate\Routing\Controller as IlluminateController;
 use Illuminate\Routing\ControllerDispatcher as BaseDispatcher;
 
@@ -29,20 +28,10 @@ class ControllerDispatcher extends BaseDispatcher
         // to the route so that they will be run by the routers after this processing.
         $instance = $this->makeController($controller);
 
-        if ($instance instanceof FilterableController || $instance instanceof IlluminateController) {
-            $this->assignAfter($instance, $route, $request, $method);
-
-            $response = $this->before($instance, $route, $request, $method);
-        }
-
-        // If no before filters returned a response we'll call the method on the controller
-        // to get the response to be returned to the router. We will then return it back
-        // out for processing by this router and the after filters can be called then.
-        if (is_null($response)) {
-            $response = $this->callWithinStack($instance, $route, $request, $method);
-        }
-
-        return $response;
+        // We'll call the method on the controller to get the response to be returned
+        // to the router. We will then return it back out for processing by this
+        // router and the after filters can be called then.
+        return $this->callWithinStack($instance, $route, $request, $method);
     }
 
     /**
