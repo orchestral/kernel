@@ -46,8 +46,8 @@ To swap Laravel 5 default configuration, all you need to do is add the following
 
 ```php
 $app->singleton(
-    'Illuminate\Foundation\Bootstrap\LoadConfiguration',
-    'Orchestra\Config\Bootstrap\LoadConfiguration'
+    Illuminate\Foundation\Bootstrap\LoadConfiguration::class,
+    Orchestra\Config\Bootstrap\LoadConfiguration::class
 );
 ```
 
