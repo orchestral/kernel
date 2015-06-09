@@ -21,8 +21,6 @@ class ControllerDispatcher extends BaseDispatcher
      */
     public function dispatch(Route $route, Request $request, $controller, $method)
     {
-        $response = null;
-
         // First we will make an instance of this controller via the IoC container instance
         // so that we can call the methods on it. We will also apply any "after" filters
         // to the route so that they will be run by the routers after this processing.
