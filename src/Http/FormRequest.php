@@ -2,6 +2,8 @@
 
 use Orchestra\Support\Traits\ValidationTrait;
 use Illuminate\Foundation\Http\FormRequest as Request;
+use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+use Illuminate\Contracts\Validation\Factory as ValidationContract;
 
 class FormRequest extends Request
 {
@@ -27,8 +29,8 @@ class FormRequest extends Request
         $this->setupValidationScenario();
         $this->setupValidationParameters();
 
-        $this->validationFactory    = $this->container->make('Illuminate\Contracts\Validation\Factory');
-        $this->validationDispatcher = $this->container->make('Illuminate\Contracts\Events\Dispatcher');
+        $this->validationFactory    = $this->container->make(ValidationContract::class);
+        $this->validationDispatcher = $this->container->make(DispatcherContract::class);
 
         return $this->runValidation($this->all(), [], $this->messages());
     }
