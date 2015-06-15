@@ -16,7 +16,7 @@ class LoadConfiguration
      */
     public function bootstrap(Application $app)
     {
-        $loader = new FileLoader(new Filesystem(), $app['path.config']);
+        $loader = new FileLoader(new Filesystem(), $app->configPath());
 
         $app->instance('config', $config = new Repository($loader, $app->environment()));
 
