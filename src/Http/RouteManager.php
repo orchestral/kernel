@@ -15,11 +15,32 @@ abstract class RouteManager
     protected $app;
 
     /**
+     * The extension instance.
+     *
+     * @var \Orchestra\Contracts\Extension\Factory
+     */
+    protected $extension;
+
+    /**
+     * Application router instance.
+     *
+     * @var \Illuminate\Routing\Router
+     */
+    protected $router;
+
+    /**
      * List of routes.
      *
      * @var array
      */
     protected $routes = [];
+
+    /**
+     * URL Generator instance.
+     *
+     * @var \Illuminate\Contracts\Routing\UrlGenerator
+     */
+    protected $urlGenerator;
 
     /**
      * Construct a new instance.
@@ -29,6 +50,10 @@ abstract class RouteManager
     public function __construct(Application $app)
     {
         $this->app = $app;
+
+        $this->extension    = $app->make('orchestra.extension');
+        $this->router       = $app->make('router');
+        $this->urlGenerator = $app->make('url');
     }
 
     /**
@@ -86,7 +111,7 @@ abstract class RouteManager
         ]);
 
         if (! is_null($callback)) {
-            $this->app['router']->group($attributes, $callback);
+            $this->router->group($attributes, $callback);
         }
 
         return $attributes;
@@ -102,9 +127,7 @@ abstract class RouteManager
      */
     public function handles($path, array $options = [])
     {
-        $url = $this->app['url'];
-
-        if ($url->isValidUrl($path)) {
+        if ($this->urlGenerator->isValidUrl($path)) {
             return $path;
         }
 
@@ -115,7 +138,7 @@ abstract class RouteManager
 
         empty($locate) && $locate = '/';
 
-        return $url->to($locate);
+        return $this->urlGenerator->to($locate);
     }
 
     /**
@@ -159,7 +182,7 @@ abstract class RouteManager
      */
     public function when($path, $listener)
     {
-        $listener = $this->app['events']->makeListener($listener);
+        $listener = $this->app->make('events')->makeListener($listener);
 
         $this->app->booted(function () use ($listener, $path) {
             if ($this->is($path)) {
@@ -178,7 +201,7 @@ abstract class RouteManager
      */
     protected function generateRouteByName($name, $default)
     {
-        return $this->app['orchestra.extension']->route($name, $default);
+        return $this->extension->route($name, $default);
     }
 
     /**
@@ -195,7 +218,7 @@ abstract class RouteManager
     protected function prepareValidRoute($route, $item, $query, array $options)
     {
         if (!! Arr::get($options, 'csrf', false)) {
-            $query .= (! empty($query) ? '&' : '').'_token='.$this->app['session']->getToken();
+            $query .= (! empty($query) ? '&' : '').'_token='.$this->app->make('session')->getToken();
         }
 
         ! empty($item) && $route = "{$route}.{$item}";

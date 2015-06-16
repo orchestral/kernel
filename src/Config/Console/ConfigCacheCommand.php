@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Config\Console;
 
 use Symfony\Component\Finder\Finder;
+use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Console\ConfigCacheCommand as BaseCommand;
 
 class ConfigCacheCommand extends BaseCommand
@@ -12,20 +13,21 @@ class ConfigCacheCommand extends BaseCommand
      */
     protected function getFreshConfiguration()
     {
-        $app = require $this->laravel['path.base'].'/bootstrap/app.php';
+        $app = require $this->laravel->basePath().'/bootstrap/app.php';
 
-        $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
+        $app->make(Kernel::class)->bootstrap();
+        $config = $app->make('config');
 
         $files = array_merge(
-            $app['config']->get('compile.config', []),
+            $config->get('compile.config', []),
             $this->getConfigurationFiles()
         );
 
         foreach ($files as $file) {
-            $app['config'][$file];
+            $config[$file];
         }
 
-        return $app['config']->all();
+        return $config->all();
     }
 
     /**

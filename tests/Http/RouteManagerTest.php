@@ -11,14 +11,26 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
      *
      * @var \Illuminate\Contracts\Foundation\Application
      */
-    private $app = null;
+    private $app;
+
+    /**
+     * Request instance.
+     *
+     * @var \Illuminate\Http\Requst
+     */
+    private $request;
 
     /**
      * Setup the test environment.
      */
     public function setUp()
     {
-        $this->app                            = m::mock('\Illuminate\Contracts\Foundation\Application', '\ArrayAccess');
+        $this->app = m::mock('\Illuminate\Contracts\Foundation\Application');
+        $this->request = m::mock('\Illuminate\Http\Request');
+
+        $this->request->shouldReceive('root')->andReturn('http://localhost')
+            ->shouldReceive('secure')->andReturn(false);
+
         $_SERVER['RouteManagerTest@callback'] = null;
 
         Facade::clearResolvedInstances();
@@ -31,6 +43,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->app);
+        unset($this->request);
         unset($_SERVER['RouteManagerTest@callback']);
 
         m::close();
@@ -42,10 +55,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     private function getApplicationMocks()
     {
         $app = $this->app;
-        $app->shouldReceive('offsetGet')->with('request')->andReturn($request = m::mock('\Illuminate\Http\Request'));
-
-        $request->shouldReceive('root')->andReturn('http://localhost')
-            ->shouldReceive('secure')->andReturn(false);
+        $app->shouldReceive('make')->with('request')->andReturn($this->request);
 
         return $app;
     }
@@ -59,9 +69,14 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     {
         $app       = $this->getApplicationMocks();
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
-        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router    = m::mock('\Illuminate\Routing\Router');
 
-        $app->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension);
+        $app->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('make')->with('url')->andReturn($url)
+            ->shouldReceive('make')->with('router')->andReturn($router);
+
+        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
         $extension->shouldReceive('route')->once()
             ->with('admin', 'admin')->andReturn($appRoute);
@@ -90,11 +105,14 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     {
         $app       = $this->getApplicationMocks();
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
+        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
         $router    = m::mock('\Illuminate\Routing\Router');
-        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
-        $app->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension)
-            ->shouldReceive('offsetGet')->with('router')->andReturn($router);
+        $app->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('make')->with('url')->andReturn($url)
+            ->shouldReceive('make')->with('router')->andReturn($router);
+
+        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
         $extension->shouldReceive('route')->once()->with('admin', 'admin')->andReturn($appRoute);
 
@@ -126,11 +144,14 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     {
         $app       = $this->getApplicationMocks();
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
+        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
         $router    = m::mock('\Illuminate\Routing\Router');
-        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
-        $app->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension)
-            ->shouldReceive('offsetGet')->with('router')->andReturn($router);
+        $app->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('make')->with('url')->andReturn($url)
+            ->shouldReceive('make')->with('router')->andReturn($router);
+
+        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
         $extension->shouldReceive('route')->once()->with('admin', 'admin')->andReturn($appRoute);
 
@@ -161,11 +182,13 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $app       = $this->getApplicationMocks();
         $config    = m::mock('\Illuminate\Contracts\Config\Repository');
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
-        $url       = m::mock('\Illuminate\Routing\UrlGenerator');
+        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router    = m::mock('\Illuminate\Routing\Router');
 
-        $app->shouldReceive('offsetGet')->with('config')->andReturn($config)
-            ->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension)
-            ->shouldReceive('offsetGet')->with('url')->andReturn($url);
+        $app->shouldReceive('make')->with('config')->andReturn($config)
+            ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('make')->with('url')->andReturn($url)
+            ->shouldReceive('make')->with('router')->andReturn($router);
 
         $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
@@ -197,12 +220,14 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $config    = m::mock('\Illuminate\Contracts\Config\Repository');
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
         $session   = m::mock('\Illuminate\Session\Store');
-        $url       = m::mock('\Illuminate\Routing\UrlGenerator');
+        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router    = m::mock('\Illuminate\Routing\Router');
 
-        $app->shouldReceive('offsetGet')->with('config')->andReturn($config)
-            ->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension)
-            ->shouldReceive('offsetGet')->with('session')->andReturn($session)
-            ->shouldReceive('offsetGet')->with('url')->andReturn($url);
+        $app->shouldReceive('make')->with('config')->andReturn($config)
+            ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('make')->with('session')->andReturn($session)
+            ->shouldReceive('make')->with('url')->andReturn($url)
+            ->shouldReceive('make')->with('router')->andReturn($router);
 
         $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
@@ -231,14 +256,16 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     public function testIsMethod()
     {
         $app       = $this->getApplicationMocks();
-        $request   = $app['request'];
-        $config    = m::mock('\Illuminate\Config\Repository');
-        $extension = m::mock('\Orchestra\Extension\Factory');
-        $url       = m::mock('\Illuminate\Routing\UrlGenerator');
+        $request   = $this->request;
+        $config    = m::mock('\Illuminate\Contracts\Config\Repository');
+        $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
+        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router    = m::mock('\Illuminate\Routing\Router');
 
-        $app->shouldReceive('offsetGet')->with('config')->andReturn($config)
-            ->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension)
-            ->shouldReceive('offsetGet')->with('url')->andReturn($url);
+        $app->shouldReceive('make')->with('config')->andReturn($config)
+            ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('make')->with('url')->andReturn($url)
+            ->shouldReceive('make')->with('router')->andReturn($router);
 
         $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
@@ -261,22 +288,24 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     public function testWhenMethod()
     {
         $app       = $this->getApplicationMocks();
-        $config    = m::mock('\Illuminate\Config\Repository');
-        $events    = m::mock('\Illuminate\Events\Dispatcher');
-        $extension = m::mock('\Orchestra\Extension\Factory');
-        $url       = m::mock('\Illuminate\Routing\UrlGenerator');
+        $config    = m::mock('\Illuminate\Contracts\Config\Repository');
+        $events    = m::mock('\Illuminate\Contracts\Events\Dispatcher');
+        $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
+        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router    = m::mock('\Illuminate\Routing\Router');
 
-        $app->shouldReceive('offsetGet')->with('config')->andReturn($config)
-            ->shouldReceive('offsetGet')->with('events')->andReturn($events)
-            ->shouldReceive('offsetGet')->with('orchestra.extension')->andReturn($extension)
-            ->shouldReceive('offsetGet')->with('url')->andReturn($url)
+        $app->shouldReceive('make')->with('config')->andReturn($config)
+            ->shouldReceive('make')->with('events')->andReturn($events)
+            ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('make')->with('url')->andReturn($url)
+            ->shouldReceive('make')->with('router')->andReturn($router)
             ->shouldReceive('boot')->andReturnNull()
             ->shouldReceive('booted')->twice()->with(m::type('Closure'))
                 ->andReturnUsing(function ($c) {
                     return $c();
                 });
 
-        $appRoute = m::mock('\Orchestra\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
         $appRoute->shouldReceive('is')->once()->with('/')->andReturn(true)
             ->shouldReceive('is')->once()->with('foo')->andReturn(false);
@@ -310,4 +339,5 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
 class StubRouteManager extends RouteManager
 {
+    //
 }

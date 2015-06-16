@@ -20,11 +20,11 @@
 	},
 	"require": {
 		"php": ">=5.5.0",
-		"orchestra/support": "3.2.*"
+		"orchestra/support": "~3.2.0"
 	},
 	"require-dev": {
 		"mockery/mockery": "0.9.*",
-		"laravel/framework": "5.2.*",
+		"laravel/framework": "~5.2.0",
 		"hashids/hashids": "~1.0"
 	},
 	"replace": {
