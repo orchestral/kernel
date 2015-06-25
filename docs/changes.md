@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.3 {#v3-1-3}
+
+* HTTP:
+  - Add `Orchestra\Http\Traits\PassThroughTrait`.
+
 ### v3.1.2 {#v3-1-2}
 
 * Improved performances by reducing call within `Illuminate\Container\Container`.
