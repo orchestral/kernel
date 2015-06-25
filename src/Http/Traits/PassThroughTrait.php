@@ -1,4 +1,4 @@
-<?php namespace Orchestra\Http\Traits; 
+<?php namespace Orchestra\Http\Traits;
 
 trait PassThroughTrait
 {
@@ -23,6 +23,7 @@ trait PassThroughTrait
                 return true;
             }
         }
+
         return false;
     }
 }
