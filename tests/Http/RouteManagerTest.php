@@ -81,15 +81,13 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $extension->shouldReceive('route')->once()
             ->with('admin', 'admin')->andReturn($appRoute);
 
-        $appRoute->shouldReceive('prefix')->once()->andReturn('admin')
-            ->shouldReceive('domain')->once()->andReturnNull();
+        $appRoute->shouldReceive('group')->once()->andReturn(['prefix' => 'admin']);
 
         $stub = new StubRouteManager($app);
 
         $expected = [
             'before' => 'auth',
             'prefix' => 'admin',
-            'domain' => null,
         ];
 
         $this->assertEquals($expected, $stub->group('admin', 'admin', ['before' => 'auth']));
@@ -116,13 +114,11 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $extension->shouldReceive('route')->once()->with('admin', 'admin')->andReturn($appRoute);
 
-        $appRoute->shouldReceive('prefix')->once()->andReturn('admin')
-            ->shouldReceive('domain')->once()->andReturnNull();
+        $appRoute->shouldReceive('group')->once()->andReturn(['prefix' => 'admin']);
 
         $group = [
             'before' => 'auth',
             'prefix' => 'admin',
-            'domain' => null,
         ];
 
         $callback = function () { };
@@ -155,12 +151,10 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $extension->shouldReceive('route')->once()->with('admin', 'admin')->andReturn($appRoute);
 
-        $appRoute->shouldReceive('prefix')->once()->andReturn('admin')
-            ->shouldReceive('domain')->once()->andReturnNull();
+        $appRoute->shouldReceive('group')->once()->andReturn(['prefix' => 'admin']);
 
         $group = [
             'prefix' => 'admin',
-            'domain' => null,
         ];
 
         $callback = function () { };
