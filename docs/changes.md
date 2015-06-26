@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.4 {#v3-1-4}
+
+* HTTP:
+  - Allow `Orchestra\Http\RouteManager::group()` to utilize new `Orchestra\Extension\RouteManager::group()`.
+
 ### v3.1.3 {#v3-1-3}
 
 * HTTP:
