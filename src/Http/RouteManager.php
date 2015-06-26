@@ -105,10 +105,7 @@ abstract class RouteManager
             $attributes = [];
         }
 
-        $attributes = array_merge($attributes, [
-            'prefix' => $route->prefix(),
-            'domain' => $route->domain(),
-        ]);
+        $attributes = array_merge($attributes, $route->group());
 
         if (! is_null($callback)) {
             $this->router->group($attributes, $callback);
