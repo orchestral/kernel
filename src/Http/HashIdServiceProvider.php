@@ -1,6 +1,7 @@
 <?php namespace Orchestra\Http;
 
 use Hashids\Hashids;
+use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Support\Providers\ServiceProvider;
 
 class HashIdServiceProvider extends ServiceProvider
@@ -19,7 +20,7 @@ class HashIdServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('orchestra.hashid', function ($app) {
+        $this->app->singleton('orchestra.hashid', function (Application $app) {
             return new Hashids($app->make('config')->get('app.key'));
         });
     }
