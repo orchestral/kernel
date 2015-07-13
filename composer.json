@@ -1,46 +1,46 @@
 {
-	"name": "orchestra/kernel",
-	"description": "Kernel for Orchestra Platform",
-	"keywords": ["orchestra-platform", "orchestral"],
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Mior Muhammad Zaki",
-			"email": "crynobone@gmail.com",
-			"homepage": "https://github.com/crynobone"
-		}
-	],
-	"autoload": {
-		"psr-4": {
-			"Orchestra\\": "src/"
-		},
-		"files": [
-			"src/Routing/helpers.php"
-		]
-	},
-	"require": {
-		"php": ">=5.5.0",
-		"orchestra/extension": "~3.2.0"
-	},
-	"require-dev": {
-		"mockery/mockery": "0.9.*",
-		"laravel/framework": "~5.2.0",
-		"hashids/hashids": "~1.0"
-	},
-	"replace": {
-		"orchestra/config": "self.version",
-		"orchestra/contracts": "self.version",
-		"orchestra/database": "self.version",
-		"orchestra/http": "self.version",
-		"orchestra/routing": "self.version"
-	},
-	"suggest": {
-		"hashids/hashids": "Allow to use HashId as a URL id replacement (~1.0)."
-	},
-	"extra": {
-		"branch-alias": {
-			"dev-master": "3.2-dev"
-		}
-	},
-	"minimum-stability": "dev"
+    "name": "orchestra/kernel",
+    "description": "Kernel for Orchestra Platform",
+    "keywords": ["orchestra-platform", "orchestral"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mior Muhammad Zaki",
+            "email": "crynobone@gmail.com",
+            "homepage": "https://github.com/crynobone"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Orchestra\\": "src/"
+        },
+        "files": [
+            "src/Routing/helpers.php"
+        ]
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "orchestra/extension": "~3.2.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "laravel/framework": "~5.2.0",
+        "hashids/hashids": "~1.0"
+    },
+    "replace": {
+        "orchestra/config": "self.version",
+        "orchestra/contracts": "self.version",
+        "orchestra/database": "self.version",
+        "orchestra/http": "self.version",
+        "orchestra/routing": "self.version"
+    },
+    "suggest": {
+        "hashids/hashids": "Allow to use HashId as a URL id replacement (~1.0)."
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.2-dev"
+        }
+    },
+    "minimum-stability": "dev"
 }
