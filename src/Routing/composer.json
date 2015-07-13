@@ -1,35 +1,35 @@
 {
-	"name": "orchestra/routing",
-	"description": "Routing Component for Orchestra Platform",
-	"keywords": ["orchestra-platform", "orchestral", "routing"],
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Mior Muhammad Zaki",
-			"email": "crynobone@gmail.com",
-			"homepage": "https://github.com/crynobone"
-		}
-	],
-	"autoload": {
-		"psr-4": {
-			"Orchestra\\Routing\\": ""
-		},
-		"files": [
-			"helpers.php"
-		]
-	},
-	"require": {
-		"php": ">=5.5.0",
-		"illuminate/routing": "~5.1.0",
-		"orchestra/contracts": "~3.1.0"
-	},
-	"extra": {
-		"branch-alias": {
-			"dev-master": "3.2-dev"
-		}
-	},
-	"support": {
-		"issues": "https://github.com/orchestral/kernel/issues"
-	},
-	"minimum-stability": "dev"
+    "name": "orchestra/routing",
+    "description": "Routing Component for Orchestra Platform",
+    "keywords": ["orchestra-platform", "orchestral", "routing"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mior Muhammad Zaki",
+            "email": "crynobone@gmail.com",
+            "homepage": "https://github.com/crynobone"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Orchestra\\Routing\\": ""
+        },
+        "files": [
+            "helpers.php"
+        ]
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "illuminate/routing": "~5.1.0",
+        "orchestra/contracts": "~3.1.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.2-dev"
+        }
+    },
+    "support": {
+        "issues": "https://github.com/orchestral/kernel/issues"
+    },
+    "minimum-stability": "dev"
 }
