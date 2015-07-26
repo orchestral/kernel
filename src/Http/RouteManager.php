@@ -4,8 +4,9 @@ use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\NamespacedItemResolver;
 use Illuminate\Contracts\Foundation\Application;
+use Orchestra\Contracts\Http\RouteManager as RouteManagerContract;
 
-abstract class RouteManager
+abstract class RouteManager implements RouteManagerContract
 {
     /**
      * Application instance.
@@ -13,6 +14,13 @@ abstract class RouteManager
      * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $app;
+
+    /**
+     * Session CSRF token value.
+     *
+     * @var string|null
+     */
+    protected $csrfToken;
 
     /**
      * The extension instance.
@@ -153,6 +161,13 @@ abstract class RouteManager
     }
 
     /**
+     * Get application mode.
+     *
+     * @return
+     */
+    abstract public function mode();
+
+    /**
      * Get extension route.
      *
      * @param  string  $name
@@ -215,9 +230,14 @@ abstract class RouteManager
     protected function prepareValidRoute($route, $item, $query, array $options)
     {
         $appends = [];
+        $mode    = $this->mode();
 
         if (!! Arr::get($options, 'csrf', false)) {
-            $appends['_token'] = $this->app->make('session')->getToken();
+            $appends['_token'] = $this->getCsrfToken();
+        }
+
+        if (! in_array($mode, ['normal'])) {
+            $appends['_mode'] = $mode;
         }
 
         $query = $this->prepareHttpQueryString($query, $appends);
@@ -244,5 +264,19 @@ abstract class RouteManager
         }
 
         return $query;
+    }
+
+    /**
+     * Get CSRF Token.
+     *
+     * @return string|null
+     */
+    protected function getCsrfToken()
+    {
+        if (is_null($this->csrfToken)) {
+            $this->csrfToken = $this->app->make('session')->getToken();
+        }
+
+        return $this->csrfToken;
     }
 }
