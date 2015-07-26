@@ -203,6 +203,42 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test Orchestra\Http\RouteManager::handles() method on safe mode.
+     *
+     * @test
+     */
+    public function testHandlesMethodOnSafeMode()
+    {
+        $app       = $this->getApplicationMocks();
+        $config    = m::mock('\Illuminate\Contracts\Config\Repository');
+        $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
+        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router    = m::mock('\Illuminate\Routing\Router');
+
+        $app->shouldReceive('make')->with('config')->andReturn($config)
+            ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('make')->with('url')->andReturn($url)
+            ->shouldReceive('make')->with('router')->andReturn($router);
+
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+
+        $appRoute->shouldReceive('to')->once()->with('/?_mode=safe')->andReturn('/?_mode=safe')
+            ->shouldReceive('to')->once()->with('info?foo=bar&_mode=safe')->andReturn('info?foo=bar&_mode=safe');
+        $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
+        $url->shouldReceive('isValidUrl')->with('app::/')->andReturn(false)
+            ->shouldReceive('isValidUrl')->once()->with('info?foo=bar')->andReturn(false)
+            ->shouldReceive('isValidUrl')->once()->with('http://localhost/admin')->andReturn(true)
+            ->shouldReceive('to')->once()->with('/?_mode=safe')->andReturn('/?_mode=safe')
+            ->shouldReceive('to')->once()->with('info?foo=bar&_mode=safe')->andReturn('info?foo=bar&_mode=safe');
+
+        $stub = new StubSafeRouteManager($app);
+
+        $this->assertEquals('/?_mode=safe', $stub->handles('app::/'));
+        $this->assertEquals('info?foo=bar&_mode=safe', $stub->handles('info?foo=bar'));
+        $this->assertEquals('http://localhost/admin', $stub->handles('http://localhost/admin'));
+    }
+
+    /**
      * Test Orchestra\Http\RouteManager::handles() method
      * with CSRF Token.
      *
@@ -228,7 +264,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $appRoute->shouldReceive('to')->once()->with('/?_token=StAGiQ')->andReturn('/?_token=StAGiQ')
             ->shouldReceive('to')->once()->with('info?foo=bar&_token=StAGiQ')->andReturn('info?foo=bar&_token=StAGiQ');
         $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
-        $session->shouldReceive('getToken')->twice()->andReturn('StAGiQ');
+        $session->shouldReceive('getToken')->once()->andReturn('StAGiQ');
         $url->shouldReceive('isValidUrl')->once()->with('app::/')->andReturn(false)
             ->shouldReceive('isValidUrl')->once()->with('info?foo=bar')->andReturn(false)
             ->shouldReceive('to')->once()->with('/?_token=StAGiQ')->andReturn('/?_token=StAGiQ')
@@ -333,5 +369,16 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
 class StubRouteManager extends RouteManager
 {
-    //
+    public function mode()
+    {
+        return 'normal';
+    }
+}
+
+class StubSafeRouteManager extends RouteManager
+{
+    public function mode()
+    {
+        return 'safe';
+    }
 }
