@@ -214,14 +214,35 @@ abstract class RouteManager
      */
     protected function prepareValidRoute($route, $item, $query, array $options)
     {
+        $appends = [];
+
         if (!! Arr::get($options, 'csrf', false)) {
-            $query .= (! empty($query) ? '&' : '').'_token='.$this->app->make('session')->getToken();
+            $appends['_token'] = $this->app->make('session')->getToken();
         }
+
+        $query = $this->prepareHttpQueryString($query, $appends);
 
         ! empty($item) && $route = "{$route}.{$item}";
         empty($route) && $route  = '';
         empty($query) || $route  = "{$route}?{$query}";
 
         return $route;
+    }
+
+    /**
+     * Prepare HTTP query string.
+     *
+     * @param  string  $query
+     * @param  array   $appends
+     *
+     * @return string
+     */
+    protected function prepareHttpQueryString($query, $appends = [])
+    {
+        if (! empty($appends)) {
+            $query .= (! empty($query) ? '&' : '').http_build_query($appends);
+        }
+
+        return $query;
     }
 }
