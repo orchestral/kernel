@@ -7,10 +7,11 @@ title: Kernel Change Log
 
 ### v3.1.5 {#v3-1-5}
 
-* Add `Orchestra\Contracts\Auth\Command\DeauthenticateUser`.
-* Add `Orchestra\Contracts\Auth\Command\ThrottlesLogins`.
-* Add `Orchestra\Contracts\Auth\Listener\DeauthenticateUser`.
-* Add `Orchestra\Contracts\Auth\Listener\ThrottlesLogins`.
+* Contracts:
+  - Add `Orchestra\Contracts\Auth\Command\DeauthenticateUser`.
+  - Add `Orchestra\Contracts\Auth\Command\ThrottlesLogins`.
+  - Add `Orchestra\Contracts\Auth\Listener\DeauthenticateUser`.
+  - Add `Orchestra\Contracts\Auth\Listener\ThrottlesLogins`.
 
 ### v3.1.4 {#v3-1-4}
 
