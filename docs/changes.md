@@ -5,7 +5,6 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
-
 ### v3.1.6 {#v3-1-6}
 
 * Contracts:
