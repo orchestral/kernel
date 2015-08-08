@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.7 {#v3-1-7}
+
+* Contracts:
+  - Fixes Table Grid contract params differ from actual Table Grid method.
+
 ### v3.1.6 {#v3-1-6}
 
 * Contracts:
