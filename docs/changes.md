@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.8 {#v3-1-8}
+
+* Contracts:
+  - Update `Orchestra\Contracts\Auth\Command\ThrottlesLogins` contracts schema to fit with the latest code.
+
 ### v3.1.7 {#v3-1-7}
 
 * Contracts:
