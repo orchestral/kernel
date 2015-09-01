@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.9@dev {#v3-1-9}
+
+* Contracts:
+  - Add `Orchestra\Contracts\Authorization\Authorizable`.
+
 ### v3.1.8 {#v3-1-8}
 
 * Contracts:
