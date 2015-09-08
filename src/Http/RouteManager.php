@@ -194,11 +194,12 @@ abstract class RouteManager implements RouteManagerContract
      */
     public function when($path, $listener)
     {
-        $listener = $this->app->make('events')->makeListener($listener);
+        $events   = $this->app->make('events');
+        $listener = $events->makeListener($listener);
 
-        $this->app->booted(function () use ($listener, $path) {
+        $events->listen('kernel.handled', function ($request, $response) use ($listener, $path) {
             if ($this->is($path)) {
-                call_user_func($listener);
+                call_user_func($listener, $request, $response);
             }
         });
     }
