@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.10 {#v3-1-10}
+
+* HTTP:
+  - Move `Orchestra\Http\RouteManager::when()` event to be executed during `kernel.handled` instead of `Illuminate\Foundation\Application::booted()`.
+
 ### v3.1.9 {#v3-1-9}
 
 * Contracts:
