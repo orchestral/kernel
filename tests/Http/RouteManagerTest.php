@@ -333,7 +333,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
-        $appRoute->shouldReceive('is')->once()->with('foo')->andReturn(false);
+        $appRoute->shouldReceive('is')->once()->with('foo')->andReturn(true);
         $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
 
         $stub = new StubRouteManager($app);
@@ -344,9 +344,9 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
             $_SERVER['RouteManagerTest@callback'] = 'app::foo';
         });
 
-        $events->fire('kernel.handled', [m::mock('\Illuminate\Http\Request'), m::mock('\Illuminate\Http\Response')]);
+        $events->fire('router.matched');
 
-        $this->assertNotEquals('app::foo', $_SERVER['RouteManagerTest@callback']);
+        $this->assertEquals('app::foo', $_SERVER['RouteManagerTest@callback']);
     }
 }
 

@@ -194,12 +194,26 @@ abstract class RouteManager implements RouteManagerContract
      */
     public function when($path, $listener)
     {
-        $events   = $this->app->make('events');
+        return $this->whenOn($path, 'router.matched', $listener);
+    }
+
+    /**
+     * Run the callback when route is matched.
+     *
+     * @param  string  $path
+     * @param  string  $on
+     * @param  mixed   $listener
+     *
+     * @return void
+     */
+    public function whenOn($path, $on, $listener)
+    {
+        $events = $this->app->make('events');
         $listener = $events->makeListener($listener);
 
-        $events->listen('kernel.handled', function ($request, $response) use ($listener, $path) {
+        $events->listen($on, function () use ($listener, $path) {
             if ($this->is($path)) {
-                call_user_func($listener, $request, $response);
+                call_user_func_array($listener, func_get_args());
             }
         });
     }
