@@ -5,6 +5,14 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.11 {#v3-1-11}
+
+* Contracts:
+  - Add `Orchestra\Contracts\Http\RouteManager::whenOn()` to contract.
+* HTTP:
+  - Move `Orchestra\Http\RouteManager::when()` event to be executed during `router.matched` instead of `kernel.handled` as this is usually to late in the application request lifecycle.
+  - Add `Orchestra\Http\RouteManager::whenOn()` to allow user to specifically choose which event it should listen to.
+
 ### v3.1.10 {#v3-1-10}
 
 * HTTP:
