@@ -208,7 +208,7 @@ abstract class RouteManager implements RouteManagerContract
      */
     public function whenOn($path, $on, $listener)
     {
-        $events = $this->app->make('events');
+        $events   = $this->app->make('events');
         $listener = $events->makeListener($listener);
 
         $events->listen($on, function () use ($listener, $path) {
