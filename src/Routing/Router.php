@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Routing;
 
+use Illuminate\Routing\Route;
 use Illuminate\Routing\Router as BaseRouter;
 use Illuminate\Routing\ResourceRegistrar as BaseResourceRegistrar;
 
@@ -23,5 +24,22 @@ class Router extends BaseRouter
         }
 
         $registrar->register($name, $controller, $options);
+    }
+
+    /**
+     * Gather the middleware for the given route.
+     *
+     * @param  \Illuminate\Routing\Route  $route
+     * @return array
+     */
+    public function gatherRouteMiddlewares(Route $route)
+    {
+        $middlewares = [];
+
+        foreach ($route->middleware() as $name) {
+            $middlewares[] = $this->resolveMiddlewareClassName($name);
+        }
+
+        return $middlewares;
     }
 }
