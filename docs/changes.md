@@ -5,6 +5,14 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.12 {#v3-1-12}
+
+* Contracts:
+  - Update `Orchestra\Contracts\Html\Form\Grid` docblocks.
+  - Update `Orchestra\Contracts\Html\Table\Grid` docblocks.
+* Database:
+  - Add `Orchestra\Database\Console\Migrations\RefreshCommand` to support `--path` and `--realpath` option on migration refresh.
+
 ### v3.1.11 {#v3-1-11}
 
 * Contracts:
