@@ -19,7 +19,8 @@
         ]
     },
     "require": {
-        "php": ">=5.5.0"
+        "php": ">=5.5.0",
+        "orchestra/contracts": "~3.2.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
@@ -28,7 +29,6 @@
     },
     "replace": {
         "orchestra/config": "self.version",
-        "orchestra/contracts": "self.version",
         "orchestra/database": "self.version",
         "orchestra/http": "self.version",
         "orchestra/routing": "self.version"

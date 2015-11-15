@@ -12,7 +12,6 @@ else
 fi
 
 git subsplit publish --tags=$1 src/Config:git@github.com:orchestral/config.git
-git subsplit publish --tags=$1 src/Contracts:git@github.com:orchestral/contracts.git
 git subsplit publish --tags=$1 src/Database:git@github.com:orchestral/database.git
 git subsplit publish --tags=$1 src/Http:git@github.com:orchestral/http.git
 git subsplit publish --tags=$1 src/Routing:git@github.com:orchestral/routing.git
