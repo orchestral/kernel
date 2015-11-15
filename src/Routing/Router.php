@@ -30,6 +30,7 @@ class Router extends BaseRouter
      * Gather the middleware for the given route.
      *
      * @param  \Illuminate\Routing\Route  $route
+     *
      * @return array
      */
     public function gatherRouteMiddlewares(Route $route)
