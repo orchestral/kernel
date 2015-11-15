@@ -21,7 +21,7 @@
     "require": {
         "php": ">=5.5.0",
         "illuminate/routing": "~5.1.0",
-        "orchestra/contracts": "~3.1.0"
+        "orchestra/contracts": "~3.1.13"
     },
     "extra": {
         "branch-alias": {
