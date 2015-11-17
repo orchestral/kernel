@@ -17,7 +17,7 @@
     },
     "require": {
         "php": ">=5.5.0",
-        "orchestra/extension": "~3.2.0"
+        "orchestra/extension": "~3.3.0"
     },
     "suggest": {
         "hashids/hashids": "Allow to use HashId as a URL id replacement (~1.0)."
