@@ -5,6 +5,15 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.13 {#v3-1-13}
+
+* Contracts:
+  - Move Contracts component out of Kernel component.
+* Http:
+  - Add `Orchestra\Http\Middleware\NotModified`.
+* Routing:
+  - Improved performances by reducing call within `Illuminate\Container\Container`.
+
 ### v3.1.12 {#v3-1-12}
 
 * Contracts:
