@@ -16,7 +16,7 @@
         }
     },
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=5.6.0",
         "orchestra/extension": "~3.3.0"
     },
     "suggest": {
