@@ -1,5 +1,6 @@
 <?php namespace Orchestra\Config\Bootstrap;
 
+use Illuminate\Support\Arr;
 use Orchestra\Config\FileLoader;
 use Orchestra\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
@@ -29,14 +30,29 @@ class LoadConfiguration
             $env = Arr::get($items, '*::app.env');
         }
 
-        $app->detectEnvironment(function () use ($env) {
-            return $env ?: env('APP_ENV', 'production');
-        });
+        $this->setEnvironment($app, $env);
 
-        $app->instance('config', $config = (new Repository($loader, $app->environment()))->setFromCache($items));
+        $app->instance('config', $config = (new Repository($loader, $app->environment())));
+
+        $config->setFromCache($items);
 
         date_default_timezone_set($config['app.timezone']);
 
         mb_internal_encoding('UTF-8');
+    }
+
+    /**
+     * Set application environment.
+     *
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  string|null  $env
+     *
+     * @return void
+     */
+    protected function setEnvironment(Application $app, $env = null)
+    {
+        $app->detectEnvironment(function () use ($env) {
+            return $env ?: env('APP_ENV', 'production');
+        });
     }
 }
