@@ -16,22 +16,24 @@ class LoadConfiguration
      */
     public function bootstrap(Application $app)
     {
+        $env    = null;
+        $items  = [];
         $loader = new FileLoader(new Filesystem(), $app->configPath());
-
-        $app->instance('config', $config = new Repository($loader, $app->environment()));
 
         // First we will see if we have a cache configuration file. If we do, we'll load
         // the configuration items from that file so that it is very quick. Otherwise
         // we will need to spin through every configuration file and load them all.
-        if (file_exists($cached = $app->getCachedConfigPath()) && ! $app->runningInConsole()) {
+        if (file_exists($cached = $app->getCachedConfigPath())) {
             $items = require $cached;
 
-            $config->setFromCache($items);
+            $env = Arr::get($items, '*::app.env');
         }
 
-        $app->detectEnvironment(function () use ($config) {
-            return $config->get('app.env', 'production');
+        $app->detectEnvironment(function () use ($env) {
+            return $env ?: env('APP_ENV', 'production');
         });
+
+        $app->instance('config', $config = (new Repository($loader, $app->environment()))->setFromCache($items));
 
         date_default_timezone_set($config['app.timezone']);
 

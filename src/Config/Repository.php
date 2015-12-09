@@ -146,11 +146,13 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      *
      * @param  array  $items
      *
-     * @return void
+     * @return $this
      */
     public function setFromCache(array $items)
     {
         $this->items = $items;
+
+        return $this;
     }
 
     /**
