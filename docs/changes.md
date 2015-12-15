@@ -5,6 +5,13 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.14 {#v3-1-14}
+
+* Database:
+  - Add `Orchestra\Database\CachableQueryServiceProvider`.
+* Http:
+  - Add `Orchestra\Http\Middleware\RequireCsrfToken`.
+
 ### v3.1.13 {#v3-1-13}
 
 * Contracts:
