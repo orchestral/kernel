@@ -9,13 +9,14 @@ class NotModified
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
+     *
      * @return \Illuminate\Http\Response
      */
     public function handle($request, Closure $next)
     {
         $response = $next($request);
 
-        if ( ! $response->headers->has('Etag')) {
+        if (! $response->headers->has('Etag')) {
             $response->setEtag(md5($response->getContent()));
         }
 
