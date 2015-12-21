@@ -15,12 +15,12 @@ class Router extends BaseRouter
     public function auth()
     {
         // Authentication Routes...
-        $router->get('login', 'Auth\AuthenticateController@show');
-        $router->post('login', 'Auth\AuthenticateController@attempt');
-        $router->get('logout', 'Auth\DeauthenticateController@logout');
+        $this->get('login', 'Auth\AuthenticateController@show');
+        $this->post('login', 'Auth\AuthenticateController@attempt');
+        $this->get('logout', 'Auth\DeauthenticateController@logout');
 
-        $router->get('register', 'Auth\RegisterController@show');
-        $router->post('register', 'Auth\RegisterController@store');
+        $this->get('register', 'Auth\RegisterController@show');
+        $this->post('register', 'Auth\RegisterController@store');
     }
 
      /**
@@ -32,8 +32,9 @@ class Router extends BaseRouter
     {
         // Password Reset Routes...
         $this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-        $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
         $this->post('password/reset', 'Auth\PasswordController@reset');
+        $this->get('password/email', 'Auth\PasswordController@showLinkRequestForm');
+        $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
     }
 
     /**
