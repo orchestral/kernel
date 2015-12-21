@@ -8,6 +8,35 @@ use Illuminate\Routing\ResourceRegistrar as BaseResourceRegistrar;
 class Router extends BaseRouter
 {
     /**
+     * Register the typical authentication routes for an application.
+     *
+     * @return void
+     */
+    public function auth()
+    {
+        // Authentication Routes...
+        $router->get('login', 'Auth\AuthenticateController@show');
+        $router->post('login', 'Auth\AuthenticateController@attempt');
+        $router->get('logout', 'Auth\DeauthenticateController@logout');
+
+        $router->get('register', 'Auth\RegisterController@show');
+        $router->post('register', 'Auth\RegisterController@store');
+    }
+
+     /**
+     * Register the typical password reset routes for an application.
+     *
+     * @return void
+     */
+    public function password()
+    {
+        // Password Reset Routes...
+        $this->get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+        $this->post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+        $this->post('password/reset', 'Auth\PasswordController@reset');
+    }
+
+    /**
      * Route a resource to a controller.
      *
      * @param  string  $name
