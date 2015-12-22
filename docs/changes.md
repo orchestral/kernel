@@ -3,6 +3,32 @@ title: Kernel Change Log
 
 ---
 
+## Version 3.2 {#v3-2}
+
+### v3.2.0 {#v3-2-0}
+
+* Update support to Laravel Framework v5.2.
+* Improved performances by reducing call within `Illuminate\Container\Container`.
+* Config:
+  - Support determine environment via `app.environment` config.
+* Database:
+  - Add `Orchestra\Database\Console\Migrations\RefreshCommand` to support `--path` and `--realpath` option on migration refresh.
+  - Add `Orchestra\Database\CachableQueryServiceProvider`.
+* Http:
+  - Add `Orchestra\Http\Traits\PassThroughTrait`.
+  - Allow `Orchestra\Http\RouteManager::group()` to utilize new `Orchestra\Extension\RouteManager::group()`.
+  - `Orchestra\Http\RouteManager` should implements `Orchestra\Contracts\Http\RouteManager`.
+  - Add `Orchestra\Http\RouteManager::mode()` abstract method.
+  - Small optimization to reduce additional method calls when generating routes.
+  - Add `Orchestra\Http\RouteManager::when()` event to be executed during `router.matched`.
+  - Add `Orchestra\Http\RouteManager::whenOn()` to allow user to specifically choose which event it should listen to.
+  - Add `Orchestra\Http\Middleware\NotModified`.
+  - Add `Orchestra\Http\Middleware\RequireCsrfToken`.
+* Routing:
+  - Improved performances by reducing call within `Illuminate\Container\Container`.
+  - Remove deprecated filter options.
+  - Add `Route::auth()` and `Route::password()` routes helper.
+
 ## Version 3.1 {#v3-1}
 
 ### v3.1.14 {#v3-1-14}
