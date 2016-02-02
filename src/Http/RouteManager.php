@@ -213,7 +213,7 @@ abstract class RouteManager implements RouteManagerContract
 
         $events->listen($on, function () use ($listener, $path) {
             if ($this->is($path)) {
-                call_user_func_array($listener, func_get_args());
+                call_user_func($listener, ...func_get_args());
             }
         });
     }
