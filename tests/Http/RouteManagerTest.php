@@ -4,6 +4,7 @@ use Mockery as m;
 use Orchestra\Http\RouteManager;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Routing\Events\RouteMatched;
 
 class RouteManagerTest extends \PHPUnit_Framework_TestCase
 {
@@ -344,7 +345,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
             $_SERVER['RouteManagerTest@callback'] = 'app::foo';
         });
 
-        $events->fire('router.matched');
+        $events->fire(RouteMatched::class);
 
         $this->assertEquals('app::foo', $_SERVER['RouteManagerTest@callback']);
     }
