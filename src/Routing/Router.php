@@ -23,7 +23,7 @@ class Router extends BaseRouter
         $this->post('register', 'Auth\RegisterController@store');
     }
 
-     /**
+    /**
      * Register the typical password reset routes for an application.
      *
      * @return void
