@@ -2,6 +2,7 @@
 
 use Closure;
 use Illuminate\Support\Arr;
+use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\NamespacedItemResolver;
 use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Contracts\Http\RouteManager as RouteManagerContract;
@@ -194,7 +195,7 @@ abstract class RouteManager implements RouteManagerContract
      */
     public function when($path, $listener)
     {
-        return $this->whenOn($path, 'router.matched', $listener);
+        return $this->whenOn($path, RouteMatched::class, $listener);
     }
 
     /**

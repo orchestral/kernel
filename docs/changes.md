@@ -5,6 +5,13 @@ title: Kernel Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.1 {#v3-2-1}
+
+* Database:
+  - Add support to `Orchestra\Database\CacheDecorator` for caching via `pluck()` and `lists()` method.
+* HTTP:
+  - Update `router.matched` event to `Illuminate\Routing\Events\RouteMatched`.
+  
 ### v3.2.0 {#v3-2-0}
 
 * Update support to Laravel Framework v5.2.
@@ -30,6 +37,11 @@ title: Kernel Change Log
   - Add `Route::auth()` and `Route::password()` routes helper.
 
 ## Version 3.1 {#v3-1}
+
+### v3.1.15 {#v3-1-15}
+
+* Database:
+  - Add support to `Orchestra\Database\CacheDecorator` for caching via `lists()` method.
 
 ### v3.1.14 {#v3-1-14}
 
