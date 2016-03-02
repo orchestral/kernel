@@ -31,6 +31,11 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.15 {#v3-1-15}
+
+* Database:
+  - Add support to `Orchestra\Database\CacheDecorator` for caching via `lists()` method.
+
 ### v3.1.14 {#v3-1-14}
 
 * Database:
