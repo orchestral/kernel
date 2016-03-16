@@ -1,13 +1,13 @@
 <?php namespace Orchestra\Http;
 
-use Orchestra\Support\Traits\ValidationTrait;
+use Orchestra\Support\Traits\Validation;
 use Illuminate\Foundation\Http\FormRequest as Request;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Contracts\Validation\Factory as ValidationContract;
 
 class FormRequest extends Request
 {
-    use ValidationTrait;
+    use Validation;
 
     /**
      * Get validation rules.
