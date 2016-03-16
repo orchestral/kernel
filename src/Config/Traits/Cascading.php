@@ -2,7 +2,7 @@
 
 use Orchestra\Config\LoaderInterface;
 
-trait CascadingTrait
+trait Cascading
 {
     /**
      * The loader implementation.

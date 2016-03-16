@@ -2,14 +2,14 @@
 
 use ArrayAccess;
 use Illuminate\Support\Arr;
-use Orchestra\Config\Traits\LoadingTrait;
-use Orchestra\Config\Traits\CascadingTrait;
+use Orchestra\Config\Traits\Loader;
+use Orchestra\Config\Traits\Cascading;
 use Orchestra\Contracts\Config\PackageRepository;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
 
 class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigContract, PackageRepository
 {
-    use CascadingTrait, LoadingTrait;
+    use Cascading, Loader;
 
     /**
      * All of the configuration items.

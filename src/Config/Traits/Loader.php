@@ -2,7 +2,7 @@
 
 use Closure;
 
-trait LoadingTrait
+trait Loader
 {
     /**
      * The after load callbacks for namespaces.
