@@ -47,6 +47,6 @@ trait Loader
     {
         $callback = $this->afterLoad[$namespace];
 
-        return call_user_func($callback, $this, $group, $items);
+        return $callback($this, $group, $items);
     }
 }
