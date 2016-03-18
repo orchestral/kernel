@@ -2,7 +2,7 @@
 
 use Closure;
 
-trait LoadingTrait
+trait Loader
 {
     /**
      * The after load callbacks for namespaces.
@@ -47,6 +47,6 @@ trait LoadingTrait
     {
         $callback = $this->afterLoad[$namespace];
 
-        return call_user_func($callback, $this, $group, $items);
+        return $callback($this, $group, $items);
     }
 }
