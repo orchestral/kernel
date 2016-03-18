@@ -5,6 +5,17 @@ title: Kernel Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.2 {#v3-2-2}
+
+* Config:
+  - Remove `Trait` suffix.
+  - Avoid using `call_user_func`.
+* Http:
+  - Update import `Orchestra\Support\Traits\ValidationTrait` to `Orchestra\Support\Traits\Validation`.
+  - Add `Orchestra\Http\Traits\PassThrough` and deprecate `Orchestra\Http\Traits\PassThroughTrait`.
+* Routing:
+  - Add `Orchestra\Routing\Traits\ControllerResponse` and deprecate `Orchestra\Routing\Traits\ControllerResponseTrait`.
+
 ### v3.2.1 {#v3-2-1}
 
 * Database:
