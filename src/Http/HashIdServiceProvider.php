@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Http;
+<?php
+
+namespace Orchestra\Http;
 
 use Hashids\Hashids;
 use Illuminate\Contracts\Foundation\Application;

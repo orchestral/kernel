@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Routing\Traits;
+<?php
+
+namespace Orchestra\Routing\Traits;
 
 /**
  * @deprecated v3.2.x

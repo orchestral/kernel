@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Routing;
+<?php
+
+namespace Orchestra\Routing;
 
 use Illuminate\Routing\Controller as BaseController;
 

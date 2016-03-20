@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Config;
+<?php
+
+namespace Orchestra\Config;
 
 interface LoaderInterface
 {

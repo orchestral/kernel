@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Config\Bootstrap;
+<?php
+
+namespace Orchestra\Config\Bootstrap;
 
 use Illuminate\Support\Arr;
 use Orchestra\Config\FileLoader;

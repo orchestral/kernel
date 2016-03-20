@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Http\Middleware;
+<?php
+
+namespace Orchestra\Http\Middleware;
 
 use Closure;
 

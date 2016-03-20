@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Http\Traits;
+<?php
+
+namespace Orchestra\Http\Traits;
 
 trait PassThrough
 {

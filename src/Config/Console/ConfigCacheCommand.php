@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Config\Console;
+<?php
+
+namespace Orchestra\Config\Console;
 
 use Symfony\Component\Finder\Finder;
 use Illuminate\Contracts\Console\Kernel;

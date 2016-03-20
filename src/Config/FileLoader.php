@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Config;
+<?php
+
+namespace Orchestra\Config;
 
 use Illuminate\Filesystem\Filesystem;
 

@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Http;
+<?php
+
+namespace Orchestra\Http;
 
 use Orchestra\Support\Traits\Validation;
 use Illuminate\Foundation\Http\FormRequest as Request;
