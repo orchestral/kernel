@@ -3,6 +3,23 @@ title: Kernel Change Log
 
 ---
 
+## Version 3.3 {#v3-3}
+
+### v3.3.0 {#v3-3-0}
+
+* Update support to Laravel Framework v5.3.
+* Config:
+  - Remove `Trait` suffix.
+  - Avoid using `call_user_func`.
+* Database:
+  - Add support to `Orchestra\Database\CacheDecorator` for caching via `pluck()` and `lists()` method.
+* Http:
+  - Update `router.matched` event to `Illuminate\Routing\Events\RouteMatched`.
+  - Update import `Orchestra\Support\Traits\ValidationTrait` to `Orchestra\Support\Traits\Validation`.
+  - Add `Orchestra\Http\Traits\PassThrough` and deprecate `Orchestra\Http\Traits\PassThroughTrait`.
+* Routing:
+  - Add `Orchestra\Routing\Traits\ControllerResponse` and deprecate `Orchestra\Routing\Traits\ControllerResponseTrait`.
+
 ## Version 3.2 {#v3-2}
 
 ### v3.2.2 {#v3-2-2}

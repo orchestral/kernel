@@ -1,4 +1,6 @@
-<?php namespace Orchestra\Http\TestCase;
+<?php
+
+namespace Orchestra\Http\TestCase;
 
 use Mockery as m;
 use Orchestra\Http\RouteManager;
