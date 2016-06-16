@@ -20,7 +20,7 @@
     },
     "require": {
         "php": ">=5.6.0",
-        "illuminate/routing": "~5.3.0",
+        "illuminate/routing": "~5.4.0",
         "orchestra/contracts": "~3.4.0"
     },
     "extra": {
