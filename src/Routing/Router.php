@@ -4,6 +4,7 @@ namespace Orchestra\Routing;
 
 use Illuminate\Support\Arr;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Collection;
 use Illuminate\Routing\Router as BaseRouter;
 use Illuminate\Routing\ResourceRegistrar as BaseResourceRegistrar;
 
