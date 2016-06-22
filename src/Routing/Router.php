@@ -68,12 +68,12 @@ class Router extends BaseRouter
      */
     public function gatherRouteMiddlewares(Route $route)
     {
-        $middlewares = [];
+        $middleware = [];
 
-        foreach ($route->middleware() as $name) {
-            $middlewares[] = $this->resolveMiddlewareClassName($name);
-        }
+        $middleware = Collection::make($route->middleware())->map(function ($name) {
+            return (array) $this->resolveMiddlewareClassName($name);
+        })->flatten();
 
-        return Arr::flatten($middlewares);
+        return $this->sortMiddleware($middleware)->all();
     }
 }
