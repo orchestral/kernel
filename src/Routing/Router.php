@@ -59,22 +59,4 @@ class Router extends BaseRouter
 
         $registrar->register($name, $controller, $options);
     }
-
-    /**
-     * Gather the middleware for the given route.
-     *
-     * @param  \Illuminate\Routing\Route  $route
-     *
-     * @return array
-     */
-    public function gatherRouteMiddlewares(Route $route)
-    {
-        $middleware = [];
-
-        $middleware = Collection::make($route->middleware())->map(function ($name) {
-            return (array) $this->resolveMiddlewareClassName($name);
-        })->flatten();
-
-        return $this->sortMiddleware($middleware)->all();
-    }
 }
