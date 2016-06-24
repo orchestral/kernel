@@ -136,7 +136,7 @@ class Notification extends BaseNotification
     {
         $data = parent::toArray();
 
-        $data['title']   = $this->title;
+        $data['title']   = $this->title ?: $this->subject;
         $data['subject'] = Str::replace('[{application}] {title}', $data);
 
         return $data;
