@@ -44,6 +44,7 @@ class MailChannel
     protected function prepareNotificationData($notification)
     {
         $data = Arr::except($notification->toArray(), ['notifiables']);
+        Arr::set($data, 'payload', data_get($notification, 'payload', []));
 
         return Arr::set($data, 'actionColor', $data['level']);
     }
