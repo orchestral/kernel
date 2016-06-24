@@ -97,19 +97,21 @@ class Notification extends BaseNotification
 
             $payload = static::payloadMethod($instance, $channel);
 
+
             $notification->via($channel)
                          ->subject($instance->subject())
                          ->level($instance->level())
                          ->payload($instance->{$payload}($notifiable));
 
-            if (method_exists($instance, 'title')) {
-                $notification->title($instance->title());
-            }
-
             $message = static::messageMethod($instance, $channel);
 
             foreach ($instance->{$message}($notifiable)->elements as $element) {
                 $notification->with($element);
+            }
+
+            if (method_exists($instance, 'title')) {
+                $notification->title($instance->title());
+                $notification->subject(Str::replace('[{application}] {title}', $notification->toArray()));
             }
         }
 
@@ -130,18 +132,4 @@ class Notification extends BaseNotification
             $instance, $channelMethod = Str::camel($channel).'Payload'
         ) ? $channelMethod : 'payload';
     }
-
-    /**
-     * Get the instance as an array.
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        $data = parent::toArray();
-
-        $data['title']   = $this->title ?: $this->subject;
-        $data['subject'] = Str::replace('[{application}] {title}', $data);
-
-        return $data;
 }
