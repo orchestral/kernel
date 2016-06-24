@@ -355,6 +355,11 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
 class StubRouteManager extends RouteManager
 {
+    public function installed()
+    {
+        return true;
+    }
+
     public function mode()
     {
         return 'normal';
@@ -363,6 +368,11 @@ class StubRouteManager extends RouteManager
 
 class StubSafeRouteManager extends RouteManager
 {
+    public function installed()
+    {
+        return true;
+    }
+
     public function mode()
     {
         return 'safe';

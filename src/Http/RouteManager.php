@@ -164,18 +164,18 @@ abstract class RouteManager implements RouteManagerContract
     }
 
     /**
-     * Get application mode.
-     *
-     * @return
-     */
-    abstract public function mode();
-
-    /**
      * Get installation status.
      *
      * @return bool
      */
     abstract public function installed();
+
+    /**
+     * Get application mode.
+     *
+     * @return
+     */
+    abstract public function mode();
 
     /**
      * Get extension route.
