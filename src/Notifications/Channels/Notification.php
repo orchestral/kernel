@@ -100,13 +100,13 @@ class Notification extends BaseNotification
                          ->subject($instance->subject())
                          ->level($instance->level());
 
-            $payload = call_user_func([$instance, static::payloadMethod($instance, $channel))], $notifiable);
+            $payload = call_user_func([$instance, static::payloadMethod($instance, $channel)], $notifiable);
 
             if (is_array($payload)) {
                 $notification->payload($payload);
             }
 
-            $message = call_user_func([$instance, static::messageMethod($instance, $channel))], $notifiable);
+            $message = call_user_func([$instance, static::messageMethod($instance, $channel)], $notifiable);
 
             if ($message instanceof MessageBuilder) {
                 foreach ($message->elements as $element) {
