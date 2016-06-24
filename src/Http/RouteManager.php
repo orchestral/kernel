@@ -171,6 +171,13 @@ abstract class RouteManager implements RouteManagerContract
     abstract public function mode();
 
     /**
+     * Get installation status.
+     *
+     * @return bool
+     */
+    abstract public function installed();
+
+    /**
      * Get extension route.
      *
      * @param  string  $name
@@ -215,7 +222,7 @@ abstract class RouteManager implements RouteManagerContract
         $listener = $events->makeListener($listener);
 
         $events->listen($on, function () use ($listener, $path) {
-            if ($this->is($path)) {
+            if ($this->is($path) && $this->installed()) {
                 $listener(...func_get_args());
             }
         });
