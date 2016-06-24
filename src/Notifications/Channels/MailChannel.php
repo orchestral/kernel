@@ -39,6 +39,7 @@ class MailChannel
      * Prepare the data from the given notification.
      *
      * @param  \Illuminate\Notifications\Channels\Notification  $notification
+     *
      * @return void
      */
     protected function prepareNotificationData($notification)

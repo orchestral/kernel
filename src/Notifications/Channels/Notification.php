@@ -2,6 +2,7 @@
 
 namespace Orchestra\Notifications\Channels;
 
+use Orchestra\Support\Str;
 use Illuminate\Support\Collection;
 use Orchestra\Notifications\ChannelManager;
 use Illuminate\Notifications\Channels\Notification as BaseNotification;
@@ -14,6 +15,13 @@ class Notification extends BaseNotification
      * @var array
      */
     public $payload = [];
+
+    /**
+     * The title of the notification.
+     *
+     * @var string
+     */
+    public $title;
 
     /**
      * Create a new notification instance.
@@ -36,6 +44,19 @@ class Notification extends BaseNotification
     public function logo($logoUrl = null)
     {
         $this->logoUrl = $logoUrl;
+
+        return $this;
+    }
+
+    /**
+     * Set the title of the notification.
+     *
+     * @param  string  $title
+     * @return $this
+     */
+    public function title($title)
+    {
+        $this->title = $title;
 
         return $this;
     }
@@ -105,4 +126,18 @@ class Notification extends BaseNotification
             $instance, $channelMethod = Str::camel($channel).'Payload'
         ) ? $channelMethod : 'payload';
     }
+
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $data = parent::toArray();
+
+        $data['title']   = $this->title;
+        $data['subject'] = Str::replace('[{application}] {title}', $data);
+
+        return $data;
 }
