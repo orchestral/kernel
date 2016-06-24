@@ -45,18 +45,6 @@ class MailChannel
     {
         $data = $notification->toArray();
 
-        return Arr::set($data, 'actionColor', $this->actionColorForLevel($data['level']));
-    }
-
-    /**
-     * Get the action color for the given notification "level".
-     *
-     * @param  string  $level
-     *
-     * @return string
-     */
-    protected function actionColorForLevel($level)
-    {
-        return $level;
+        return Arr::set($data, 'actionColor', $data['level']);
     }
 }
