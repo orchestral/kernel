@@ -1,0 +1,32 @@
+{
+    "name": "orchestra/notifications",
+    "description": "Notifications Component for Orchestra Platform",
+    "keywords": ["orchestra-platform", "orchestral", "notifications"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mior Muhammad Zaki",
+            "email": "crynobone@gmail.com",
+            "homepage": "https://github.com/crynobone"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Orchestra\\Notifications\\": ""
+        }
+    },
+    "require": {
+        "php": ">=5.6.0",
+        "illuminate/notifications": "~5.3.0",
+        "orchestra/notifier": "~3.3.1"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.3-dev"
+        }
+    },
+    "support": {
+        "issues": "https://github.com/orchestral/kernel/issues"
+    },
+    "minimum-stability": "dev"
+}
