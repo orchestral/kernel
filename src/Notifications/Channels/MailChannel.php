@@ -20,9 +20,9 @@ class MailChannel
      */
     public function send(Notification $notification)
     {
-        $users = $notification->notifiables->filter()->all();
+        $users = $notification->notifiables;
 
-        if (empty($users)) {
+        if ($users->isEmpty()) {
             return;
         }
 
@@ -32,9 +32,7 @@ class MailChannel
             $notification->subject
         );
 
-        foreach($users as $user) {
-            $this->sendNotification($user, $message);
-        }
+        $this->sendNotifications($users, $message);
     }
 
     /**
