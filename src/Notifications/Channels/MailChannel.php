@@ -46,6 +46,7 @@ class MailChannel
     {
         $data = Arr::except($notification->toArray(), ['notifiables']);
 
+        $data['title'] = $notification->title;
         $data['payload'] = data_get($notification, 'payload', []);
         $data['actionColor'] = $data['level'];
 

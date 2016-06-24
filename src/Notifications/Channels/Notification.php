@@ -97,7 +97,6 @@ class Notification extends BaseNotification
 
             $payload = static::payloadMethod($instance, $channel);
 
-
             $notification->via($channel)
                          ->subject($instance->subject())
                          ->level($instance->level())
@@ -111,7 +110,7 @@ class Notification extends BaseNotification
 
             if (method_exists($instance, 'title')) {
                 $notification->title($instance->title());
-                $notification->subject(Str::replace('[{application}] {title}', $notification->toArray()));
+                $notification->subject("[{$notification->application}] {$notification->title}");
             }
         }
 
