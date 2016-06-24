@@ -21,6 +21,7 @@
     "require": {
         "php": ">=5.6.0",
         "orchestra/contracts": "~3.4.0",
+        "orchestra/notifier": "~3.4.0",
         "orchestra/support": "~3.4.0"
     },
     "require-dev": {
@@ -32,6 +33,7 @@
         "orchestra/config": "self.version",
         "orchestra/database": "self.version",
         "orchestra/http": "self.version",
+        "orchestra/notifications": "self.version",
         "orchestra/routing": "self.version"
     },
     "suggest": {

@@ -118,8 +118,8 @@ class RepositoryTest extends \PHPUnit_Framework_TestCase
 
     public function testPackageRegistersNamespaceAndSetsUpAfterLoadCallback()
     {
-        $config = $this->getMock('\Orchestra\Config\Repository', ['addNamespace'], [m::mock('\Orchestra\Config\LoaderInterface'), 'production']);
-        $config->expects($this->once())->method('addNamespace')->with($this->equalTo('rees'), $this->equalTo(__DIR__));
+        $config = m::mock('\Orchestra\Config\Repository[addNamespace]', [m::mock('\Orchestra\Config\LoaderInterface'), 'production']);
+        $config->shouldReceive('addNamespace')->once()->with('rees', __DIR__)->andReturnNull();
         $config->getLoader()->shouldReceive('cascadePackage')->once()->with('production', 'dayle/rees', 'group', ['foo'])->andReturn(['bar']);
         $config->package('dayle/rees', __DIR__);
         $afterLoad = $config->getAfterLoadCallbacks();
