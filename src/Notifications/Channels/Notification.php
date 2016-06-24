@@ -102,6 +102,10 @@ class Notification extends BaseNotification
                          ->level($instance->level())
                          ->payload($instance->{$payload}($notifiable));
 
+            if (method_exists($instance, 'title')) {
+                $notification->title($instance->title());
+            }
+
             $message = static::messageMethod($instance, $channel);
 
             foreach ($instance->{$message}($notifiable)->elements as $element) {
