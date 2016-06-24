@@ -15,4 +15,18 @@ class ChannelManager extends Manager
     {
         return $this->app->make(Channels\MailChannel::class);
     }
+
+    /**
+     * Build a new channel notification from the given object.
+     *
+     * @param  mixed  $notifiable
+     * @param  mixed  $notification
+     * @param  array|null  $channels
+     *
+     * @return array
+     */
+    public function notificationsFromInstance($notifiable, $notification, $channels = null)
+    {
+        return Channels\Notification::notificationsFromInstance($notifiable, $notification, $channels);
+    }
 }

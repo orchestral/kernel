@@ -39,12 +39,17 @@ class MailChannel
      * Prepare the data from the given notification.
      *
      * @param  \Illuminate\Notifications\Channels\Notification  $notification
+     *
      * @return void
      */
     protected function prepareNotificationData($notification)
     {
-        $data = $notification->toArray();
+        $data = Arr::except($notification->toArray(), ['notifiables']);
 
-        return Arr::set($data, 'actionColor', $data['level']);
+        $data['title'] = $notification->title;
+        $data['payload'] = data_get($notification, 'payload', []);
+        $data['actionColor'] = $data['level'];
+
+        return $data;
     }
 }
