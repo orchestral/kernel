@@ -5,6 +5,7 @@ namespace Orchestra\Notifications\Channels;
 use Orchestra\Support\Str;
 use Illuminate\Support\Collection;
 use Orchestra\Notifications\ChannelManager;
+use Illuminate\Notifications\MessageBuilder;
 use Illuminate\Notifications\Channels\Notification as BaseNotification;
 
 class Notification extends BaseNotification
@@ -95,17 +96,22 @@ class Notification extends BaseNotification
         foreach ($channels as $channel) {
             $notifications[] = $notification = new static([$notifiable]);
 
-            $payload = static::payloadMethod($instance, $channel);
-
             $notification->via($channel)
                          ->subject($instance->subject())
-                         ->level($instance->level())
-                         ->payload($instance->{$payload}($notifiable));
+                         ->level($instance->level());
 
-            $message = static::messageMethod($instance, $channel);
+            $payload = call_user_func([$instance, static::payloadMethod($instance, $channel))], $notifiable);
 
-            foreach ($instance->{$message}($notifiable)->elements as $element) {
-                $notification->with($element);
+            if (is_array($payload)) {
+                $notification->payload($payload);
+            }
+
+            $message = call_user_func([$instance, static::messageMethod($instance, $channel))], $notifiable);
+
+            if ($message instanceof MessageBuilder) {
+                foreach ($message->elements as $element) {
+                    $notification->with($element);
+                }
             }
 
             if (method_exists($instance, 'title')) {
