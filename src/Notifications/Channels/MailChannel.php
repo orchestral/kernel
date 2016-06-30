@@ -27,7 +27,7 @@ class MailChannel
         }
 
         $message = Message::create(
-            data_get($notification, 'payload.view', 'orchestra/foundation::emails.notification'),
+            data_get($notification, 'options.view', 'orchestra/foundation::emails.notification'),
             $this->prepareNotificationData($notification),
             $notification->subject
         );

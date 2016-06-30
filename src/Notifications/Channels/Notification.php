@@ -11,13 +11,6 @@ use Illuminate\Notifications\Channels\Notification as BaseNotification;
 class Notification extends BaseNotification
 {
     /**
-     * The data payload of the notification.
-     *
-     * @var array
-     */
-    public $payload = [];
-
-    /**
      * The title of the notification.
      *
      * @var string
@@ -64,20 +57,6 @@ class Notification extends BaseNotification
     }
 
     /**
-     * Set the data payload of the notification.
-     *
-     * @param  array  $payload
-     *
-     * @return $this
-     */
-    public function payload(array $payload)
-    {
-        $this->payload = $payload;
-
-        return $this;
-    }
-
-    /**
      * Build a new channel notification from the given object.
      *
      * @param  mixed  $notifiable
@@ -90,8 +69,9 @@ class Notification extends BaseNotification
     {
         $notifications = [];
 
-        $channels = $channels ?: $instance->via($notifiable)
-                              ?: app(ChannelManager::class)->deliversVia();
+        $channels = $channels ?: $instance->via($notifiable);
+
+        $channels = $channels ?: app(ChannelManager::class)->deliversVia();
 
         foreach ($channels as $channel) {
             $notifications[] = $notification = new static([$notifiable]);
@@ -100,19 +80,15 @@ class Notification extends BaseNotification
                          ->subject($instance->subject())
                          ->level($instance->level());
 
-            $payload = call_user_func([$instance, static::payloadMethod($instance, $channel)], $notifiable);
+            $method = static::messageMethod($instance, $channel);
 
-            if (is_array($payload)) {
-                $notification->payload($payload);
+            foreach ($instance->{$method}($notifiable)->elements as $element) {
+                $notification->with($element);
             }
 
-            $message = call_user_func([$instance, static::messageMethod($instance, $channel)], $notifiable);
+            $method = static::optionsMethod($instance, $channel);
 
-            if ($message instanceof MessageBuilder) {
-                foreach ($message->elements as $element) {
-                    $notification->with($element);
-                }
-            }
+            $notification->options($instance->{$method}($notifiable));
 
             if (method_exists($instance, 'title')) {
                 $notification->title($instance->title());
@@ -121,20 +97,5 @@ class Notification extends BaseNotification
         }
 
         return $notifications;
-    }
-
-    /**
-     * Get the proper data method for the given instance and channel.
-     *
-     * @param  mixed  $instance
-     * @param  string  $channel
-     *
-     * @return string
-     */
-    protected static function payloadMethod($instance, $channel)
-    {
-        return method_exists(
-            $instance, $channelMethod = Str::camel($channel).'Payload'
-        ) ? $channelMethod : 'payload';
     }
 }
