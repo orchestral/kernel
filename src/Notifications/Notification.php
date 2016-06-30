@@ -32,12 +32,12 @@ class Notification extends BaseNotification
     }
 
     /**
-     * Get the notification channel payload data.
+     * Get the notification's options.
      *
      * @return array
      */
-    public function payload()
+    public function options()
     {
-        return [];
+        return property_exists($this, 'options') ? $this->options : [];
     }
 }

@@ -17,6 +17,7 @@
     },
     "require": {
         "php": ">=5.6.0",
+        "illuminate/notifications": "~5.3.0",
         "orchestra/notifier": "~3.3.1"
     },
     "extra": {
