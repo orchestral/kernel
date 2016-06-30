@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification as BaseNotification;
 class Notification extends BaseNotification
 {
     /**
-     * Get the subject of the notification.
+     * Get the title of the notification.
      *
      * @return string
      */
@@ -17,6 +17,18 @@ class Notification extends BaseNotification
         return property_exists($this, 'title')
                         ? $this->title
                         : Str::title(Str::snake(class_basename($this), ' '));
+    }
+
+    /**
+     * Get the subject of the notification.
+     *
+     * @return string
+     */
+    public function subject()
+    {
+        return property_exists($this, 'subject')
+                        ? $this->subject
+                        : $this->title();
     }
 
     /**

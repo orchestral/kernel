@@ -5,6 +5,7 @@ namespace Orchestra\Notifications;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Notifications\ChannelManager as Manager;
 use Illuminate\Contracts\Notifications\Factory as FactoryContract;
+use Illuminate\Contracts\Notifications\Dispatcher as DispatcherContract;
 use Illuminate\Notifications\NotificationServiceProvider as ServiceProvider;
 
 class NotificationServiceProvider extends ServiceProvider
@@ -20,6 +21,7 @@ class NotificationServiceProvider extends ServiceProvider
             return new ChannelManager($app);
         });
 
+        $this->app->alias(ChannelManager::class, DispatcherContract::class);
         $this->app->alias(ChannelManager::class, FactoryContract::class);
         $this->app->alias(ChannelManager::class, Manager::class);
     }
@@ -32,9 +34,10 @@ class NotificationServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            Manager::class,
             ChannelManager::class,
+            DispatcherContract::class,
             FactoryContract::class,
+            Manager::class,
         ];
     }
 }

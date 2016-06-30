@@ -53,6 +53,7 @@ class Notification extends BaseNotification
      * Set the title of the notification.
      *
      * @param  string  $title
+     *
      * @return $this
      */
     public function title($title)
@@ -89,9 +90,8 @@ class Notification extends BaseNotification
     {
         $notifications = [];
 
-        $channels = $channels ?: $instance->via($notifiable);
-
-        $channels = $channels ?: app(ChannelManager::class)->deliversVia();
+        $channels = $channels ?: $instance->via($notifiable)
+                              ?: app(ChannelManager::class)->deliversVia();
 
         foreach ($channels as $channel) {
             $notifications[] = $notification = new static([$notifiable]);
@@ -116,7 +116,7 @@ class Notification extends BaseNotification
 
             if (method_exists($instance, 'title')) {
                 $notification->title($instance->title());
-                $notification->subject("[{$notification->application}] {$notification->title}");
+                $notification->subject("[{$notification->application}] {$notification->subject}");
             }
         }
 
