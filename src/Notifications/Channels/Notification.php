@@ -2,10 +2,8 @@
 
 namespace Orchestra\Notifications\Channels;
 
-use Orchestra\Support\Str;
 use Illuminate\Support\Collection;
 use Orchestra\Notifications\ChannelManager;
-use Illuminate\Notifications\MessageBuilder;
 use Illuminate\Notifications\Channels\Notification as BaseNotification;
 
 class Notification extends BaseNotification

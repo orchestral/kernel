@@ -53,10 +53,10 @@ trait ControllerResponse
      * @param  string  $message
      * @param  array   $headers
      *
-     * @return void
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @return void
      */
     public function suspend($code, $message = '', array $headers = [])
     {
