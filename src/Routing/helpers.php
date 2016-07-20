@@ -5,7 +5,7 @@ if (! function_exists('redirect_with_errors')) {
      * Redirect with input and errors.
      *
      * @param  string  $to
-     * @param  \Illuminate\Support\MessageBag|array  $errors
+     * @param  \Illuminate\Contracts\Support\MessageBag|array  $errors
      *
      * @return mixed
      */
