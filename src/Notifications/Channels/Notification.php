@@ -55,45 +55,23 @@ class Notification extends BaseNotification
     }
 
     /**
-     * Build a new channel notification from the given object.
+     * Build a new channel notification.
      *
      * @param  mixed  $notifiable
      * @param  mixed  $instance
-     * @param  array|null  $channels
+     * @param  string  $channel
      *
-     * @return array[static]
+     * @return static
      */
-    public static function notificationsFromInstance($notifiable, $instance, $channels = null)
+    protected static function buildNotification($notifiable, $instance, $channel)
     {
-        $notifications = [];
+        $notification = parent::buildNotification($notifiable, $instance, $channel);
 
-        $channels = $channels ?: $instance->via($notifiable);
-
-        $channels = $channels ?: app(ChannelManager::class)->deliversVia();
-
-        foreach ($channels as $channel) {
-            $notifications[] = $notification = new static([$notifiable]);
-
-            $notification->via($channel)
-                         ->subject($instance->subject())
-                         ->level($instance->level());
-
-            $method = static::messageMethod($instance, $channel);
-
-            foreach ($instance->{$method}($notifiable)->elements as $element) {
-                $notification->with($element);
-            }
-
-            $method = static::optionsMethod($instance, $channel);
-
-            $notification->options($instance->{$method}($notifiable));
-
-            if (method_exists($instance, 'title')) {
-                $notification->title($instance->title());
-                $notification->subject("[{$notification->application}] {$notification->subject}");
-            }
+        if (method_exists($instance, 'title')) {
+            $notification->title($instance->title());
+            $notification->subject("[{$notification->application}] {$notification->subject}");
         }
 
-        return $notifications;
+        return $notification;
     }
 }
