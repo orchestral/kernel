@@ -26,18 +26,6 @@ class Notification extends BaseNotification
      */
     public function subject()
     {
-        return property_exists($this, 'subject')
-                        ? $this->subject
-                        : $this->title();
-    }
-
-    /**
-     * Get the notification's options.
-     *
-     * @return array
-     */
-    public function options()
-    {
-        return property_exists($this, 'options') ? $this->options : [];
+        return property_exists($this, 'subject') ? $this->subject : $this->title();
     }
 }
