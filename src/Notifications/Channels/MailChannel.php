@@ -5,7 +5,7 @@ namespace Orchestra\Notifications\Channels;
 use Illuminate\Support\Arr;
 use Orchestra\Notifier\Message;
 use Orchestra\Notifier\Notifiable;
-use Illuminate\Notifications\Channels\Notification;
+use Orchestra\Notifications\Notification;
 
 class MailChannel
 {
@@ -14,15 +14,14 @@ class MailChannel
     /**
      * Send the given notification.
      *
-     * @param  \Orchestra\Notifications\Channels\Notification  $notification
+     * @param  \Illuminate\Support\Collection  $notifiables
+     * @param  \Illuminate\Notifications\Notification  $notification
      *
      * @return void
      */
-    public function send(Notification $notification)
+    public function send($notifiables, Notification $notification)
     {
-        $users = $notification->notifiables;
-
-        if ($users->isEmpty()) {
+        if ($notifiables->isEmpty()) {
             return;
         }
 
@@ -32,7 +31,7 @@ class MailChannel
             $notification->subject
         );
 
-        $this->sendNotifications($users, $message);
+        $this->sendNotifications($notifiables, $message);
     }
 
     /**
@@ -44,10 +43,10 @@ class MailChannel
      */
     protected function prepareNotificationData($notification)
     {
-        $data = Arr::except($notification->toArray(), ['notifiables']);
+        $data = $notification->toArray();
 
         $data['title']       = $notification->title;
-        $data['payload']     = data_get($notification, 'payload', []);
+        $data['options']     = data_get($notification, 'options', []);
         $data['actionColor'] = $data['level'];
 
         return $data;

@@ -7,14 +7,23 @@ use Illuminate\Support\Str;
 trait NotificationTitle
 {
     /**
+     * The title of the notification.
+     *
+     * @var string
+     */
+    public $title;
+
+    /**
      * Get the title of the notification.
+     *
+     * @param  string  $title
      *
      * @return string
      */
-    public function title()
+    public function title($title)
     {
-        return property_exists($this, 'title')
-                        ? $this->title
-                        : Str::title(Str::snake(class_basename($this), ' '));
+        $this->title = $title;
+
+        return $this;
     }
 }
