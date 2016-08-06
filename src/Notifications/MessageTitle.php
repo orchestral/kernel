@@ -2,9 +2,7 @@
 
 namespace Orchestra\Notifications;
 
-use Illuminate\Support\Str;
-
-trait NotificationTitle
+trait MessageTitle
 {
     /**
      * The title of the notification.
