@@ -2,6 +2,7 @@
 
 namespace Orchestra\Notifications;
 
+use Illuminate\Notifications\Channels\MailChannel;
 use Illuminate\Notifications\ChannelManager as Manager;
 
 class ChannelManager extends Manager
@@ -13,6 +14,8 @@ class ChannelManager extends Manager
      */
     protected function createMailDriver()
     {
-        return $this->app->make(Channels\MailChannel::class);
+        $mailer = $this->app->make('orchestra.mail');
+
+        return $this->app->make(MailChannel::class, [$mailer->getMailer()]);
     }
 }
