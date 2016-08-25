@@ -5,6 +5,17 @@ title: Kernel Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.1 {#v3-3-1}
+
+* Database:
+  - Update migration commands based on changes upstream.
+* Http:
+  - Only execute event under `Orchestra\Http\RouteManager::whenOn()` if the application has been installed.
+* Notifications:
+  - Add new component based on `illuminate/notifications`.
+* Routing:
+  - Remove `Orchestra\Routing\Router::gatherRouteMiddlewares()` method.
+
 ### v3.3.0 {#v3-3-0}
 
 * Update support to Laravel Framework v5.3.
