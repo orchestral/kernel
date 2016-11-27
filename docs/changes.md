@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.2 {#v3-3-2}
+
+* Notifications:
+  - Attach `title` to `Orchestra\Notifications\Messages\MailMessage::toArray()`.
+
 ### v3.3.1 {#v3-3-1}
 
 * Database:
