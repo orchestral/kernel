@@ -76,7 +76,9 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
         $router    = m::mock('\Illuminate\Routing\Router');
 
-        $app->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+        $app->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
+            ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('bound')->with('orchestra.extension.status')->andReturn(false)
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
@@ -110,7 +112,9 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
         $router    = m::mock('\Illuminate\Routing\Router');
 
-        $app->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+        $app->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
+            ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('bound')->with('orchestra.extension.status')->andReturn(false)
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
@@ -147,7 +151,9 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
         $router    = m::mock('\Illuminate\Routing\Router');
 
-        $app->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+        $app->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
+            ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('bound')->with('orchestra.extension.status')->andReturn(false)
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
@@ -184,7 +190,9 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $router    = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('make')->with('config')->andReturn($config)
+            ->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
             ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('bound')->with('orchestra.extension.status')->andReturn(false)
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
@@ -216,11 +224,15 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $app       = $this->getApplicationMocks();
         $config    = m::mock('\Illuminate\Contracts\Config\Repository');
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
+        $status    = m::mock('\Orchestra\Contracts\Extension\StatusChecker');
         $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
         $router    = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('make')->with('config')->andReturn($config)
+            ->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
             ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('bound')->with('orchestra.extension.status')->andReturn(true)
+            ->shouldReceive('make')->with('orchestra.extension.status')->andReturn($status)
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
@@ -229,13 +241,14 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $appRoute->shouldReceive('to')->once()->with('/?_mode=safe')->andReturn('/?_mode=safe')
             ->shouldReceive('to')->once()->with('info?foo=bar&_mode=safe')->andReturn('info?foo=bar&_mode=safe');
         $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
+        $status->shouldReceive('mode')->andReturn('safe');
         $url->shouldReceive('isValidUrl')->with('app::/')->andReturn(false)
             ->shouldReceive('isValidUrl')->once()->with('info?foo=bar')->andReturn(false)
             ->shouldReceive('isValidUrl')->once()->with('http://localhost/admin')->andReturn(true)
             ->shouldReceive('to')->once()->with('/?_mode=safe')->andReturn('/?_mode=safe')
             ->shouldReceive('to')->once()->with('info?foo=bar&_mode=safe')->andReturn('info?foo=bar&_mode=safe');
 
-        $stub = new StubSafeRouteManager($app);
+        $stub = new StubRouteManager($app);
 
         $this->assertEquals('/?_mode=safe', $stub->handles('app::/'));
         $this->assertEquals('info?foo=bar&_mode=safe', $stub->handles('info?foo=bar'));
@@ -258,7 +271,9 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $router    = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('make')->with('config')->andReturn($config)
+            ->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
             ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('bound')->with('orchestra.extension.status')->andReturn(false)
             ->shouldReceive('make')->with('session')->andReturn($session)
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
@@ -297,7 +312,9 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
         $router    = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('make')->with('config')->andReturn($config)
+            ->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
             ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('bound')->with('orchestra.extension.status')->andReturn(false)
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
@@ -330,7 +347,9 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $app->shouldReceive('make')->with('config')->andReturn($config)
             ->shouldReceive('make')->with('events')->andReturn($events)
+            ->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
             ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
+            ->shouldReceive('bound')->with('orchestra.extension.status')->andReturn(false)
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
@@ -359,11 +378,6 @@ class StubRouteManager extends RouteManager
     {
         return true;
     }
-
-    public function mode()
-    {
-        return 'normal';
-    }
 }
 
 class StubSafeRouteManager extends RouteManager
@@ -371,10 +385,5 @@ class StubSafeRouteManager extends RouteManager
     public function installed()
     {
         return true;
-    }
-
-    public function mode()
-    {
-        return 'safe';
     }
 }

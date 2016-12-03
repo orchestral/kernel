@@ -19,20 +19,6 @@ abstract class RouteManager implements RouteManagerContract
     protected $app;
 
     /**
-     * Session CSRF token value.
-     *
-     * @var string|null
-     */
-    protected $csrfToken;
-
-    /**
-     * The extension instance.
-     *
-     * @var \Orchestra\Contracts\Extension\Factory
-     */
-    protected $extension;
-
-    /**
      * Application router instance.
      *
      * @var \Illuminate\Routing\Router
@@ -40,61 +26,26 @@ abstract class RouteManager implements RouteManagerContract
     protected $router;
 
     /**
-     * List of routes.
+     * Route handler implementation.
      *
-     * @var array
+     * @var \Orchestra\Http\RouteResolver
      */
-    protected $routes = [];
-
-    /**
-     * URL Generator instance.
-     *
-     * @var \Illuminate\Contracts\Routing\UrlGenerator
-     */
-    protected $urlGenerator;
+    protected $resolver;
 
     /**
      * Construct a new instance.
      *
      * @param  \Illuminate\Contracts\Foundation\Application  $app
      */
-    public function __construct(Application $app)
+    public function __construct(Application $app, RouteResolver $resolver = null)
     {
-        $this->app = $app;
-
-        $this->extension    = $app->make('orchestra.extension');
-        $this->router       = $app->make('router');
-        $this->urlGenerator = $app->make('url');
-    }
-
-    /**
-     *  Return locate handles configuration for a package/app.
-     *
-     * @param  string  $path
-     * @param  array   $options
-     *
-     * @return array
-     */
-    public function locate($path, array $options = [])
-    {
-        $query = '';
-
-        // split URI and query string, the route resolver should not worry
-        // about provided query string.
-        if (strpos($path, '?') !== false) {
-            list($path, $query) = explode('?', $path, 2);
+        if (is_null($resolver)) {
+            $resolver = new RouteResolver($app);
         }
 
-        list($package, $route, $item) = with(new NamespacedItemResolver())->parseKey($path);
-
-        $route = $this->prepareValidRoute($route, $item, $query, $options);
-
-        // If package is empty, we should consider that the route is using
-        // app (or root path), it doesn't matter at this stage if app is
-        // an extension or simply handling root path.
-        empty($package) && $package = 'app';
-
-        return [$package, $route];
+        $this->app = $app;
+        $this->router = $app->make('router');
+        $this->resolver = $resolver;
     }
 
     /**
@@ -126,6 +77,19 @@ abstract class RouteManager implements RouteManagerContract
     }
 
     /**
+     *  Return locate handles configuration for a package/app.
+     *
+     * @param  string  $path
+     * @param  array   $options
+     *
+     * @return array
+     */
+    public function locate($path, array $options = [])
+    {
+        return $this->resolver->locate($path, $options);
+    }
+
+    /**
      *  Return handles URL for a package/app.
      *
      * @param  string  $path
@@ -135,18 +99,7 @@ abstract class RouteManager implements RouteManagerContract
      */
     public function handles($path, array $options = [])
     {
-        if ($this->urlGenerator->isValidUrl($path)) {
-            return $path;
-        }
-
-        list($package, $route) = $this->locate($path, $options);
-
-        // Get the path from route configuration, and append route.
-        $locate = $this->route($package)->to($route);
-
-        empty($locate) && $locate = '/';
-
-        return $this->urlGenerator->to($locate);
+        return $this->resolver->to($path, $options);
     }
 
     /**
@@ -158,9 +111,7 @@ abstract class RouteManager implements RouteManagerContract
      */
     public function is($path)
     {
-        list($package, $route) = $this->locate($path);
-
-        return $this->route($package)->is($route);
+        return $this->resolver->is($path);
     }
 
     /**
@@ -169,13 +120,6 @@ abstract class RouteManager implements RouteManagerContract
      * @return bool
      */
     abstract public function installed();
-
-    /**
-     * Get application mode.
-     *
-     * @return
-     */
-    abstract public function mode();
 
     /**
      * Get extension route.
@@ -187,11 +131,7 @@ abstract class RouteManager implements RouteManagerContract
      */
     public function route($name, $default = '/')
     {
-        if (! isset($this->routes[$name])) {
-            $this->routes[$name] = $this->generateRouteByName($name, $default);
-        }
-
-        return $this->routes[$name];
+        return $this->resolver->route($name, $default);
     }
 
     /**
@@ -226,82 +166,5 @@ abstract class RouteManager implements RouteManagerContract
                 $listener(...func_get_args());
             }
         });
-    }
-
-    /**
-     * Generate route by name.
-     *
-     * @param  string  $name
-     * @param  string  $default
-     *
-     * @return \Orchestra\Contracts\Extension\RouteGenerator
-     */
-    protected function generateRouteByName($name, $default)
-    {
-        return $this->extension->route($name, $default);
-    }
-
-    /**
-     * Prepare valid route, since we already extract package from route
-     * we can re-append query string to route value.
-     *
-     * @param  string  $route
-     * @param  string  $item
-     * @param  string  $query
-     * @param  array   $options
-     *
-     * @return string
-     */
-    protected function prepareValidRoute($route, $item, $query, array $options)
-    {
-        $appends = [];
-        $mode    = $this->mode();
-
-        if (!! Arr::get($options, 'csrf', false)) {
-            $appends['_token'] = $this->getCsrfToken();
-        }
-
-        if (! in_array($mode, ['normal'])) {
-            $appends['_mode'] = $mode;
-        }
-
-        $query = $this->prepareHttpQueryString($query, $appends);
-
-        ! empty($item) && $route = "{$route}.{$item}";
-        empty($route) && $route  = '';
-        empty($query) || $route  = "{$route}?{$query}";
-
-        return $route;
-    }
-
-    /**
-     * Prepare HTTP query string.
-     *
-     * @param  string  $query
-     * @param  array   $appends
-     *
-     * @return string
-     */
-    protected function prepareHttpQueryString($query, $appends = [])
-    {
-        if (! empty($appends)) {
-            $query .= (! empty($query) ? '&' : '').http_build_query($appends);
-        }
-
-        return $query;
-    }
-
-    /**
-     * Get CSRF Token.
-     *
-     * @return string|null
-     */
-    protected function getCsrfToken()
-    {
-        if (is_null($this->csrfToken)) {
-            $this->csrfToken = $this->app->make('session')->getToken();
-        }
-
-        return $this->csrfToken;
     }
 }
