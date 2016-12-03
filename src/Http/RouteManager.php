@@ -122,6 +122,16 @@ abstract class RouteManager implements RouteManagerContract
     abstract public function installed();
 
     /**
+     * Get application status.
+     *
+     * @return string
+     */
+    public function mode()
+    {
+        return $this->resolver->mode();
+    }
+
+    /**
      * Get extension route.
      *
      * @param  string  $name
