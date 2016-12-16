@@ -5,6 +5,12 @@ title: Kernel Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.3 {#v3-3-3}
+
+* Http:
+  - Refactor `Orchestra\Http\RouteManager` and extract some extendable methods to `Orchestra\Http\RouteResolver`.
+  - Add `Orchestra\Http\RouteManager::resolveApplicationRouter()` method to allow swapping router instance between Laravel and Lumen.
+
 ### v3.3.2 {#v3-3-2}
 
 * Notifications:

@@ -44,8 +44,20 @@ abstract class RouteManager implements RouteManagerContract
         }
 
         $this->app = $app;
-        $this->router = $app->make('router');
+        $this->router = $this->resolveApplicationRouter($app);
         $this->resolver = $resolver;
+    }
+
+    /**
+     * Resolve application router.
+     *
+     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     *
+     * @return mixed
+     */
+    protected function resolveApplicationRouter(Application $app)
+    {
+        return $app->make('router');
     }
 
     /**
