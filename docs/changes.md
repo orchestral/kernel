@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.4 {#v3-3-4}
+
+* Routing:
+  - Add `Orchestra\Routing\VersionedHelpers`.
+
 ### v3.3.3 {#v3-3-3}
 
 * Http:
