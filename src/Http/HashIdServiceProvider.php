@@ -23,7 +23,7 @@ class HashIdServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('orchestra.hashid', function (Application $app) {
-            return new Hashids($app->make('config')->get('app.key'));
+            return new Hashids(md5($app->make('config')->get('app.key')));
         });
     }
 
