@@ -25,9 +25,9 @@
         "orchestra/support": "~3.4.0"
     },
     "require-dev": {
-        "mockery/mockery": "^0.9.4",
+        "hashids/hashids": "~1.0",
         "laravel/framework": "~5.4.0",
-        "hashids/hashids": "~1.0"
+        "mockery/mockery": "^0.9.4"
     },
     "replace": {
         "orchestra/config": "self.version",
@@ -43,6 +43,9 @@
         "branch-alias": {
             "dev-master": "3.4-dev"
         }
+    },
+    "config": {
+        "sort-packages": true
     },
     "minimum-stability": "dev"
 }

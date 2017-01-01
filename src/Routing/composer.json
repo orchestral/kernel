@@ -31,5 +31,8 @@
     "support": {
         "issues": "https://github.com/orchestral/kernel/issues"
     },
+    "config": {
+        "sort-packages": true
+    },
     "minimum-stability": "dev"
 }
