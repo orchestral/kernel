@@ -16,13 +16,13 @@
         }
     },
     "require": {
-        "php": ">=5.6.0",
-        "illuminate/notifications": "~5.4.0",
-        "orchestra/notifier": "~3.4.0"
+        "php": ">=7.0",
+        "illuminate/notifications": "~5.5.0",
+        "orchestra/notifier": "~3.5.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.4-dev"
+            "dev-master": "3.5-dev"
         }
     },
     "support": {
