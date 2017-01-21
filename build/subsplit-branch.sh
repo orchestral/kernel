@@ -8,7 +8,7 @@ fi
 if [ -d .subsplit ]; then
     git subsplit update
 else
-    git subsplit init git@github.com:orchestral/support.git
+    git subsplit init git@github.com:orchestral/kernel.git
 fi
 
 git subsplit publish --heads=$1 --no-tags src/Config:git@github.com:orchestral/config.git
