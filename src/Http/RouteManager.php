@@ -181,9 +181,9 @@ abstract class RouteManager implements RouteManagerContract
         $events   = $this->app->make('events');
         $listener = $events->makeListener($listener);
 
-        $events->listen($on, function () use ($listener, $path) {
+        $events->listen($on, function (...$payloads) use ($events, $listener, $path) {
             if ($this->is($path) && $this->installed()) {
-                $listener(...func_get_args());
+                $listener($events, $payloads);
             }
         });
     }
