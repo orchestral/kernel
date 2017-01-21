@@ -89,5 +89,5 @@ trait VersionedHelpers
      *
      * @return string
      */
-    abstract function getVersionedResourceClassName($group, $name);
+    abstract public function getVersionedResourceClassName($group, $name);
 }

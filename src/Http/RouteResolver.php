@@ -57,7 +57,7 @@ class RouteResolver
      */
     public function __construct(Application $app)
     {
-        $this->app = $app;
+        $this->app          = $app;
         $this->urlGenerator = $app->make('url');
 
         $this->integrateWithExtension($app);
@@ -141,7 +141,6 @@ class RouteResolver
 
         return $this->routes[$name];
     }
-
 
     /**
      * Get application mode.
@@ -247,7 +246,6 @@ class RouteResolver
 
         return $query;
     }
-
 
     /**
      * Get CSRF Token.
