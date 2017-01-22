@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.5 {#v3-3-5}
+
+* Routing:
+  - Improves `Orchestra\Routing\VersionedHelpers::transformWith()` to handle `Orchestra\Support\Transformer`.
+
 ### v3.3.4 {#v3-3-4}
 
 * Routing:
