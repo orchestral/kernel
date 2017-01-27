@@ -3,9 +3,7 @@
 namespace Orchestra\Http;
 
 use Closure;
-use Illuminate\Support\Arr;
 use Illuminate\Routing\Events\RouteMatched;
-use Illuminate\Support\NamespacedItemResolver;
 use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Contracts\Http\RouteManager as RouteManagerContract;
 
@@ -43,8 +41,8 @@ abstract class RouteManager implements RouteManagerContract
             $resolver = new RouteResolver($app);
         }
 
-        $this->app = $app;
-        $this->router = $this->resolveApplicationRouter($app);
+        $this->app      = $app;
+        $this->router   = $this->resolveApplicationRouter($app);
         $this->resolver = $resolver;
     }
 
@@ -183,9 +181,9 @@ abstract class RouteManager implements RouteManagerContract
         $events   = $this->app->make('events');
         $listener = $events->makeListener($listener);
 
-        $events->listen($on, function () use ($listener, $path) {
+        $events->listen($on, function (...$payloads) use ($events, $listener, $path) {
             if ($this->is($path) && $this->installed()) {
-                $listener(...func_get_args());
+                $listener($events, $payloads);
             }
         });
     }

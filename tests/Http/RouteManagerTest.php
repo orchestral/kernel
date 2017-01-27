@@ -362,11 +362,11 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertNull($_SERVER['RouteManagerTest@callback']);
 
-        $stub->when('app::foo', function () {
-            $_SERVER['RouteManagerTest@callback'] = 'app::foo';
+        $stub->when('app::foo', function ($namespace, $method) {
+            $_SERVER['RouteManagerTest@callback'] = "{$namespace}::{$method}";
         });
 
-        $events->fire(RouteMatched::class);
+        $events->fire(RouteMatched::class, ['app', 'foo']);
 
         $this->assertEquals('app::foo', $_SERVER['RouteManagerTest@callback']);
     }

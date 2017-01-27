@@ -2,6 +2,7 @@
 
 namespace Orchestra\Routing;
 
+use Orchestra\Support\Transformer;
 use Illuminate\Contracts\Support\Arrayable;
 
 trait VersionedHelpers
@@ -12,17 +13,20 @@ trait VersionedHelpers
      * @param  \Orchestra\Model\Eloquent|\Illuminate\Support\Collection  $instance
      * @param  string  $name
      * @param  string|null  $serializer
+     * @param  array  $options
      *
      * @return array
      */
-    protected function transform($instance, $transformer, $serializer = null)
+    protected function transform($instance, $transformer, $serializer = null, array $options = [])
     {
         if (is_null($serializer)) {
             $serializer = $transformer;
         }
 
         return $this->serializeWith(
-            $this->transformWith($instance, $transformer), $serializer
+            $this->transformWith($instance, $transformer, $options),
+            $serializer,
+            $options
         );
     }
 
@@ -48,15 +52,23 @@ trait VersionedHelpers
      *
      * @param  \Orchestra\Model\Eloquent|\Illuminate\Support\Collection  $instance
      * @param  string  $name
+     * @param  array  $options
      *
      * @return mixed
      */
-    protected function transformWith($instance, $name)
+    protected function transformWith($instance, $name, array $options = [])
     {
         $transformer = $this->getVersionedResourceClassName('Transformers', $name);
 
         if (class_exists($transformer)) {
-            return $instance->transform(app($transformer));
+            $transformer = app($transformer);
+
+            if ($transformer instanceof Transformer) {
+                return $transformer->withOptions($options)
+                            ->handle($instance);
+            }
+
+            return $instance->transform($transformer);
         }
 
         return $instance;
@@ -89,5 +101,5 @@ trait VersionedHelpers
      *
      * @return string
      */
-    abstract function getVersionedResourceClassName($group, $name);
+    abstract public function getVersionedResourceClassName($group, $name);
 }
