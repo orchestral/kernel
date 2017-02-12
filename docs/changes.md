@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 ## Version 3.3 {#v3-3}
 
+### v3.3.6 {#v3-3-6}
+
+* Database:
+  - Add `Orchestra\Database\ConsoleServiceProvider`.
+
 ### v3.3.5 {#v3-3-5}
 
 * Routing:
@@ -54,6 +59,11 @@ title: Kernel Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.3 {#v3-2-3}
+
+* Database:
+  - Add `Orchestra\Database\ConsoleServiceProvider`.
+
 ### v3.2.2 {#v3-2-2}
 
 * Config:
@@ -97,6 +107,11 @@ title: Kernel Change Log
   - Add `Route::auth()` and `Route::password()` routes helper.
 
 ## Version 3.1 {#v3-1}
+
+### v3.1.16 {#v3-1-16}
+
+* Database:
+  - Add `Orchestra\Database\ConsoleServiceProvider`.
 
 ### v3.1.15 {#v3-1-15}
 
