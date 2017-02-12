@@ -49,6 +49,11 @@ title: Kernel Change Log
 
 ## Version 3.1 {#v3-1}
 
+### v3.1.16 {#v3-1-16}
+
+* Database:
+  - Add `Orchestra\Database\ConsoleServiceProvider`.
+
 ### v3.1.15 {#v3-1-15}
 
 * Database:
