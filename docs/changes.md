@@ -5,6 +5,11 @@ title: Kernel Change Log
 
 ## Version 3.2 {#v3-2}
 
+### v3.2.3 {#v3-2-3}
+
+* Database:
+  - Add `Orchestra\Database\ConsoleServiceProvider`.
+
 ### v3.2.2 {#v3-2-2}
 
 * Config:
