@@ -27,7 +27,8 @@
     "require-dev": {
         "hashids/hashids": "~1.0",
         "laravel/framework": "~5.4.17",
-        "mockery/mockery": "^0.9.4"
+        "mockery/mockery": "^0.9.4",
+        "phpunit/phpunit": "~5.7"
     },
     "replace": {
         "orchestra/config": "self.version",
