@@ -3,12 +3,13 @@
 namespace Orchestra\Http\TestCase;
 
 use Mockery as m;
+use PHPUnit\Framework\TestCase;
 use Orchestra\Http\RouteManager;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Routing\Events\RouteMatched;
 
-class RouteManagerTest extends \PHPUnit_Framework_TestCase
+class RouteManagerTest extends TestCase
 {
     /**
      * Application instance.
@@ -27,7 +28,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Setup the test environment.
      */
-    public function setUp()
+    protected function setUp()
     {
         $this->app = m::mock('\Illuminate\Contracts\Foundation\Application');
         $this->request = m::mock('\Illuminate\Http\Request');
@@ -44,7 +45,7 @@ class RouteManagerTest extends \PHPUnit_Framework_TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown()
     {
         unset($this->app);
         unset($this->request);
