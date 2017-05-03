@@ -255,7 +255,7 @@ class RouteResolver
     protected function getCsrfToken()
     {
         if (is_null($this->csrfToken)) {
-            $this->csrfToken = $this->app->make('session')->getToken();
+            $this->csrfToken = $this->app->make('session')->token();
         }
 
         return $this->csrfToken;
