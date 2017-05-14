@@ -284,7 +284,7 @@ class RouteManagerTest extends TestCase
         $appRoute->shouldReceive('to')->once()->with('/?_token=StAGiQ')->andReturn('/?_token=StAGiQ')
             ->shouldReceive('to')->once()->with('info?foo=bar&_token=StAGiQ')->andReturn('info?foo=bar&_token=StAGiQ');
         $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
-        $session->shouldReceive('getToken')->once()->andReturn('StAGiQ');
+        $session->shouldReceive('token')->once()->andReturn('StAGiQ');
         $url->shouldReceive('isValidUrl')->once()->with('app::/')->andReturn(false)
             ->shouldReceive('isValidUrl')->once()->with('info?foo=bar')->andReturn(false)
             ->shouldReceive('to')->once()->with('/?_token=StAGiQ')->andReturn('/?_token=StAGiQ')

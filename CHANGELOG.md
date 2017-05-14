@@ -2,6 +2,18 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 3.4.1
+
+Released: 2017-05-14
+
+### Changes
+
+* Add `--path` as array for migrations artisan command.
+
+### Fixes
+
+* Fixes fetching token from session store.
+
 ## 3.4.0
 
 Released: 2017-05-02
