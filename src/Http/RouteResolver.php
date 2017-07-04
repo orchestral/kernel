@@ -2,7 +2,6 @@
 
 namespace Orchestra\Http;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\NamespacedItemResolver;
 use Illuminate\Contracts\Foundation\Application;
 
@@ -213,7 +212,7 @@ class RouteResolver
         $appends = [];
         $mode    = $this->mode();
 
-        if (!! Arr::get($options, 'csrf', false)) {
+        if (!! ($options['csrf'] ?? false)) {
             $appends['_token'] = $this->getCsrfToken();
         }
 

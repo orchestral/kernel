@@ -2,7 +2,6 @@
 
 namespace Orchestra\Config\Bootstrap;
 
-use Illuminate\Support\Arr;
 use Orchestra\Config\FileLoader;
 use Orchestra\Config\Repository;
 use Illuminate\Filesystem\Filesystem;
@@ -19,7 +18,6 @@ class LoadConfiguration
      */
     public function bootstrap(Application $app)
     {
-        $env    = null;
         $items  = [];
         $loader = new FileLoader(new Filesystem(), $app->configPath());
 
@@ -28,11 +26,9 @@ class LoadConfiguration
         // we will need to spin through every configuration file and load them all.
         if (file_exists($cached = $app->getCachedConfigPath())) {
             $items = require $cached;
-
-            $env = Arr::get($items, '*::app.env');
         }
 
-        $this->setEnvironment($app, $env);
+        $this->setEnvironment($app, $items['*::app']['env'] ?? null);
 
         $app->instance('config', $config = (new Repository($loader, $app->environment())));
 
