@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Http\TestCase;
+namespace Orchestra\Kernel\TestCase\Unit\Http;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
