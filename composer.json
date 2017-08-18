@@ -18,6 +18,11 @@
             "src/Routing/helpers.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Orchestra\\TestCase\\": "tests/"
+        }
+    },
     "require": {
         "php": ">=7.0",
         "orchestra/contracts": "~3.5.0",
