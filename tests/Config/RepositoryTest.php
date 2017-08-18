@@ -8,19 +8,25 @@ use Orchestra\Config\Repository;
 
 class RepositoryTest extends TestCase
 {
+    /**
+     * Teardown the test environment.
+     */
     protected function tearDown()
     {
         m::close();
     }
 
-    public function testHasGroupIndicatesIfConfigGroupExists()
+    /** @test */
+    function has_group_indicates_if_config_group_exists()
     {
         $config = $this->getRepository();
         $config->getLoader()->shouldReceive('exists')->once()->with('group', 'namespace')->andReturn(false);
+
         $this->assertFalse($config->hasGroup('namespace::group'));
     }
 
-    public function testHasOnTrueReturnsTrue()
+    /** @test */
+    function has_exist_when_item_exist()
     {
         $config  = $this->getRepository();
         $options = $this->getDummyOptions();
@@ -31,7 +37,8 @@ class RepositoryTest extends TestCase
         $this->assertTrue($config->get('app.bing'));
     }
 
-    public function testGetReturnsBasicItems()
+    /** @test */
+    function get_returns_basic_items()
     {
         $config  = $this->getRepository();
         $options = $this->getDummyOptions();
@@ -47,7 +54,8 @@ class RepositoryTest extends TestCase
         $this->assertEquals('blah', $config->get('app.code', function () { return 'blah'; }));
     }
 
-    public function testEntireArrayCanBeReturned()
+    /** @test */
+    function entire_arrays_can_be_returned()
     {
         $config  = $this->getRepository();
         $options = $this->getDummyOptions();
@@ -56,7 +64,8 @@ class RepositoryTest extends TestCase
         $this->assertEquals($options, $config->get('app'));
     }
 
-    public function testLoaderGetsCalledCorrectForNamespaces()
+    /** @test */
+    function loader_gets_called_correct_for_namespaces()
     {
         $config  = $this->getRepository();
         $options = $this->getDummyOptions();
@@ -68,7 +77,8 @@ class RepositoryTest extends TestCase
         $this->assertEquals('blah', $config->get('namespace::options.code', function () { return 'blah'; }));
     }
 
-    public function testNamespacedAccessedAndPostNamespaceLoadEventIsFired()
+    /** @test */
+    function namespaced_accessed_and_post_namespace_run_the_events()
     {
         $config  = $this->getRepository();
         $options = $this->getDummyOptions();
@@ -86,7 +96,8 @@ class RepositoryTest extends TestCase
         $this->assertEquals('rees', $config->get('namespace::options.dayle'));
     }
 
-    public function testLoaderUsesNamespaceAsGroupWhenUsingPackagesAndGroupDoesntExist()
+    /** @test */
+    function loader_uses_namespace_as_group_when_using_packages_and_group_doesnt_exist()
     {
         $config  = $this->getRepository();
         $options = $this->getDummyOptions();
@@ -101,7 +112,8 @@ class RepositoryTest extends TestCase
         $this->assertEquals('breeze', $config->get('namespace::baz.boom'));
     }
 
-    public function testItemsCanBeSet()
+    /** @test */
+    function can_set_config()
     {
         $config = $this->getRepository();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'foo', null)->andReturn(['name' => 'dayle']);
@@ -117,7 +129,8 @@ class RepositoryTest extends TestCase
         $this->assertEquals('taylor', $config->get('namespace::foo.name'));
     }
 
-    public function testPackageRegistersNamespaceAndSetsUpAfterLoadCallback()
+    /** @test */
+    function package_register_namespace_and_setup_callback()
     {
         $config = m::mock('\Orchestra\Config\Repository[addNamespace]', [m::mock('\Orchestra\Config\LoaderInterface'), 'production']);
         $config->shouldReceive('addNamespace')->once()->with('rees', __DIR__)->andReturnNull();
@@ -129,11 +142,21 @@ class RepositoryTest extends TestCase
         $this->assertEquals(['bar'], $results);
     }
 
+    /**
+     * Get mocked repository.
+     *
+     * @return \Orchestra\Config\Repository
+     */
     protected function getRepository()
     {
         return new Repository(m::mock('\Orchestra\Config\LoaderInterface'), 'production');
     }
 
+    /**
+     * Get dummy options.
+     *
+     * @return array
+     */
     protected function getDummyOptions()
     {
         return ['foo' => 'bar', 'baz' => ['boom' => 'breeze'], 'bing' => true];

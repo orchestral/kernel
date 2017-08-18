@@ -8,18 +8,23 @@ use Orchestra\Config\FileLoader;
 
 class FileLoaderTest extends TestCase
 {
+    /**
+     * Teardown the test environment.
+     */
     protected function tearDown()
     {
         m::close();
     }
 
-    public function testEmptyArrayIsReturnedOnNullPath()
+    /** @test */
+    function empty_array_is_returned_on_null_path()
     {
         $loader = $this->getLoader();
         $this->assertEquals([], $loader->load('local', 'group', 'namespace'));
     }
 
-    public function testBasicArrayIsReturned()
+    /** @test */
+    function basic_array_is_returned()
     {
         $loader = $this->getLoader();
         $loader->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/app.php')->andReturn(true);
@@ -30,7 +35,8 @@ class FileLoaderTest extends TestCase
         $this->assertEquals(['foo' => 'bar'], $array);
     }
 
-    public function testEnvironmentArrayIsMerged()
+    /** @test */
+    function environment_arrays_is_merged()
     {
         $loader = $this->getLoader();
         $loader->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/app.php')->andReturn(true);
@@ -42,14 +48,16 @@ class FileLoaderTest extends TestCase
         $this->assertEquals(['foo' => 'blah', 'baz' => 'boom', 'providers' => ['AppProvider', 'SomeProvider']], $array);
     }
 
-    public function testGroupExistsReturnsTrueWhenTheGroupExists()
+    /** @test */
+    function group_exists_return_true_when_the_group_exists()
     {
         $loader = $this->getLoader();
         $loader->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/app.php')->andReturn(true);
         $this->assertTrue($loader->exists('app'));
     }
 
-    public function testGroupExistsReturnsTrueWhenNamespaceGroupExists()
+    /** @test */
+    function group_exists_return_true_when_namespace_group_exists()
     {
         $loader = $this->getLoader();
         $loader->addNamespace('namespace', __DIR__.'/namespace');
@@ -57,13 +65,15 @@ class FileLoaderTest extends TestCase
         $this->assertTrue($loader->exists('app', 'namespace'));
     }
 
-    public function testGroupExistsReturnsFalseWhenNamespaceHintDoesntExists()
+    /** @test */
+    function group_exists_return_false_when_namespace_hint_doesnt_exists()
     {
         $loader = $this->getLoader();
         $this->assertFalse($loader->exists('app', 'namespace'));
     }
 
-    public function testGroupExistsReturnsFalseWhenNamespaceGroupDoesntExists()
+    /** @test */
+    function group_exists_return_false_when_namespace_group_doesnt_exists()
     {
         $loader = $this->getLoader();
         $loader->addNamespace('namespace', __DIR__.'/namespace');
@@ -71,7 +81,8 @@ class FileLoaderTest extends TestCase
         $this->assertFalse($loader->exists('app', 'namespace'));
     }
 
-    public function testCascadingPackagesProperlyLoadsFiles()
+    /** @test */
+    function cascading_packages_properly_load_files()
     {
         $loader = $this->getLoader();
         $loader->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/packages/dayle/rees/group.php')->andReturn(true);
@@ -83,6 +94,11 @@ class FileLoaderTest extends TestCase
         $this->assertEquals(['foo' => 'boom', 'bar' => 'baz'], $items);
     }
 
+    /**
+     * Get the config loader.
+     *
+     * @return \Orchestra\Config\FileLoader
+     */
     protected function getLoader()
     {
         return new FileLoader(m::mock('\Illuminate\Filesystem\Filesystem'), __DIR__);

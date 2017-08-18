@@ -65,12 +65,8 @@ class RouteManagerTest extends TestCase
         return $app;
     }
 
-    /**
-     * Test Orchestra\Http\RouteManager::group() method.
-     *
-     * @test
-     */
-    public function testGroupMethod()
+    /** @test */
+    public function router_with_group()
     {
         $app       = $this->getApplicationMocks();
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
@@ -100,13 +96,8 @@ class RouteManagerTest extends TestCase
         $this->assertEquals($expected, $stub->group('admin', 'admin', ['before' => 'auth']));
     }
 
-    /**
-     * Test Orchestra\Http\RouteManager::group() method
-     * with closure.
-     *
-     * @test
-     */
-    public function testGroupMethodWithClosure()
+    /** @test */
+    public function router_with_group_using_closure()
     {
         $app       = $this->getApplicationMocks();
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
@@ -139,13 +130,8 @@ class RouteManagerTest extends TestCase
         $this->assertEquals($group, $stub->group('admin', 'admin', ['before' => 'auth'], $callback));
     }
 
-    /**
-     * Test Orchestra\Http\RouteManager::group() method
-     * with closure and not array.
-     *
-     * @test
-     */
-    public function testGroupMethodWithClosureAndNotArray()
+    /** @test */
+    function router_with_group_using_closure_and_not_array()
     {
         $app       = $this->getApplicationMocks();
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
@@ -177,12 +163,8 @@ class RouteManagerTest extends TestCase
         $this->assertEquals($group, $stub->group('admin', 'admin', $callback));
     }
 
-    /**
-     * Test Orchestra\Http\RouteManager::handles() method.
-     *
-     * @test
-     */
-    public function testHandlesMethod()
+    /** @test */
+    function router_with_handles()
     {
         $app       = $this->getApplicationMocks();
         $config    = m::mock('\Illuminate\Contracts\Config\Repository');
@@ -215,12 +197,8 @@ class RouteManagerTest extends TestCase
         $this->assertEquals('http://localhost/admin', $stub->handles('http://localhost/admin'));
     }
 
-    /**
-     * Test Orchestra\Http\RouteManager::handles() method on safe mode.
-     *
-     * @test
-     */
-    public function testHandlesMethodOnSafeMode()
+    /** @test */
+    function router_with_handles_on_safe_mode()
     {
         $app       = $this->getApplicationMocks();
         $config    = m::mock('\Illuminate\Contracts\Config\Repository');
@@ -256,13 +234,8 @@ class RouteManagerTest extends TestCase
         $this->assertEquals('http://localhost/admin', $stub->handles('http://localhost/admin'));
     }
 
-    /**
-     * Test Orchestra\Http\RouteManager::handles() method
-     * with CSRF Token.
-     *
-     * @test
-     */
-    public function testHandlesMethodWithCsrfToken()
+    /** @test */
+    function router_with_handles_and_csrf_token()
     {
         $app       = $this->getApplicationMocks();
         $config    = m::mock('\Illuminate\Contracts\Config\Repository');
@@ -298,12 +271,8 @@ class RouteManagerTest extends TestCase
         $this->assertEquals('info?foo=bar&_token=StAGiQ', $stub->handles('info?foo=bar', $options));
     }
 
-    /**
-     * Test Orchestra\Http\RouteManager::is() method.
-     *
-     * @test
-     */
-    public function testIsMethod()
+    /** @test */
+    function router_with_is()
     {
         $app       = $this->getApplicationMocks();
         $request   = $this->request;
@@ -332,12 +301,8 @@ class RouteManagerTest extends TestCase
         $this->assertTrue($stub->is('info?foo=bar'));
     }
 
-    /**
-     * Test Orchestra\Http\RouteManager::when() method.
-     *
-     * @test
-     */
-    public function testWhenMethod()
+    /** @test */
+    function router_with_when()
     {
         $app       = $this->getApplicationMocks();
         $config    = m::mock('\Illuminate\Contracts\Config\Repository');
