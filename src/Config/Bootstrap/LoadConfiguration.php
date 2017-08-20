@@ -18,6 +18,7 @@ class LoadConfiguration
      */
     public function bootstrap(Application $app)
     {
+        $env    = null;
         $items  = [];
         $loader = new FileLoader(new Filesystem(), $app->configPath());
 
@@ -28,13 +29,14 @@ class LoadConfiguration
             $items = require $cached;
         }
 
-        $this->setEnvironment($app, $items['*::app']['env'] ?? null);
+        tap(new Repository($loader, $app->environment()), function ($config) use ($app, $items) {
+            $this->setEnvironment($app, $items['*::app']['env'] ?? null);
+            $app->instance('config', $config);
+            $config->setFromCache($items);
 
-        $app->instance('config', $config = (new Repository($loader, $app->environment())));
+            date_default_timezone_set($config->get('app.timezone', 'UTC'));
+        });
 
-        $config->setFromCache($items);
-
-        date_default_timezone_set($config->get('app.timezone', 'UTC'));
 
         mb_internal_encoding('UTF-8');
     }
