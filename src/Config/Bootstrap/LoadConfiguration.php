@@ -34,7 +34,7 @@ class LoadConfiguration
 
         $config->setFromCache($items);
 
-        date_default_timezone_set($config['app.timezone']);
+        date_default_timezone_set($config->get('app.timezone', 'UTC'));
 
         mb_internal_encoding('UTF-8');
     }
