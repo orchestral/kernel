@@ -8,17 +8,17 @@ use Orchestra\TestCase\TestCase;
 class ConfigTest extends TestCase
 {
     /**
-     * Resolve application implementation.
+     * Override application bindings.
      *
-     * @return \Illuminate\Foundation\Application
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
      */
-    protected function resolveApplication()
+    protected function overrideApplicationBindings($app)
     {
-        $app = parent::resolveApplication();
-
-        $app->bind('Illuminate\Foundation\Bootstrap\LoadConfiguration', 'Orchestra\Config\Bootstrap\LoadConfiguration');
-
-        return $app;
+        return [
+            'Illuminate\Foundation\Bootstrap\LoadConfiguration' => 'Orchestra\Config\Bootstrap\LoadConfiguration',
+        ];
     }
 
     /** @test */
