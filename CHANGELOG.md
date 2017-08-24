@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 3.4.2
+
+Released: 2017-07-11
+
+### Changes
+
+* Consistently return a Collection when using `Orchestra\Database\CacheDecorator`.
+
 ## 3.4.1
 
 Released: 2017-05-14
