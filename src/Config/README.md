@@ -8,7 +8,6 @@ Config Component is a configuration with environment based support for Laravel 5
 [![Latest Unstable Version](https://poser.pugx.org/orchestra/config/v/unstable)](//packagist.org/packages/orchestra/config)
 [![License](https://poser.pugx.org/orchestra/config/license)](https://packagist.org/packages/orchestra/config)
 
-
 ## Table of Content
 
 * [Version Compatibility](#version-compatibility)
