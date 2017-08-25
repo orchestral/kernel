@@ -3,9 +3,11 @@ Configuration Component for Laravel and Orchestra Platform
 
 Config Component is a configuration with environment based support for Laravel 5 and above. The component is actually based from Laravel 4 configuration.
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/orchestra/config.svg?style=flat-square)](https://packagist.org/packages/orchestra/config)
-[![Total Downloads](https://img.shields.io/packagist/dt/orchestra/config.svg?style=flat-square)](https://packagist.org/packages/orchestra/config)
-[![MIT License](https://img.shields.io/packagist/l/orchestra/config.svg?style=flat-square)](https://packagist.org/packages/orchestra/config)
+[![Latest Stable Version](https://poser.pugx.org/orchestra/config/version)](https://packagist.org/packages/orchestra/config)
+[![Total Downloads](https://poser.pugx.org/orchestra/config/downloads)](https://packagist.org/packages/orchestra/config)
+[![Latest Unstable Version](https://poser.pugx.org/orchestra/config/v/unstable)](//packagist.org/packages/orchestra/config)
+[![License](https://poser.pugx.org/orchestra/config/license)](https://packagist.org/packages/orchestra/config)
+
 
 ## Table of Content
 
@@ -21,7 +23,8 @@ Laravel    | Config
  5.1.x     | 3.1.x
  5.2.x     | 3.2.x
  5.3.x     | 3.3.x
- 5.4.x     | 3.4.x@dev
+ 5.4.x     | 3.4.x
+ 5.5.x     | 3.5.x
  
 ## Installation
 
