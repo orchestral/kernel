@@ -2,6 +2,31 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 3.5.0
+
+Released: 2017-08-25
+
+### Added
+
+* Add `Orchestra\Database\Console\Migrations\FreshCommand`.
+
+### Changes
+
+* Update support for Laravel Framework v5.5.
+
+### Removed
+
+* Remove deprecated `Orchestra\Database\MigrationServiceProvider`.
+* Remove deprecated `Orchestra\Database\CacheDecorator::lists()` method.
+
+## 3.4.3
+
+Released: 2017-08-25
+
+### Changes
+
+* Improves migrations artisan commands to match Laravel equivalent.
+
 ## 3.4.2
 
 Released: 2017-07-11
