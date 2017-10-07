@@ -19,6 +19,10 @@ class LoadConfiguration
      */
     public function bootstrap(Application $app)
     {
+        if ($app->environment('testing') && $app->bound('config')) {
+            return ;
+        }
+
         $env    = null;
         $items  = [];
         $loader = new FileLoader(new Filesystem(), $app->configPath());
