@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 3.5.1
+
+Released: 2017-10-07
+
+### Changes
+
+* Avoid rebounding `config` on testing environment when it has been bound.
+
 ## 3.5.0
 
 Released: 2017-08-25
@@ -18,6 +26,14 @@ Released: 2017-08-25
 
 * Remove deprecated `Orchestra\Database\MigrationServiceProvider`.
 * Remove deprecated `Orchestra\Database\CacheDecorator::lists()` method.
+
+## 3.4.4
+
+Released: 2017-10-07
+
+### Changes
+
+* Avoid rebounding `config` on testing environment when it has been bound.
 
 ## 3.4.3
 
