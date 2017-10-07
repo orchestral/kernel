@@ -19,7 +19,7 @@ class LoadConfiguration
      */
     public function bootstrap(Application $app)
     {
-        if ($app->environment('testing') && $app->bound('config')) {
+        if ($app->bound('config') && $app->environment('testing')) {
             return ;
         }
 
