@@ -41,8 +41,8 @@ abstract class RouteManager implements RouteManagerContract
             $resolver = new RouteResolver($app);
         }
 
-        $this->app      = $app;
-        $this->router   = $this->resolveApplicationRouter($app);
+        $this->app = $app;
+        $this->router = $this->resolveApplicationRouter($app);
         $this->resolver = $resolver;
     }
 
@@ -73,7 +73,7 @@ abstract class RouteManager implements RouteManagerContract
         $route = $this->route($name, $default);
 
         if ($attributes instanceof Closure) {
-            $callback   = $attributes;
+            $callback = $attributes;
             $attributes = [];
         }
 
@@ -178,7 +178,7 @@ abstract class RouteManager implements RouteManagerContract
      */
     public function whenOn($path, $on, $listener)
     {
-        $events   = $this->app->make('events');
+        $events = $this->app->make('events');
         $listener = $events->makeListener($listener);
 
         $events->listen($on, function (...$payloads) use ($events, $listener, $path) {

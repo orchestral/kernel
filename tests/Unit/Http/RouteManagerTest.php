@@ -68,10 +68,10 @@ class RouteManagerTest extends TestCase
     /** @test */
     public function router_with_group()
     {
-        $app       = $this->getApplicationMocks();
+        $app = $this->getApplicationMocks();
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
-        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
-        $router    = m::mock('\Illuminate\Routing\Router');
+        $url = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
             ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
@@ -79,7 +79,7 @@ class RouteManagerTest extends TestCase
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
-        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
         $extension->shouldReceive('route')->once()
             ->with('admin', 'admin')->andReturn($appRoute);
@@ -99,10 +99,10 @@ class RouteManagerTest extends TestCase
     /** @test */
     public function router_with_group_using_closure()
     {
-        $app       = $this->getApplicationMocks();
+        $app = $this->getApplicationMocks();
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
-        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
-        $router    = m::mock('\Illuminate\Routing\Router');
+        $url = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
             ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
@@ -110,7 +110,7 @@ class RouteManagerTest extends TestCase
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
-        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
         $extension->shouldReceive('route')->once()->with('admin', 'admin')->andReturn($appRoute);
 
@@ -131,12 +131,12 @@ class RouteManagerTest extends TestCase
     }
 
     /** @test */
-    function router_with_group_using_closure_and_not_array()
+    public function router_with_group_using_closure_and_not_array()
     {
-        $app       = $this->getApplicationMocks();
+        $app = $this->getApplicationMocks();
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
-        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
-        $router    = m::mock('\Illuminate\Routing\Router');
+        $url = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
             ->shouldReceive('make')->with('orchestra.extension')->andReturn($extension)
@@ -144,7 +144,7 @@ class RouteManagerTest extends TestCase
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
-        $appRoute  = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
 
         $extension->shouldReceive('route')->once()->with('admin', 'admin')->andReturn($appRoute);
 
@@ -164,13 +164,13 @@ class RouteManagerTest extends TestCase
     }
 
     /** @test */
-    function router_with_handles()
+    public function router_with_handles()
     {
-        $app       = $this->getApplicationMocks();
-        $config    = m::mock('\Illuminate\Contracts\Config\Repository');
+        $app = $this->getApplicationMocks();
+        $config = m::mock('\Illuminate\Contracts\Config\Repository');
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
-        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
-        $router    = m::mock('\Illuminate\Routing\Router');
+        $url = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('make')->with('config')->andReturn($config)
             ->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
@@ -198,14 +198,14 @@ class RouteManagerTest extends TestCase
     }
 
     /** @test */
-    function router_with_handles_on_safe_mode()
+    public function router_with_handles_on_safe_mode()
     {
-        $app       = $this->getApplicationMocks();
-        $config    = m::mock('\Illuminate\Contracts\Config\Repository');
+        $app = $this->getApplicationMocks();
+        $config = m::mock('\Illuminate\Contracts\Config\Repository');
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
-        $status    = m::mock('\Orchestra\Contracts\Extension\StatusChecker');
-        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
-        $router    = m::mock('\Illuminate\Routing\Router');
+        $status = m::mock('\Orchestra\Contracts\Extension\StatusChecker');
+        $url = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('make')->with('config')->andReturn($config)
             ->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
@@ -235,14 +235,14 @@ class RouteManagerTest extends TestCase
     }
 
     /** @test */
-    function router_with_handles_and_csrf_token()
+    public function router_with_handles_and_csrf_token()
     {
-        $app       = $this->getApplicationMocks();
-        $config    = m::mock('\Illuminate\Contracts\Config\Repository');
+        $app = $this->getApplicationMocks();
+        $config = m::mock('\Illuminate\Contracts\Config\Repository');
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
-        $session   = m::mock('\Illuminate\Session\Store');
-        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
-        $router    = m::mock('\Illuminate\Routing\Router');
+        $session = m::mock('\Illuminate\Session\Store');
+        $url = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('make')->with('config')->andReturn($config)
             ->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
@@ -272,14 +272,14 @@ class RouteManagerTest extends TestCase
     }
 
     /** @test */
-    function router_with_is()
+    public function router_with_is()
     {
-        $app       = $this->getApplicationMocks();
-        $request   = $this->request;
-        $config    = m::mock('\Illuminate\Contracts\Config\Repository');
+        $app = $this->getApplicationMocks();
+        $request = $this->request;
+        $config = m::mock('\Illuminate\Contracts\Config\Repository');
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
-        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
-        $router    = m::mock('\Illuminate\Routing\Router');
+        $url = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('make')->with('config')->andReturn($config)
             ->shouldReceive('bound')->with('orchestra.extension')->andReturn(true)
@@ -302,14 +302,14 @@ class RouteManagerTest extends TestCase
     }
 
     /** @test */
-    function router_with_when()
+    public function router_with_when()
     {
-        $app       = $this->getApplicationMocks();
-        $config    = m::mock('\Illuminate\Contracts\Config\Repository');
-        $events    = new Dispatcher();
+        $app = $this->getApplicationMocks();
+        $config = m::mock('\Illuminate\Contracts\Config\Repository');
+        $events = new Dispatcher();
         $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
-        $url       = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
-        $router    = m::mock('\Illuminate\Routing\Router');
+        $url = m::mock('\Illuminate\Contracts\Routing\UrlGenerator');
+        $router = m::mock('\Illuminate\Routing\Router');
 
         $app->shouldReceive('make')->with('config')->andReturn($config)
             ->shouldReceive('make')->with('events')->andReturn($events)

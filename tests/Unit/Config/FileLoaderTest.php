@@ -17,14 +17,14 @@ class FileLoaderTest extends TestCase
     }
 
     /** @test */
-    function empty_array_is_returned_on_null_path()
+    public function empty_array_is_returned_on_null_path()
     {
         $loader = $this->getLoader();
         $this->assertEquals([], $loader->load('local', 'group', 'namespace'));
     }
 
     /** @test */
-    function basic_array_is_returned()
+    public function basic_array_is_returned()
     {
         $loader = $this->getLoader();
         $loader->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/app.php')->andReturn(true);
@@ -36,7 +36,7 @@ class FileLoaderTest extends TestCase
     }
 
     /** @test */
-    function environment_arrays_is_merged()
+    public function environment_arrays_is_merged()
     {
         $loader = $this->getLoader();
         $loader->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/app.php')->andReturn(true);
@@ -49,7 +49,7 @@ class FileLoaderTest extends TestCase
     }
 
     /** @test */
-    function group_exists_return_true_when_the_group_exists()
+    public function group_exists_return_true_when_the_group_exists()
     {
         $loader = $this->getLoader();
         $loader->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/app.php')->andReturn(true);
@@ -57,7 +57,7 @@ class FileLoaderTest extends TestCase
     }
 
     /** @test */
-    function group_exists_return_true_when_namespace_group_exists()
+    public function group_exists_return_true_when_namespace_group_exists()
     {
         $loader = $this->getLoader();
         $loader->addNamespace('namespace', __DIR__.'/namespace');
@@ -66,14 +66,14 @@ class FileLoaderTest extends TestCase
     }
 
     /** @test */
-    function group_exists_return_false_when_namespace_hint_doesnt_exists()
+    public function group_exists_return_false_when_namespace_hint_doesnt_exists()
     {
         $loader = $this->getLoader();
         $this->assertFalse($loader->exists('app', 'namespace'));
     }
 
     /** @test */
-    function group_exists_return_false_when_namespace_group_doesnt_exists()
+    public function group_exists_return_false_when_namespace_group_doesnt_exists()
     {
         $loader = $this->getLoader();
         $loader->addNamespace('namespace', __DIR__.'/namespace');
@@ -82,7 +82,7 @@ class FileLoaderTest extends TestCase
     }
 
     /** @test */
-    function cascading_packages_properly_load_files()
+    public function cascading_packages_properly_load_files()
     {
         $loader = $this->getLoader();
         $loader->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/packages/dayle/rees/group.php')->andReturn(true);
