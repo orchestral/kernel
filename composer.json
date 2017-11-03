@@ -27,7 +27,7 @@
         "php": ">=7.0",
         "orchestra/contracts": "~3.5.0",
         "orchestra/notifier": "~3.5.0",
-        "orchestra/support": "~3.5.0"
+        "orchestra/support": "~3.5.2"
     },
     "require-dev": {
         "hashids/hashids": "~1.0",

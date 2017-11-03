@@ -2,38 +2,22 @@
 
 namespace Orchestra\Http\Resources\Json;
 
-use Orchestra\Support\Transformer;
 use Illuminate\Http\Resources\Json\Resource as BaseResource;
 
 class Resource extends BaseResource
 {
-    /**
-     * Transformer namespace.
-     *
-     * @var string
-     */
-    protected $namespace;
+    use Tranformable;
 
     /**
-     * Transformer name.
-     *
-     * @var string|null
-     */
-    protected $transformer;
-
-    /**
-     * Create a new resource instance.
+     * Create new anonymous resource collection.
      *
      * @param  mixed  $resource
-     * @param  string|null  $transformer
-     * @param  string|null  $version
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function __construct($resource, $transformer = null, $version = null)
+    public static function collection($resource)
     {
-        parent::__construct($resource);
-
-        $this->transformer = ! is_null($transformer) ? $transformer : class_basename($resource);
-        $this->version = $version;
+        return new AnonymousResourceCollection($resource, get_called_class());
     }
 
     /**
@@ -45,18 +29,10 @@ class Resource extends BaseResource
      */
     public function toArray($request)
     {
-        $transformer = app('orchestra.http.version')->resolve(
-            $this->namespace, $this->version, $this->transformer
-        );
-
-        if (class_exists($transformer, false)) {
-            $transformer = new $transformer($request);
-
-            if ($transformer instanceof Transformer) {
-                return $transformer->handle($instance);
-            }
+        if (is_null($transformed = $this->toArrayUsingTransformer($request))) {
+            return parent::toArray($request);
         }
 
-        return parent::toArray($request);
+        return $transformed;
     }
 }
