@@ -13,7 +13,7 @@ class Resource extends BaseResource
      *
      * @param  mixed  $resource
      *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return \Orchestra\Http\Resources\Json\AnonymousResourceCollection
      */
     public static function collection($resource)
     {
@@ -25,10 +25,14 @@ class Resource extends BaseResource
      *
      * @param  \Illuminate\Http\Request  $request
      *
-     * @return array
+     * @return mixed
      */
     public function toArray($request)
     {
+        if (method_exists($request, 'version')) {
+            $this->version($request->version());
+        }
+
         if (is_null($transformed = $this->toArrayUsingTransformer($request))) {
             return parent::toArray($request);
         }

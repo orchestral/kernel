@@ -25,7 +25,7 @@ trait Transformable
      *
      * @return $this
      */
-    public function transformer($transformer)
+    public function transformer(string $transformer = null): self
     {
         $this->transformer = $transformer;
 
@@ -39,7 +39,7 @@ trait Transformable
      *
      * @return $this
      */
-    public function version($version)
+    public function version(string $version = null): self
     {
         $this->version = $version;
 
@@ -47,11 +47,31 @@ trait Transformable
     }
 
     /**
+     * Get transformer.
+     *
+     * @return string|null
+     */
+    public function getTransformer()
+    {
+        return $this->transformer;
+    }
+
+    /**
+     * Get version.
+     *
+     * @return string|null
+     */
+    public function getVersion()
+    {
+        return $this->version;
+    }
+
+    /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      *
-     * @return array
+     * @return array|null
      */
     public function toArrayUsingTransformer($request)
     {
@@ -71,7 +91,7 @@ trait Transformable
      *
      * @return string
      */
-    protected function resolveTransformer()
+    protected function resolveTransformer(): string
     {
         $transformer = $this->transformer ?? class_basename($this->instance);
 
@@ -85,5 +105,5 @@ trait Transformable
      *
      * @return string
      */
-    abstract protected function getNamespace();
+    abstract public function getNamespace(): string;
 }
