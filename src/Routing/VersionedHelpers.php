@@ -2,8 +2,9 @@
 
 namespace Orchestra\Routing;
 
-use Orchestra\Support\Transformer;
+use Orchestra\Http\Transformer;
 use Illuminate\Contracts\Support\Arrayable;
+use Orchestra\Support\Transformer as BaseTransformer;
 
 trait VersionedHelpers
 {
@@ -64,8 +65,11 @@ trait VersionedHelpers
             $transformer = app($transformer);
 
             if ($transformer instanceof Transformer) {
-                return $transformer->withOptions($options)
-                            ->handle($instance);
+                return $transformer->options($options);
+            }
+
+            if ($transformer instanceof BaseTransformer) {
+                return $transformer->handle($instance);
             }
 
             return $instance->transform($transformer);
