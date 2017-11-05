@@ -4,7 +4,7 @@ namespace Orchestra\Http;
 
 use Orchestra\Support\Transformer as BaseTransformer;
 
-class Transformer extends BaseTransformer
+abstract class Transformer extends BaseTransformer
 {
     use Traits\Transformable;
 
