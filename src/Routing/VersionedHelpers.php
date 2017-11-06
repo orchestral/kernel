@@ -61,11 +61,11 @@ trait VersionedHelpers
     {
         $transformer = $this->getVersionedResourceClassName('Transformers', $name);
 
-        if (class_exists($transformer, false)) {
-            $transformer = app($transformer);
+        if (class_exists($transformer)) {
+            $transformer = resolve($transformer);
 
             if ($transformer instanceof Transformer) {
-                $transformer->options($options);
+                return $transformer->options($options)->handle($instance);
             }
 
             if ($transformer instanceof BaseTransformer) {
