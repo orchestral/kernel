@@ -47,6 +47,21 @@ trait Transformable
     }
 
     /**
+     * Add options.
+     *
+     * @param  array  $options
+     *
+     * @return $this
+     *
+     * @deprecated v3.5.x
+     * @see static::options()
+     */
+    public function withOptions(array $options = [])
+    {
+        return $this->options($options);
+    }
+
+    /**
      * Get request instance.
      *
      * @return \Illuminate\Http\Request
