@@ -9,6 +9,13 @@ abstract class Transformer extends BaseTransformer
     use Traits\Transformable;
 
     /**
+     * Resource instance.
+     *
+     * @var Orchestra\Http\Resources\Json\Resource
+     */
+    protected $resource;
+
+    /**
      * Invoke the transformation.
      *
      * @param  mixed  $instance
@@ -19,6 +26,20 @@ abstract class Transformer extends BaseTransformer
     public static function with($instance, array $options = [])
     {
         return (new static())->options($options)->handle($instance);
+    }
+
+    /**
+     * Set resource.
+     *
+     * @param  \Orchestra\Http\Resources\Json|resource $resource
+     *
+     * @return $this
+     */
+    public function resource($resource)
+    {
+        $this->resource = $resource;
+
+        return $this;
     }
 
     /**
