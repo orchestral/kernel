@@ -42,7 +42,7 @@ class FileLoader implements LoaderInterface
      */
     public function __construct(Filesystem $files, $defaultPath)
     {
-        $this->files       = $files;
+        $this->files = $files;
         $this->defaultPath = $defaultPath;
     }
 

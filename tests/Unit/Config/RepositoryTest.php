@@ -17,7 +17,7 @@ class RepositoryTest extends TestCase
     }
 
     /** @test */
-    function has_group_indicates_if_config_group_exists()
+    public function has_group_indicates_if_config_group_exists()
     {
         $config = $this->getRepository();
         $config->getLoader()->shouldReceive('exists')->once()->with('group', 'namespace')->andReturn(false);
@@ -26,9 +26,9 @@ class RepositoryTest extends TestCase
     }
 
     /** @test */
-    function has_exist_when_item_exist()
+    public function has_exist_when_item_exist()
     {
-        $config  = $this->getRepository();
+        $config = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'app', null)->andReturn($options);
         $config->getLoader()->shouldReceive('exists')->once()->with('app/bing')->andReturn(false);
@@ -38,9 +38,9 @@ class RepositoryTest extends TestCase
     }
 
     /** @test */
-    function get_returns_basic_items()
+    public function get_returns_basic_items()
     {
-        $config  = $this->getRepository();
+        $config = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'app', null)->andReturn($options);
         $config->getLoader()->shouldReceive('exists')->twice()->with('app/foo')->andReturn(false);
@@ -55,9 +55,9 @@ class RepositoryTest extends TestCase
     }
 
     /** @test */
-    function entire_arrays_can_be_returned()
+    public function entire_arrays_can_be_returned()
     {
-        $config  = $this->getRepository();
+        $config = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'app', null)->andReturn($options);
 
@@ -65,9 +65,9 @@ class RepositoryTest extends TestCase
     }
 
     /** @test */
-    function loader_gets_called_correct_for_namespaces()
+    public function loader_gets_called_correct_for_namespaces()
     {
-        $config  = $this->getRepository();
+        $config = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'options', 'namespace')->andReturn($options);
 
@@ -78,9 +78,9 @@ class RepositoryTest extends TestCase
     }
 
     /** @test */
-    function namespaced_accessed_and_post_namespace_run_the_events()
+    public function namespaced_accessed_and_post_namespace_run_the_events()
     {
-        $config  = $this->getRepository();
+        $config = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'options', 'namespace')->andReturn($options);
         $config->afterLoading('namespace', function ($repository, $group, $items) {
@@ -97,9 +97,9 @@ class RepositoryTest extends TestCase
     }
 
     /** @test */
-    function loader_uses_namespace_as_group_when_using_packages_and_group_doesnt_exist()
+    public function loader_uses_namespace_as_group_when_using_packages_and_group_doesnt_exist()
     {
-        $config  = $this->getRepository();
+        $config = $this->getRepository();
         $options = $this->getDummyOptions();
         $config->getLoader()->shouldReceive('addNamespace')->with('namespace', __DIR__);
         $config->getLoader()->shouldReceive('cascadePackage')->andReturnUsing(function ($env, $package, $group, $items) { return $items; });
@@ -113,7 +113,7 @@ class RepositoryTest extends TestCase
     }
 
     /** @test */
-    function can_set_config()
+    public function can_set_config()
     {
         $config = $this->getRepository();
         $config->getLoader()->shouldReceive('load')->once()->with('production', 'foo', null)->andReturn(['name' => 'dayle']);
@@ -130,14 +130,14 @@ class RepositoryTest extends TestCase
     }
 
     /** @test */
-    function package_register_namespace_and_setup_callback()
+    public function package_register_namespace_and_setup_callback()
     {
         $config = m::mock('\Orchestra\Config\Repository[addNamespace]', [m::mock('\Orchestra\Config\LoaderInterface'), 'production']);
         $config->shouldReceive('addNamespace')->once()->with('rees', __DIR__)->andReturnNull();
         $config->getLoader()->shouldReceive('cascadePackage')->once()->with('production', 'dayle/rees', 'group', ['foo'])->andReturn(['bar']);
         $config->package('dayle/rees', __DIR__);
         $afterLoad = $config->getAfterLoadCallbacks();
-        $results   = call_user_func($afterLoad['rees'], $config, 'group', ['foo']);
+        $results = call_user_func($afterLoad['rees'], $config, 'group', ['foo']);
 
         $this->assertEquals(['bar'], $results);
     }

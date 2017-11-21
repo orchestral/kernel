@@ -31,7 +31,7 @@ class FormRequest extends Request
         $this->setupValidationScenario();
         $this->setupValidationParameters();
 
-        $this->validationFactory    = $this->container->make(ValidationContract::class);
+        $this->validationFactory = $this->container->make(ValidationContract::class);
         $this->validationDispatcher = $this->container->make(DispatcherContract::class);
 
         return $this->runValidation($this->all(), [], $this->messages());
@@ -44,10 +44,10 @@ class FormRequest extends Request
      */
     protected function setupValidationScenario()
     {
-        $current   = $this->method();
+        $current = $this->method();
         $available = [
-            'POST'   => 'store',
-            'PUT'    => 'update',
+            'POST' => 'store',
+            'PUT' => 'update',
             'DELETE' => 'destroy',
         ];
 

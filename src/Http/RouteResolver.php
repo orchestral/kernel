@@ -56,7 +56,7 @@ class RouteResolver
      */
     public function __construct(Application $app)
     {
-        $this->app          = $app;
+        $this->app = $app;
         $this->urlGenerator = $app->make('url');
 
         $this->integrateWithExtension($app);
@@ -210,9 +210,9 @@ class RouteResolver
     protected function prepareValidRoute($route, $item, $query, array $options)
     {
         $appends = [];
-        $mode    = $this->mode();
+        $mode = $this->mode();
 
-        if (!! ($options['csrf'] ?? false)) {
+        if ((bool) ($options['csrf'] ?? false)) {
             $appends['_token'] = $this->getCsrfToken();
         }
 
@@ -223,8 +223,8 @@ class RouteResolver
         $query = $this->prepareHttpQueryString($query, $appends);
 
         ! empty($item) && $route = "{$route}.{$item}";
-        empty($route) && $route  = '';
-        empty($query) || $route  = "{$route}?{$query}";
+        empty($route) && $route = '';
+        empty($query) || $route = "{$route}?{$query}";
 
         return $route;
     }

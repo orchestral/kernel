@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 3.5.2
+
+Released: 2017-11-21
+
+### Added
+
+* Add `Orchestra\Http\Transformer`.
+
 ## 3.5.1
 
 Released: 2017-10-07

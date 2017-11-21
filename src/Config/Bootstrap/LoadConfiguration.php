@@ -19,10 +19,10 @@ class LoadConfiguration
     public function bootstrap(Application $app)
     {
         if ($app->bound('config') && $app->environment('testing')) {
-            return ;
+            return;
         }
 
-        $items  = [];
+        $items = [];
         $loader = new FileLoader(new Filesystem(), $app->configPath());
 
         // First we will see if we have a cache configuration file. If we do, we'll load
