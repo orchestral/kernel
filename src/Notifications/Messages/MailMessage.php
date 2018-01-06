@@ -20,7 +20,7 @@ class MailMessage extends Message
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $data = parent::toArray();
 

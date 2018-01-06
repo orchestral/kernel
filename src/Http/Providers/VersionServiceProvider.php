@@ -42,7 +42,7 @@ class VersionServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerSupportedVersions(VersionControl $version)
+    protected function registerSupportedVersions(VersionControl $version): void
     {
         foreach ($this->versions as $code => $namespace) {
             $version->addVersion($code, $namespace);

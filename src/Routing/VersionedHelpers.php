@@ -12,13 +12,13 @@ trait VersionedHelpers
      * Transform and serialize the instance.
      *
      * @param  \Orchestra\Model\Eloquent|\Illuminate\Support\Collection  $instance
-     * @param  string  $name
+     * @param  string  $transformer
      * @param  string|null  $serializer
      * @param  array  $options
      *
      * @return array
      */
-    protected function transform($instance, $transformer, $serializer = null, array $options = [])
+    protected function transform($instance, string $transformer, ?string $serializer = null, array $options = [])
     {
         if (is_null($serializer)) {
             $serializer = $transformer;
@@ -41,7 +41,7 @@ trait VersionedHelpers
      *
      * @return mixed
      */
-    protected function processWith($instance, $name, $method, ...$parameters)
+    protected function processWith($instance, string $name, string $method, ...$parameters)
     {
         $processor = $this->getVersionedResourceClassName('Processors', $name);
 
@@ -57,7 +57,7 @@ trait VersionedHelpers
      *
      * @return mixed
      */
-    protected function transformWith($instance, $name, array $options = [])
+    protected function transformWith($instance, string $name, array $options = [])
     {
         $transformer = $this->getVersionedResourceClassName('Transformers', $name);
 
@@ -86,7 +86,7 @@ trait VersionedHelpers
      *
      * @return array
      */
-    protected function serializeWith($instance, $name)
+    protected function serializeWith($instance, string $name)
     {
         $serializer = $this->getVersionedResourceClassName('Serializers', $name);
 
@@ -105,5 +105,5 @@ trait VersionedHelpers
      *
      * @return string
      */
-    abstract public function getVersionedResourceClassName($group, $name);
+    abstract public function getVersionedResourceClassName(string $group, string $name): string;
 }

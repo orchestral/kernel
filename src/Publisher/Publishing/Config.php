@@ -12,11 +12,11 @@ class Config extends Publisher
      * @param  string  $package
      * @param  string  $packagePath
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
-    protected function getSource($package, $packagePath)
+    protected function getSource(string $package, string $packagePath): string
     {
         $sources = [
             "{$packagePath}/{$package}/resources/config",

@@ -33,9 +33,10 @@ abstract class RouteManager implements RouteManagerContract
     /**
      * Construct a new instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param \Illuminate\Contracts\Foundation\Application  $app
+     * @param \Orchestra\Http\RouteResolver|null  $resolver
      */
-    public function __construct(Application $app, RouteResolver $resolver = null)
+    public function __construct(Application $app, ?RouteResolver $resolver = null)
     {
         if (is_null($resolver)) {
             $resolver = new RouteResolver($app);
@@ -68,7 +69,7 @@ abstract class RouteManager implements RouteManagerContract
      *
      * @return array
      */
-    public function group($name, $default, $attributes = [], Closure $callback = null)
+    public function group(string $name, string $default, $attributes = [], Closure $callback = null): array
     {
         $route = $this->route($name, $default);
 
@@ -94,7 +95,7 @@ abstract class RouteManager implements RouteManagerContract
      *
      * @return array
      */
-    public function locate($path, array $options = [])
+    public function locate(string $path, array $options = []): array
     {
         return $this->resolver->locate($path, $options);
     }
@@ -107,7 +108,7 @@ abstract class RouteManager implements RouteManagerContract
      *
      * @return string
      */
-    public function handles($path, array $options = [])
+    public function handles(string $path, array $options = []): string
     {
         return $this->resolver->to($path, $options);
     }
@@ -119,7 +120,7 @@ abstract class RouteManager implements RouteManagerContract
      *
      * @return bool
      */
-    public function is($path)
+    public function is(string $path): bool
     {
         return $this->resolver->is($path);
     }
@@ -129,14 +130,14 @@ abstract class RouteManager implements RouteManagerContract
      *
      * @return bool
      */
-    abstract public function installed();
+    abstract public function installed(): bool;
 
     /**
      * Get application status.
      *
      * @return string
      */
-    public function mode()
+    public function mode(): string
     {
         return $this->resolver->mode();
     }
@@ -149,7 +150,7 @@ abstract class RouteManager implements RouteManagerContract
      *
      * @return \Orchestra\Contracts\Extension\RouteGenerator
      */
-    public function route($name, $default = '/')
+    public function route(string $name, string $default = '/')
     {
         return $this->resolver->route($name, $default);
     }
@@ -162,9 +163,9 @@ abstract class RouteManager implements RouteManagerContract
      *
      * @return void
      */
-    public function when($path, $listener)
+    public function when(string $path, $listener): void
     {
-        return $this->whenOn($path, RouteMatched::class, $listener);
+        $this->whenOn($path, RouteMatched::class, $listener);
     }
 
     /**
@@ -176,7 +177,7 @@ abstract class RouteManager implements RouteManagerContract
      *
      * @return void
      */
-    public function whenOn($path, $on, $listener)
+    public function whenOn(string $path, string $on, $listener): void
     {
         $events = $this->app->make('events');
         $listener = $events->makeListener($listener);

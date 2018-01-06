@@ -2,8 +2,8 @@
 
 namespace Orchestra\Publisher;
 
-use Orchestra\Contracts\Publisher\Publisher;
 use Illuminate\Database\Migrations\Migrator;
+use Orchestra\Contracts\Publisher\Publisher;
 use Illuminate\Contracts\Container\Container;
 
 class MigrateManager implements Publisher
@@ -30,7 +30,7 @@ class MigrateManager implements Publisher
      */
     public function __construct(Container $app, Migrator $migrator)
     {
-        $this->app      = $app;
+        $this->app = $app;
         $this->migrator = $migrator;
     }
 
@@ -39,7 +39,7 @@ class MigrateManager implements Publisher
      *
      * @return void
      */
-    protected function createMigrationRepository()
+    protected function createMigrationRepository(): void
     {
         $repository = $this->migrator->getRepository();
 
@@ -55,7 +55,7 @@ class MigrateManager implements Publisher
      *
      * @return void
      */
-    public function run($path)
+    public function run(string $path): void
     {
         // We need to make sure migration table is available.
         $this->createMigrationRepository();
@@ -70,14 +70,14 @@ class MigrateManager implements Publisher
      *
      * @return void
      */
-    public function package($name)
+    public function package(string $name): void
     {
         $files = $this->app->make('files');
 
         if (method_exists($this->app, 'vendorPath')) {
             $vendorPath = rtrim($this->app->vendorPath(), '/');
         } else {
-            $basePath   = rtrim($this->app->basePath(), '/');
+            $basePath = rtrim($this->app->basePath(), '/');
             $vendorPath = "{$basePath}/vendor";
         }
 
@@ -99,9 +99,9 @@ class MigrateManager implements Publisher
      *
      * @param  string  $name
      *
-     * @return void
+     * @return bool
      */
-    public function extension($name)
+    public function extension(string $name): bool
     {
         $files = $this->app->make('files');
 
@@ -128,17 +128,21 @@ class MigrateManager implements Publisher
                 $this->run($path);
             }
         }
+
+        return true;
     }
 
     /**
      * Migrate Orchestra Platform.
      *
-     * @return void
+     * @return bool
      */
-    public function foundation()
+    public function foundation(): bool
     {
         $this->package('orchestra/memory');
         $this->package('orchestra/auth');
+
+        return true;
     }
 
     /**
@@ -148,15 +152,15 @@ class MigrateManager implements Publisher
      *
      * @return array
      */
-    protected function getPathFromExtensionName($name)
+    protected function getPathFromExtensionName(string $name): array
     {
         $extension = $this->app->make('orchestra.extension');
-        $finder    = $this->app->make('orchestra.extension.finder');
+        $finder = $this->app->make('orchestra.extension.finder');
 
         if ($name === 'app') {
             $basePath = $sourcePath = $this->app->basePath();
         } else {
-            $basePath   = $finder->resolveExtensionPath(rtrim($extension->option($name, 'path'), '/'));
+            $basePath = $finder->resolveExtensionPath(rtrim($extension->option($name, 'path'), '/'));
             $sourcePath = $finder->resolveExtensionPath(rtrim($extension->option($name, 'source-path'), '/'));
         }
 

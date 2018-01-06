@@ -21,7 +21,7 @@ trait Loader
      *
      * @return void
      */
-    public function afterLoading($namespace, Closure $callback)
+    public function afterLoading(string $namespace, Closure $callback): void
     {
         $this->afterLoad[$namespace] = $callback;
     }
@@ -31,7 +31,7 @@ trait Loader
      *
      * @return array
      */
-    public function getAfterLoadCallbacks()
+    public function getAfterLoadCallbacks(): array
     {
         return $this->afterLoad;
     }
@@ -45,7 +45,7 @@ trait Loader
      *
      * @return array
      */
-    protected function callAfterLoad($namespace, $group, $items)
+    protected function callAfterLoad(string $namespace, string $group, array $items): array
     {
         $callback = $this->afterLoad[$namespace];
 

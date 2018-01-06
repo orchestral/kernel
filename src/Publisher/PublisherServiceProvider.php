@@ -31,7 +31,7 @@ class PublisherServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerMigration()
+    protected function registerMigration(): void
     {
         $this->app->singleton('orchestra.publisher.migrate', function (Application $app) {
             // In order to use migration, we need to boot 'migration.repository'
@@ -47,7 +47,7 @@ class PublisherServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerAssetPublisher()
+    protected function registerAssetPublisher(): void
     {
         $this->app->singleton('orchestra.publisher.asset', function (Application $app) {
             return new AssetManager($app, $app->make('asset.publisher'));

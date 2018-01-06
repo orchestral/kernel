@@ -340,7 +340,7 @@ class RouteManagerTest extends TestCase
 
 class StubRouteManager extends RouteManager
 {
-    public function installed()
+    public function installed(): bool
     {
         return true;
     }
@@ -348,7 +348,7 @@ class StubRouteManager extends RouteManager
 
 class StubSafeRouteManager extends RouteManager
 {
-    public function installed()
+    public function installed(): bool
     {
         return true;
     }

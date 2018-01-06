@@ -32,7 +32,7 @@ class AssetManager implements Publisher
      */
     public function __construct(Container $app, Asset $publisher)
     {
-        $this->app       = $app;
+        $this->app = $app;
         $this->publisher = $publisher;
     }
 
@@ -44,7 +44,7 @@ class AssetManager implements Publisher
      *
      * @return mixed
      */
-    public function publish($name, $destinationPath)
+    public function publish(string $name, string $destinationPath)
     {
         return $this->publisher->publish($name, $destinationPath);
     }
@@ -54,11 +54,11 @@ class AssetManager implements Publisher
      *
      * @param  string  $name
      *
-     * @return mixed
-     *
      * @throws \Orchestra\Contracts\Publisher\FilePermissionException
+     *
+     * @return bool
      */
-    public function extension($name)
+    public function extension(string $name): bool
     {
         if (is_null($path = $this->getPathFromExtensionName($name))) {
             return false;
@@ -74,11 +74,11 @@ class AssetManager implements Publisher
     /**
      * Migrate Orchestra Platform.
      *
-     * @return mixed
-     *
      * @throws \Orchestra\Contracts\Publisher\FilePermissionException
+     *
+     * @return bool
      */
-    public function foundation()
+    public function foundation(): bool
     {
         $path = rtrim($this->app->basePath(), '/').'/vendor/orchestra/foundation/resources/public';
 
@@ -100,10 +100,10 @@ class AssetManager implements Publisher
      *
      * @return string|null
      */
-    protected function getPathFromExtensionName($name)
+    protected function getPathFromExtensionName(string $name): ?string
     {
         $finder = $this->app->make('orchestra.extension.finder');
-        $files  = $this->app->make('files');
+        $files = $this->app->make('files');
 
         if ($name === 'app') {
             $basePath = $this->app->basePath();
@@ -120,6 +120,6 @@ class AssetManager implements Publisher
             }
         }
 
-        return;
+        return null;
     }
 }

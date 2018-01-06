@@ -33,9 +33,9 @@ abstract class Publisher
      * @param  \Illuminate\Filesystem\Filesystem  $files
      * @param  string  $publishPath
      */
-    public function __construct(Filesystem $files, $publishPath)
+    public function __construct(Filesystem $files, string $publishPath)
     {
-        $this->files       = $files;
+        $this->files = $files;
         $this->publishPath = $publishPath;
     }
 
@@ -45,11 +45,11 @@ abstract class Publisher
      * @param  string  $package
      * @param  string  $packagePath
      *
-     * @return string
-     *
      * @throws \InvalidArgumentException
+     *
+     * @return string
      */
-    abstract protected function getSource($package, $packagePath);
+    abstract protected function getSource(string $package, string $packagePath): string;
 
     /**
      * Publish files from a given path.
@@ -59,7 +59,7 @@ abstract class Publisher
      *
      * @return bool
      */
-    public function publish($package, $source)
+    public function publish(string $package, string $source): bool
     {
         $destination = $this->getDestinationPath($package);
 
@@ -72,11 +72,11 @@ abstract class Publisher
      * Publish the files for a package.
      *
      * @param  string  $package
-     * @param  string  $packagePath
+     * @param  string|null  $packagePath
      *
      * @return bool
      */
-    public function publishPackage($package, $packagePath = null)
+    public function publishPackage(string $package, ?string $packagePath = null): bool
     {
         $source = $this->getSource($package, $packagePath ?: $this->packagePath);
 
@@ -90,7 +90,7 @@ abstract class Publisher
      *
      * @return void
      */
-    protected function makeDestination($destination)
+    protected function makeDestination(string $destination): void
     {
         if (! $this->files->isDirectory($destination)) {
             $this->files->makeDirectory($destination, 0777, true);
@@ -104,7 +104,7 @@ abstract class Publisher
      *
      * @return bool
      */
-    public function alreadyPublished($package)
+    public function alreadyPublished(string $package): bool
     {
         return $this->files->isDirectory($this->getDestinationPath($package));
     }
@@ -116,7 +116,7 @@ abstract class Publisher
      *
      * @return string
      */
-    public function getDestinationPath($package)
+    public function getDestinationPath(string $package): string
     {
         return $this->publishPath."/packages/{$package}";
     }
@@ -128,7 +128,7 @@ abstract class Publisher
      *
      * @return void
      */
-    public function setPackagePath($packagePath)
+    public function setPackagePath(string $packagePath): void
     {
         $this->packagePath = $packagePath;
     }
