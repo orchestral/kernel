@@ -130,7 +130,7 @@ class RouteResolver
      * @param  string  $name
      * @param  string  $default
      *
-     * @return \Orchestra\Contracts\Extension\RouteGenerator
+     * @return \Orchestra\Contracts\Extension\UrlGenerator
      */
     public function route(string $name, string $default = '/')
     {
@@ -185,7 +185,7 @@ class RouteResolver
      * @param  string  $name
      * @param  string  $default
      *
-     * @return \Orchestra\Contracts\Extension\RouteGenerator
+     * @return \Orchestra\Contracts\Extension\UrlGenerator
      */
     protected function generateRouteByName(string $name, string $default)
     {

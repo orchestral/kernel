@@ -148,7 +148,7 @@ abstract class RouteManager implements RouteManagerContract
      * @param  string  $name
      * @param  string  $default
      *
-     * @return \Orchestra\Contracts\Extension\RouteGenerator
+     * @return \Orchestra\Contracts\Extension\UrlGenerator
      */
     public function route(string $name, string $default = '/')
     {

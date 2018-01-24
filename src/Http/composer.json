@@ -16,7 +16,7 @@
         }
     },
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "orchestra/contracts": "~3.6.0",
         "orchestra/extension": "~3.6.0",
         "orchestra/support": "~3.6.0"
