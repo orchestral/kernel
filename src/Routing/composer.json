@@ -19,7 +19,7 @@
         ]
     },
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "illuminate/routing": "~5.7.0",
         "orchestra/contracts": "~3.7.0",
         "orchestra/support-core": "~3.7.0"

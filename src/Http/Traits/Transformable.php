@@ -35,7 +35,7 @@ trait Transformable
      *
      * @return $this
      */
-    public function options(array $options = [])
+    public function options(array $options = []): self
     {
         $this->options = $options;
 
@@ -44,21 +44,6 @@ trait Transformable
         }
 
         return $this;
-    }
-
-    /**
-     * Add options.
-     *
-     * @param  array  $options
-     *
-     * @return $this
-     *
-     * @deprecated v3.5.x
-     * @see static::options()
-     */
-    public function withOptions(array $options = [])
-    {
-        return $this->options($options);
     }
 
     /**
@@ -82,7 +67,7 @@ trait Transformable
      *
      * @return $this
      */
-    public function setRequest($request)
+    public function setRequest($request): self
     {
         $this->request = $request;
 
@@ -97,7 +82,7 @@ trait Transformable
      *
      * @return array
      */
-    protected function merge($meta, array $options = [])
+    protected function merge($meta, array $options = []): array
     {
         if (is_array($meta) && empty($options)) {
             $options = $meta;
@@ -126,7 +111,7 @@ trait Transformable
      *
      * @return array
      */
-    protected function transformByMeta($meta, $data, ...$parameters)
+    protected function transformByMeta(string $meta, array $data, ...$parameters): array
     {
         $name = Str::singular($meta);
         $types = $this->options[$meta] ?? null;
@@ -153,7 +138,7 @@ trait Transformable
      *
      * @return array|null
      */
-    protected function filterMetaType($name)
+    protected function filterMetaType(string $name): ?array
     {
         $types = $this->options[$name] ?? $this->getRequest()->input($name);
 

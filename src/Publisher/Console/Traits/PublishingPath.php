@@ -7,9 +7,9 @@ trait PublishingPath
     /**
      * Get the specified path to the files.
      *
-     * @return string
+     * @return string|null
      */
-    protected function getPath()
+    protected function getPath(): ?string
     {
         $path = $this->input->getOption('path');
 
@@ -17,7 +17,7 @@ trait PublishingPath
         // exists we will use that as the path to the assets. This allows the free
         // storage of assets wherever is best for this developer's web projects.
         if (is_null($path)) {
-            return;
+            return null;
         }
 
         return $this->laravel->basePath().'/'.$path;

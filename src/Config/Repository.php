@@ -33,7 +33,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * @param  \Orchestra\Config\LoaderInterface  $loader
      * @param  string  $environment
      */
-    public function __construct(LoaderInterface $loader, $environment)
+    public function __construct(LoaderInterface $loader, string $environment)
     {
         $this->setLoader($loader);
 
@@ -223,11 +223,11 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      *
      * @param  string  $package
      * @param  string  $hint
-     * @param  string  $namespace
+     * @param  string|null  $namespace
      *
      * @return void
      */
-    public function package($package, $hint, $namespace = null)
+    public function package(string $package, string $hint, ?string $namespace = null): void
     {
         $namespace = $this->getPackageNamespace($package, $namespace);
 
@@ -251,11 +251,11 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * Get the configuration namespace for a package.
      *
      * @param  string  $package
-     * @param  string  $namespace
+     * @param  string|null  $namespace
      *
      * @return string
      */
-    protected function getPackageNamespace($package, $namespace)
+    protected function getPackageNamespace(string $package, ?string $namespace): string
     {
         if (is_null($namespace)) {
             list(, $namespace) = explode('/', $package);
@@ -268,11 +268,11 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      * Get the collection identifier.
      *
      * @param  string  $group
-     * @param  string  $namespace
+     * @param  string|null  $namespace
      *
      * @return string
      */
-    protected function getCollection($group, $namespace = null)
+    protected function getCollection(string $group, ?string $namespace = null): string
     {
         $namespace = $namespace ?: '*';
 

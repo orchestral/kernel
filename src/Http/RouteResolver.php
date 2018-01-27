@@ -69,7 +69,7 @@ class RouteResolver
      *
      * @return void
      */
-    protected function integrateWithExtension(Application $app)
+    protected function integrateWithExtension(Application $app): void
     {
         if ($app->bound('orchestra.extension')) {
             $this->extension = $app->make('orchestra.extension');
@@ -87,7 +87,7 @@ class RouteResolver
      *
      * @return bool
      */
-    public function is($path)
+    public function is(string $path): bool
     {
         list($package, $route) = $this->locate($path);
 
@@ -102,7 +102,7 @@ class RouteResolver
      *
      * @return array
      */
-    public function locate($path, array $options = [])
+    public function locate(string $path, array $options = []): array
     {
         $query = '';
 
@@ -130,9 +130,9 @@ class RouteResolver
      * @param  string  $name
      * @param  string  $default
      *
-     * @return \Orchestra\Contracts\Extension\RouteGenerator
+     * @return \Orchestra\Contracts\Extension\UrlGenerator
      */
-    public function route($name, $default = '/')
+    public function route(string $name, string $default = '/')
     {
         if (! isset($this->routes[$name])) {
             $this->routes[$name] = $this->generateRouteByName($name, $default);
@@ -144,9 +144,9 @@ class RouteResolver
     /**
      * Get application mode.
      *
-     * @return
+     * @return string
      */
-    public function mode()
+    public function mode(): string
     {
         if (is_null($this->status)) {
             return 'normal';
@@ -163,7 +163,7 @@ class RouteResolver
      *
      * @return string
      */
-    public function to($path, array $options = [])
+    public function to(string $path, array $options = []): string
     {
         if ($this->urlGenerator->isValidUrl($path)) {
             return $path;
@@ -185,9 +185,9 @@ class RouteResolver
      * @param  string  $name
      * @param  string  $default
      *
-     * @return \Orchestra\Contracts\Extension\RouteGenerator
+     * @return \Orchestra\Contracts\Extension\UrlGenerator
      */
-    protected function generateRouteByName($name, $default)
+    protected function generateRouteByName(string $name, string $default)
     {
         if (is_null($this->extension)) {
             return $default;
@@ -201,13 +201,13 @@ class RouteResolver
      * we can re-append query string to route value.
      *
      * @param  string  $route
-     * @param  string  $item
+     * @param  string|null  $item
      * @param  string  $query
      * @param  array   $options
      *
      * @return string
      */
-    protected function prepareValidRoute($route, $item, $query, array $options)
+    protected function prepareValidRoute(string $route, ?string $item, string $query, array $options): string
     {
         $appends = [];
         $mode = $this->mode();
@@ -237,7 +237,7 @@ class RouteResolver
      *
      * @return string
      */
-    protected function prepareHttpQueryString($query, $appends = [])
+    protected function prepareHttpQueryString(string $query, array $appends = []): string
     {
         if (! empty($appends)) {
             $query .= (! empty($query) ? '&' : '').http_build_query($appends);
@@ -251,7 +251,7 @@ class RouteResolver
      *
      * @return string|null
      */
-    protected function getCsrfToken()
+    protected function getCsrfToken(): ?string
     {
         if (is_null($this->csrfToken)) {
             $this->csrfToken = $this->app->make('session')->token();

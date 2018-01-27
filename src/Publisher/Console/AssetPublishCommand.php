@@ -60,7 +60,7 @@ class AssetPublishCommand extends Command
      *
      * @return void
      */
-    protected function publishAssets($package)
+    protected function publishAssets(string $package): void
     {
         if (! is_null($path = $this->getPath())) {
             $this->assets->publish($package, $path);

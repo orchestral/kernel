@@ -16,7 +16,7 @@ class LoadConfiguration
      *
      * @return void
      */
-    public function bootstrap(Application $app)
+    public function bootstrap(Application $app): void
     {
         if ($app->bound('config') && $app->environment('testing')) {
             return;
@@ -52,7 +52,7 @@ class LoadConfiguration
      *
      * @return void
      */
-    protected function setEnvironment(Application $app, $env = null)
+    protected function setEnvironment(Application $app, ?string $env = null): void
     {
         $app->detectEnvironment(function () use ($env) {
             return $env ?: env('APP_ENV', 'production');

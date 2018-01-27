@@ -16,9 +16,9 @@ trait TitleForSubject
      *
      * @param  string  $title
      *
-     * @return string
+     * @return $this
      */
-    public function title($title)
+    public function title(string $title): self
     {
         $name = config('app.name');
 

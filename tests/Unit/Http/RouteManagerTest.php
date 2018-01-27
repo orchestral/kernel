@@ -79,7 +79,7 @@ class RouteManagerTest extends TestCase
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
-        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\UrlGenerator');
 
         $extension->shouldReceive('route')->once()
             ->with('admin', 'admin')->andReturn($appRoute);
@@ -110,7 +110,7 @@ class RouteManagerTest extends TestCase
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
-        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\UrlGenerator');
 
         $extension->shouldReceive('route')->once()->with('admin', 'admin')->andReturn($appRoute);
 
@@ -144,7 +144,7 @@ class RouteManagerTest extends TestCase
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
-        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\UrlGenerator');
 
         $extension->shouldReceive('route')->once()->with('admin', 'admin')->andReturn($appRoute);
 
@@ -179,7 +179,7 @@ class RouteManagerTest extends TestCase
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
-        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\UrlGenerator');
 
         $appRoute->shouldReceive('to')->once()->with('/')->andReturn('/')
             ->shouldReceive('to')->once()->with('info?foo=bar')->andReturn('info?foo=bar');
@@ -215,7 +215,7 @@ class RouteManagerTest extends TestCase
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
-        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\UrlGenerator');
 
         $appRoute->shouldReceive('to')->once()->with('/?_mode=safe')->andReturn('/?_mode=safe')
             ->shouldReceive('to')->once()->with('info?foo=bar&_mode=safe')->andReturn('info?foo=bar&_mode=safe');
@@ -252,7 +252,7 @@ class RouteManagerTest extends TestCase
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
-        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\UrlGenerator');
 
         $appRoute->shouldReceive('to')->once()->with('/?_token=StAGiQ')->andReturn('/?_token=StAGiQ')
             ->shouldReceive('to')->once()->with('info?foo=bar&_token=StAGiQ')->andReturn('info?foo=bar&_token=StAGiQ');
@@ -288,7 +288,7 @@ class RouteManagerTest extends TestCase
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
-        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\UrlGenerator');
 
         $request->shouldReceive('path')->never()->andReturn('/');
         $appRoute->shouldReceive('is')->once()->with('/')->andReturn(true)
@@ -319,7 +319,7 @@ class RouteManagerTest extends TestCase
             ->shouldReceive('make')->with('url')->andReturn($url)
             ->shouldReceive('make')->with('router')->andReturn($router);
 
-        $appRoute = m::mock('\Orchestra\Contracts\Extension\RouteGenerator');
+        $appRoute = m::mock('\Orchestra\Contracts\Extension\UrlGenerator');
 
         $appRoute->shouldReceive('is')->once()->with('foo')->andReturn(true);
         $extension->shouldReceive('route')->once()->with('app', '/')->andReturn($appRoute);
@@ -340,7 +340,7 @@ class RouteManagerTest extends TestCase
 
 class StubRouteManager extends RouteManager
 {
-    public function installed()
+    public function installed(): bool
     {
         return true;
     }
@@ -348,7 +348,7 @@ class StubRouteManager extends RouteManager
 
 class StubSafeRouteManager extends RouteManager
 {
-    public function installed()
+    public function installed(): bool
     {
         return true;
     }

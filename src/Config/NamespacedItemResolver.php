@@ -106,7 +106,7 @@ abstract class NamespacedItemResolver extends Resolver
     /**
      * Get the loader implementation.
      *
-     * @return \Illuminate\Config\LoaderInterface
+     * @return \Orchestra\Config\LoaderInterface
      */
-    abstract public function getLoader();
+    abstract public function getLoader(): LoaderInterface;
 }

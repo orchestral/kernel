@@ -28,7 +28,7 @@ trait Cascading
      *
      * @return void
      */
-    public function addNamespace($namespace, $hint)
+    public function addNamespace(string $namespace, string $hint): void
     {
         $this->loader->addNamespace($namespace, $hint);
     }
@@ -39,7 +39,7 @@ trait Cascading
      *
      * @return array
      */
-    public function getNamespaces()
+    public function getNamespaces(): array
     {
         return $this->loader->getNamespaces();
     }
@@ -47,9 +47,9 @@ trait Cascading
     /**
      * Get the loader implementation.
      *
-     * @return \Illuminate\Config\LoaderInterface
+     * @return \Orchestra\Config\LoaderInterface
      */
-    public function getLoader()
+    public function getLoader(): LoaderInterface
     {
         return $this->loader;
     }
@@ -71,7 +71,7 @@ trait Cascading
      *
      * @return string
      */
-    public function getEnvironment()
+    public function getEnvironment(): string
     {
         return $this->environment;
     }

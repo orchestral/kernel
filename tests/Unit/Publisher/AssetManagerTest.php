@@ -102,7 +102,7 @@ class AssetManagerTest extends TestCase
         $files->shouldReceive('isDirectory')->once()->with('bar/resources/public')->andReturn(false)
             ->shouldReceive('isDirectory')->once()->with('bar/public')->andReturn(true);
         $extension->shouldReceive('option')->once()->with('foo', 'path')->andReturn('bar');
-        $finder->shouldReceive('resolveExtensionPath')->once()->with("bar")->andReturn('bar');
+        $finder->shouldReceive('resolveExtensionPath')->once()->with('bar')->andReturn('bar');
         $publisher->shouldReceive('publish')->once()->with('foo', 'bar/public')->andThrow('\Exception');
 
         $stub = new AssetManager($app, $publisher);

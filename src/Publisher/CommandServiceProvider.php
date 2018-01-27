@@ -19,9 +19,9 @@ class CommandServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        'AssetPublish'  => 'command.asset.publish',
+        'AssetPublish' => 'command.asset.publish',
         'ConfigPublish' => 'command.config.publish',
-        'ViewPublish'   => 'command.view.publish',
+        'ViewPublish' => 'command.view.publish',
     ];
 
     /**
@@ -56,7 +56,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerAssetPublisher()
+    protected function registerAssetPublisher(): void
     {
         $this->app->singleton('asset.publisher', function (Application $app) {
             $publicPath = $app->publicPath();
@@ -77,7 +77,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerConfigPublisher()
+    protected function registerConfigPublisher(): void
     {
         $this->app->singleton('config.publisher', function (Application $app) {
             $path = $app->configPath();
@@ -98,7 +98,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerViewPublisher()
+    protected function registerViewPublisher(): void
     {
         $this->app->singleton('view.publisher', function (Application $app) {
             $viewPath = $app->basePath().'/resources/views';
@@ -119,7 +119,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerAssetPublishCommand()
+    protected function registerAssetPublishCommand(): void
     {
         $this->app->singleton('command.asset.publish', function (Application $app) {
             return new AssetPublishCommand($app->make('asset.publisher'));
@@ -131,7 +131,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerConfigPublishCommand()
+    protected function registerConfigPublishCommand(): void
     {
         $this->app->singleton('command.config.publish', function (Application $app) {
             return new ConfigPublishCommand($app->make('config.publisher'));
@@ -143,7 +143,7 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerViewPublishCommand()
+    protected function registerViewPublishCommand(): void
     {
         $this->app->singleton('command.view.publish', function (Application $app) {
             return new ViewPublishCommand($app->make('view.publisher'));
