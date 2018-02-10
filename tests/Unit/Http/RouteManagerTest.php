@@ -345,11 +345,3 @@ class StubRouteManager extends RouteManager
         return true;
     }
 }
-
-class StubSafeRouteManager extends RouteManager
-{
-    public function installed(): bool
-    {
-        return true;
-    }
-}

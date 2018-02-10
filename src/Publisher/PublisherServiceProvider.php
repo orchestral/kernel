@@ -34,8 +34,7 @@ class PublisherServiceProvider extends ServiceProvider
     protected function registerMigration(): void
     {
         $this->app->singleton('orchestra.publisher.migrate', function (Application $app) {
-            // In order to use migration, we need to boot 'migration.repository'
-            // instance.
+            // In order to use migration, we need to boot 'migration.repository' instance.
             $app->make('migration.repository');
 
             return new MigrateManager($app, $app->make('migrator'));

@@ -12,17 +12,13 @@ class AssetManagerTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    public function tearDown()
+    protected function tearDown(): void
     {
         m::close();
     }
 
-    /**
-     * Test Orchestra\Publisher\AssetManager::publish() method.
-     *
-     * @test
-     */
-    public function testPublishMethod()
+    /** @test */
+    public function it_can_publish_assets()
     {
         $app = new Container();
         $publisher = m::mock('\Orchestra\Publisher\Publishing\Asset');
@@ -32,12 +28,8 @@ class AssetManagerTest extends TestCase
         $this->assertTrue($stub->publish('foo', 'bar'));
     }
 
-    /**
-     * Test Orchestra\Publisher\AssetManager::extension() method.
-     *
-     * @test
-     */
-    public function testExtensionMethod()
+    /** @test */
+    public function it_can_publish_assets_for_extension()
     {
         $app = new Container();
         $app['files'] = $files = m::mock('\Illuminate\Filesystem\Filesystem');
@@ -61,12 +53,8 @@ class AssetManagerTest extends TestCase
         $this->assertFalse($stub->extension('foobar'));
     }
 
-    /**
-     * Test Orchestra\Publisher\AssetManager::extension() method.
-     *
-     * @test
-     */
-    public function testExtensionMethodAsApplication()
+    /** @test */
+    public function it_cant_publish_assets_for_extension_when_given_an_extension()
     {
         $app = m::mock('\Illuminate\Container\Container')->makePartial();
         $app['files'] = $files = m::mock('\Illuminate\Filesystem\Filesystem');
@@ -90,7 +78,7 @@ class AssetManagerTest extends TestCase
      *
      * @expectedException \Orchestra\Contracts\Publisher\FilePermissionException
      */
-    public function testExtensionMethodThrowsException()
+    public function it_can_run_migrations_for_app_as_extension()
     {
         $app = new Container();
         $app['files'] = $files = m::mock('\Illuminate\Filesystem\Filesystem');
