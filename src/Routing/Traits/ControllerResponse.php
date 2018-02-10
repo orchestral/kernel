@@ -2,6 +2,7 @@
 
 namespace Orchestra\Routing\Traits;
 
+use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -11,13 +12,16 @@ trait ControllerResponse
      * Queue notification and redirect.
      *
      * @param  string  $to
-     * @param  string  $message
+     * @param  string|null  $message
      * @param  string  $type
      *
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function redirectWithMessage($to, $message = null, $type = 'success')
-    {
+    public function redirectWithMessage(
+        string $to,
+        ?string $message = null,
+        string $type = 'success'
+    ): RedirectResponse {
         return redirect_with_message($to, $message, $type);
     }
 
@@ -27,9 +31,9 @@ trait ControllerResponse
      * @param  string  $to
      * @param  \Illuminate\Contracts\Support\MessageBag|array  $errors
      *
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function redirectWithErrors($to, $errors)
+    public function redirectWithErrors(string $to, $errors)
     {
         return redirect_with_errors($to, $errors);
     }
@@ -39,9 +43,9 @@ trait ControllerResponse
      *
      * @param  string  $to
      *
-     * @return mixed
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function redirect($to)
+    public function redirect(string $to): RedirectResponse
     {
         return redirect($to);
     }
@@ -49,16 +53,16 @@ trait ControllerResponse
     /**
      * Halt current request using App::abort().
      *
-     * @param  int     $code
+     * @param  int  $code
      * @param  string  $message
-     * @param  array   $headers
+     * @param  array  $headers
      *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      *
      * @return void
      */
-    public function suspend($code, $message = '', array $headers = [])
+    public function suspend(int $code, string $message = '', array $headers = []): void
     {
         if ($code == 404) {
             throw new NotFoundHttpException($message);
