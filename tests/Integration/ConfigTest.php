@@ -22,7 +22,7 @@ class ConfigTest extends TestCase
     }
 
     /** @test */
-    public function instance_is_loaded_properly()
+    public function it_loads_config_properly()
     {
         tap($this->app->make('config'), function ($config) {
             $this->assertInstanceOf(Repository::class, $config);

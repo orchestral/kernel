@@ -136,9 +136,9 @@ trait Transformable
      *
      * @param  string  $name
      *
-     * @return array|null
+     * @return void
      */
-    protected function filterMetaType(string $name): ?array
+    protected function filterMetaType(string $name): void
     {
         $types = $this->options[$name] ?? $this->getRequest()->input($name);
 

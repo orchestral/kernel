@@ -12,17 +12,13 @@ class MigrateManagerTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         m::close();
     }
 
-    /**
-     * Test Orchestra\Publisher\MigrateManager::run() method.
-     *
-     * @test
-     */
-    public function testRunMethod()
+    /** @test */
+    public function it_can_run_migrations()
     {
         $app = new Container();
         $migrator = m::mock('\Illuminate\Database\Migrations\Migrator');
@@ -37,12 +33,8 @@ class MigrateManagerTest extends TestCase
         $stub->run('/var/www/laravel/migrations');
     }
 
-    /**
-     * Test Orchestra\Publisher\MigrateManager::extension() method.
-     *
-     * @test
-     */
-    public function testExtensionMethod()
+    /** @test */
+    public function it_can_run_migrations_for_extension()
     {
         $app = new Container();
         $app['migrator'] = $migrator = m::mock('\Illuminate\Database\Migrations\Migrator');
@@ -78,12 +70,8 @@ class MigrateManagerTest extends TestCase
         $stub->extension('laravel/framework');
     }
 
-    /**
-     * Test Orchestra\Publisher\MigrateManager::extension() method.
-     *
-     * @test
-     */
-    public function testExtensionMethodAsApplication()
+    /** @test */
+    public function it_can_run_migrations_for_app_as_extension()
     {
         $app = m::mock('\Illuminate\Container\Container')->makePartial();
         $app['migrator'] = $migrator = m::mock('\Illuminate\Database\Migrations\Migrator');
@@ -107,12 +95,8 @@ class MigrateManagerTest extends TestCase
         $stub->extension('app');
     }
 
-    /**
-     * Test Orchestra\Publisher\MigrateManager::foundation() method.
-     *
-     * @test
-     */
-    public function testFoundationMethod()
+    /** @test */
+    public function it_can_run_migrations_for_foundation()
     {
         $app = m::mock('\Illuminate\Container\Container, \Illuminate\Contracts\Foundation\Application');
         $files = m::mock('\Illuminate\Filesystem\Filesystem');
