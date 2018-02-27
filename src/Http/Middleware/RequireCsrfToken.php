@@ -5,9 +5,17 @@ namespace Orchestra\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Session\TokenMismatchException;
+use Illuminate\Contracts\Foundation\Application;
 
 class RequireCsrfToken
 {
+    /**
+     * The application instance.
+     *
+     * @var \Illuminate\Foundation\Application
+     */
+    protected $app;
+
     /**
      * The encrypter implementation.
      *
@@ -18,10 +26,12 @@ class RequireCsrfToken
     /**
      * Create a new filter instance.
      *
+     * @param  \Illuminate\Foundation\Application  $app
      * @param  \Illuminate\Contracts\Encryption\Encrypter  $encrypter
      */
-    public function __construct(Encrypter $encrypter)
+    public function __construct(Application $app, Encrypter $encrypter)
     {
+        $this->app = $app;
         $this->encrypter = $encrypter;
     }
 
@@ -35,11 +45,11 @@ class RequireCsrfToken
      */
     public function handle($request, Closure $next)
     {
-        if (! $this->tokensMatch($request)) {
-            throw new TokenMismatchException();
+        if ($this->runningUnitTests() || $this->tokensMatch($request)) {
+            return $next($request);
         }
 
-        return $next($request);
+        throw new TokenMismatchException();
     }
 
     /**
@@ -58,5 +68,15 @@ class RequireCsrfToken
         }
 
         return hash_equals((string) $request->session()->token(), (string) $token);
+    }
+
+    /**
+     * Determine if the application is running unit tests.
+     *
+     * @return bool
+     */
+    protected function runningUnitTests()
+    {
+        return $this->app->runningInConsole() && $this->app->runningUnitTests();
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Publisher\Console\Traits;
+namespace Orchestra\Publisher\Console\Concerns;
 
 trait PublishingPath
 {

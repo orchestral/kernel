@@ -6,7 +6,7 @@ use Orchestra\Support\Transformer as BaseTransformer;
 
 abstract class Transformer extends BaseTransformer
 {
-    use Traits\Transformable;
+    use Concerns\Transformable;
 
     /**
      * Invoke the transformation.
