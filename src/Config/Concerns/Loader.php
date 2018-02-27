@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Config\Traits;
+namespace Orchestra\Config\Concerns;
 
 use Closure;
 

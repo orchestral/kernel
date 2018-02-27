@@ -9,7 +9,6 @@ use Illuminate\Contracts\Foundation\Application;
 
 class RequireCsrfToken
 {
-
     /**
      * The application instance.
      *

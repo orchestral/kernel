@@ -6,5 +6,5 @@ use Illuminate\Console\Command as BaseCommand;
 
 class Command extends BaseCommand
 {
-    use Traits\PublishingPath;
+    use Concerns\PublishingPath;
 }

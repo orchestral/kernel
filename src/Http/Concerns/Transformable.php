@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\Http\Traits;
+namespace Orchestra\Http\Concerns;
 
 use Orchestra\Support\Arr;
 use Orchestra\Support\Str;
