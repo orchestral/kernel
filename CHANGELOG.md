@@ -2,6 +2,23 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 3.6.0 
+
+Released: 2018-02-27
+
+### Added
+
+* Added `orchestra/publisher`.
+
+### Changes
+
+* Update support for Laravel Framework v5.6.
+* Use PHP 7.1 scalar typehint and return type whenever possible.
+
+### Removed
+
+* Remove `--realpath` support from `orchestra/database` as this is not supported in Laravel Framework.
+
 ## 3.5.2
 
 Released: 2017-11-21
