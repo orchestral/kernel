@@ -35,7 +35,7 @@ trait Transformable
      *
      * @return $this
      */
-    public function options(array $options = []): self
+    public function options(array $options = [])
     {
         $this->options = $options;
 
@@ -67,7 +67,7 @@ trait Transformable
      *
      * @return $this
      */
-    public function setRequest($request): self
+    public function setRequest($request)
     {
         $this->request = $request;
 

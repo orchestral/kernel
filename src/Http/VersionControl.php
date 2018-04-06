@@ -29,7 +29,7 @@ class VersionControl
      *
      * @return $this
      */
-    public function addVersion(string $code, string $namespace, bool $default = false): self
+    public function addVersion(string $code, string $namespace, bool $default = false)
     {
         $this->supportedVersions[$code] = $namespace;
 
@@ -49,7 +49,7 @@ class VersionControl
      *
      * @return $this
      */
-    public function setDefaultVersion(string $code): self
+    public function setDefaultVersion(string $code)
     {
         if (! array_key_exists($code, $this->supportedVersions)) {
             throw new InvalidArgumentException("Unable to set [{$code}] as default version!");

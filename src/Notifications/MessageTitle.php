@@ -18,7 +18,7 @@ trait MessageTitle
      *
      * @return $this
      */
-    public function title(string $title): self
+    public function title(string $title)
     {
         $this->title = $title;
 
