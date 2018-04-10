@@ -140,6 +140,10 @@ trait Transformable
         }
 
         foreach ($types as $type) {
+            if (is_array($type) {
+                continue;
+            }
+
             $method = $name.Str::studly($type);
 
             if (method_exists($this, $method)) {
