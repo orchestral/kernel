@@ -110,7 +110,11 @@ trait Transformable
             $data = Arr::get($this->options, is_null($meta) ? $key : "{$key}.{$meta}", []);
 
             if (is_array($data)) {
-                $options[$key] = array_merge($data, (array) $value);
+                $options[$key] = is_null($meta) ? $data : array_keys($data);
+
+                foreach ((array) $value as $item) {
+                    $options[$key][] = $item;
+                }
             }
         }
 
@@ -161,6 +165,6 @@ trait Transformable
             $types = explode(',', $types);
         }
 
-        $this->options[$name] = is_array($types) ? Arr::expand($types) : null;
+        $this->options[$name] = is_array($types) ? Arr::expand(array_flip($types)) : null;
     }
 }
