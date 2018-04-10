@@ -140,7 +140,7 @@ trait Transformable
         }
 
         foreach ($types as $type) {
-            if (is_array($type) {
+            if (is_array($type)) {
                 continue;
             }
 
