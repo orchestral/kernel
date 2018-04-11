@@ -110,7 +110,7 @@ trait Transformable
             $filtered = Arr::expand(array_flip($value));
             $parent = Arr::get($this->options, is_null($meta) ? $key : "{$key}.{$meta}", []);
 
-            $options[$key] = array_merge_recursive($filtered, $parent);
+            $options[$key] = array_keys(Arr::dot(array_merge_recursive($filtered, $parent)));
         }
 
         return $options;
