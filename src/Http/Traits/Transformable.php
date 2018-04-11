@@ -133,13 +133,13 @@ trait Transformable
     protected function transformByMeta($meta, $data, ...$parameters)
     {
         $name = Str::singular($meta);
-        $types = $this->options[$meta] ?? null;
+        $types = $this->merge([])[$meta];
 
         if (empty($types)) {
             return $data;
         }
 
-        foreach ($types as $type) {
+        foreach ($types as $type => $index) {
             if (is_array($type)) {
                 continue;
             }
