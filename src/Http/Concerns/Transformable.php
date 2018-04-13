@@ -89,14 +89,13 @@ trait Transformable
             $meta = null;
         }
 
-        $options = array_merge(['includes' => null, 'excludes' => null], $options);
+        $options = array_merge(['includes' => [], 'excludes' => []], $options);
 
         foreach ($options as $key => $value) {
-            $data = Arr::get($this->options, is_null($meta) ? $key : "{$key}.{$meta}", []);
+            $filtered = Arr::expand(array_flip($value));
+            $parent = Arr::get($this->options, is_null($meta) ? $key : "{$key}.{$meta}", []);
 
-            if (is_array($data)) {
-                $options[$key] = array_merge($data, (array) $value);
-            }
+            $options[$key] = array_keys(Arr::dot(array_merge_recursive($filtered, $parent)));
         }
 
         return $options;
@@ -114,13 +113,17 @@ trait Transformable
     protected function transformByMeta(string $meta, array $data, ...$parameters): array
     {
         $name = Str::singular($meta);
-        $types = $this->options[$meta] ?? null;
+        $types = $this->options[$meta];
 
         if (empty($types)) {
             return $data;
         }
 
-        foreach ($types as $type) {
+        foreach ($types as $type => $index) {
+            if (is_array($type)) {
+                continue;
+            }
+
             $method = $name.Str::studly($type);
 
             if (method_exists($this, $method)) {
@@ -146,6 +149,6 @@ trait Transformable
             $types = explode(',', $types);
         }
 
-        $this->options[$name] = is_array($types) ? Arr::expand($types) : null;
+        $this->options[$name] = is_array($types) ? Arr::expand(array_flip($types)) : [];
     }
 }
