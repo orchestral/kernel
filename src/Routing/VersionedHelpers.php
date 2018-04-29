@@ -2,7 +2,9 @@
 
 namespace Orchestra\Routing;
 
+use Illuminate\Support\Fluent;
 use Orchestra\Http\Transformer;
+use Illuminate\Support\Collection;
 use Illuminate\Contracts\Support\Arrayable;
 use Orchestra\Support\Transformer as BaseTransformer;
 
@@ -94,7 +96,15 @@ trait VersionedHelpers
             return call_user_func(app($serializer), $instance);
         }
 
-        return $instance instanceof Arrayable ? $instance->toArray() : $instance;
+        if ($instance instanceof Fluent) {
+            return $instance->getAttributes();
+        } elseif ($instance instanceof Collection) {
+            return $instance->all();
+        } elseif ($instance instanceof Arrayable) {
+            return $instance->toArray();
+        }
+
+        return $instance;
     }
 
     /**
