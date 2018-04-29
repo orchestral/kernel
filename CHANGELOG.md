@@ -19,6 +19,14 @@ Released: 2018-02-27
 
 * Remove `--realpath` support from `orchestra/database` as this is not supported in Laravel Framework.
 
+## 3.5.3
+
+Released: 2018-04-29
+
+### Fixes
+
+* Fixes `Orchestra\Http\Transformer`.
+
 ## 3.5.2
 
 Released: 2017-11-21
