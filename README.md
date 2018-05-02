@@ -8,3 +8,4 @@ This repository contains the core code of the Orchestra Platform. If you want to
 [![Total Downloads](https://poser.pugx.org/orchestra/kernel/downloads)](https://packagist.org/packages/orchestra/kernel)
 [![Latest Unstable Version](https://poser.pugx.org/orchestra/kernel/v/unstable)](//packagist.org/packages/orchestra/kernel)
 [![License](https://poser.pugx.org/orchestra/kernel/license)](https://packagist.org/packages/orchestra/kernel)
+[![Coverage Status](https://coveralls.io/repos/github/orchestral/kernel/badge.svg?branch=3.6)](https://coveralls.io/github/orchestral/kernel?branch=3.6)
