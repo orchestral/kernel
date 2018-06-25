@@ -1,11 +1,11 @@
 <?php
 
-namespace Orchestra\TestCase\Integration;
+namespace Orchestra\TestCase\Integration\Config;
 
 use Orchestra\Config\Repository;
-use Orchestra\TestCase\TestCase;
+use Orchestra\Testbench\TestCase;
 
-class ConfigTest extends TestCase
+class RepositoryTest extends TestCase
 {
     /**
      * Override application bindings.
