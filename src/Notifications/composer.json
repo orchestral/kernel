@@ -17,7 +17,7 @@
     },
     "require": {
         "php": ">=7.1",
-        "illuminate/notifications": "dev-master",
+        "illuminate/notifications": "~5.8.0",
         "orchestra/notifier": "~3.8.0"
     },
     "extra": {
