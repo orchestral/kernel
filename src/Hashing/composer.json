@@ -1,0 +1,34 @@
+{
+    "name": "orchestra/hashing",
+    "description": "Hashing Component for Orchestra Platform",
+    "keywords": ["orchestra-platform", "orchestral", "hashing"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mior Muhammad Zaki",
+            "email": "crynobone@gmail.com",
+            "homepage": "https://github.com/crynobone"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Orchestra\\Http\\": ""
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+        "illuminate/contracts": "~5.6.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.6-dev"
+        }
+    },
+    "support": {
+        "issues": "https://github.com/orchestral/kernel/issues"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev"
+}
