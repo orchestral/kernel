@@ -20,7 +20,7 @@ class ConfigPublishCommandTest extends TestCase
 
     public function testCommandCallsPublisherWithProperPackageName()
     {
-        $laravel = m::mock('\Illuminate\Contracts\Foundation\Application');
+        $laravel = m::mock('\Illuminate\Foundation\Application[call]');
         $laravel->shouldReceive('call')->once()->andReturnUsing(function ($method, $parameters = []) {
             return call_user_func_array($method, $parameters);
         });
