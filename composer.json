@@ -37,6 +37,7 @@
     "replace": {
         "orchestra/config": "self.version",
         "orchestra/database": "self.version",
+        "orchestra/hashing": "self.version",
         "orchestra/http": "self.version",
         "orchestra/notifications": "self.version",
         "orchestra/routing": "self.version"
