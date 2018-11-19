@@ -332,7 +332,7 @@ class RouteManagerTest extends TestCase
             $_SERVER['RouteManagerTest@callback'] = "{$namespace}::{$method}";
         });
 
-        $events->fire(RouteMatched::class, ['app', 'foo']);
+        $events->dispatch(RouteMatched::class, ['app', 'foo']);
 
         $this->assertEquals('app::foo', $_SERVER['RouteManagerTest@callback']);
     }
