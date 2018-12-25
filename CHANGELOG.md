@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 3.6.2
+
+Released: 2018-12-25
+
+### Added
+
+* Add `orchestra/hashing`.
+
 ## 3.6.1
 
 Released: 2018-05-02
