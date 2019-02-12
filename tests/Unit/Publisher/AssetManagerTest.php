@@ -148,10 +148,12 @@ class AssetManagerTest extends TestCase
      * Test Orchestra\Publisher\AssetManager::foundation() method
      * throws an exception.
      *
-     * @expectedException \Orchestra\Contracts\Publisher\FilePermissionException
+     * @test
      */
     public function testFoundationMethodThrowsException()
     {
+        $this->expectException('Orchestra\Contracts\Publisher\FilePermissionException');
+
         $app = m::mock('\Illuminate\Container\Container, \Illuminate\Contracts\Foundation\Application');
         $files = m::mock('\Illuminate\Filesystem\Filesystem');
 

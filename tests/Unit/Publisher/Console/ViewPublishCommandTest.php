@@ -10,7 +10,10 @@ use Orchestra\Publisher\Console\ViewPublishCommand;
 
 class ViewPublishCommandTest extends TestCase
 {
-    public function tearDown()
+    /**
+     * Teardown the test environment.
+     */
+    protected function tearDown(): void
     {
         m::close();
     }

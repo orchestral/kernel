@@ -28,7 +28,7 @@ class RouteManagerTest extends TestCase
     /**
      * Setup the test environment.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->app = m::mock('\Illuminate\Contracts\Foundation\Application');
         $this->request = m::mock('\Illuminate\Http\Request');
@@ -45,7 +45,7 @@ class RouteManagerTest extends TestCase
     /**
      * Teardown the test environment.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->app);
         unset($this->request);
