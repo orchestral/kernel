@@ -25,8 +25,8 @@ abstract class NamespacedItemResolver extends Resolver
         // If the key does not contain a double colon, it means the key is not in a
         // namespace, and is just a regular configuration item. Namespaces are a
         // tool for organizing configuration items for things such as modules.
-        if (strpos($key, '::') === false) {
-            $segments = explode('.', $key);
+        if (\strpos($key, '::') === false) {
+            $segments = \explode('.', $key);
 
             $parsed = $this->parseCustomSegments($segments);
         } else {
@@ -48,11 +48,11 @@ abstract class NamespacedItemResolver extends Resolver
      */
     protected function parseCustomSegments(array $segments)
     {
-        if (count($segments) >= 2) {
+        if (\count($segments) >= 2) {
             $group = "{$segments[0]}/{$segments[1]}";
 
             if ($this->getLoader()->exists($group)) {
-                return [null, $group, implode('.', array_slice($segments, 2))];
+                return [null, $group, \implode('.', \array_slice($segments, 2))];
             }
         }
 
@@ -68,12 +68,12 @@ abstract class NamespacedItemResolver extends Resolver
      */
     protected function parseNamespacedSegments($key)
     {
-        list($namespace, $item) = explode('::', $key);
+        list($namespace, $item) = \explode('::', $key);
 
         // If the namespace is registered as a package, we will just assume the group
         // is equal to the namespace since all packages cascade in this way having
         // a single file per package, otherwise we'll just parse them as normal.
-        if (in_array($namespace, $this->packages)) {
+        if (\in_array($namespace, $this->packages)) {
             return $this->parsePackageSegments($key, $namespace, $item);
         }
 

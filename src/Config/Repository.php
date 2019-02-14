@@ -48,7 +48,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function has($key)
     {
-        $default = microtime(true);
+        $default = \microtime(true);
 
         return $this->get($key, $default) !== $default;
     }
@@ -103,7 +103,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function set($key, $value = null)
     {
-        if (is_array($key)) {
+        if (\is_array($key)) {
             foreach ($key as $configKey => $configValue) {
                 $this->setSingleItem($configKey, $configValue);
             }
@@ -124,7 +124,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     {
         $config = $this->get($key);
 
-        $this->setSingleItem($key, array_unshift($config, $value));
+        $this->setSingleItem($key, \array_unshift($config, $value));
     }
 
     /**
@@ -139,7 +139,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     {
         $config = $this->get($key);
 
-        $this->setSingleItem($key, array_push($config, $value));
+        $this->setSingleItem($key, \array_push($config, $value));
     }
 
     /**
@@ -178,7 +178,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
             $this->load($group, $namespace, $collection);
         }
 
-        if (is_null($item)) {
+        if (\is_null($item)) {
             $this->items[$collection] = $value;
         } else {
             Arr::set($this->items[$collection], $item, $value);
@@ -256,8 +256,8 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     protected function getPackageNamespace(string $package, ?string $namespace): string
     {
-        if (is_null($namespace)) {
-            list(, $namespace) = explode('/', $package);
+        if (\is_null($namespace)) {
+            list(, $namespace) = \explode('/', $package);
         }
 
         return $namespace;

@@ -20,9 +20,8 @@ class ConfigCacheCommand extends BaseCommand
         $app->make(Kernel::class)->bootstrap();
         $config = $app->make('config');
 
-        $files = array_merge(
-            $config->get('compile.config', []),
-            $this->getConfigurationFiles()
+        $files = \array_merge(
+            $config->get('compile.config', []), $this->getConfigurationFiles()
         );
 
         foreach ($files as $file) {
@@ -44,7 +43,7 @@ class ConfigCacheCommand extends BaseCommand
         $found = Finder::create()->files()->name('*.php')->depth('== 0')->in($path);
 
         foreach ($found as $file) {
-            $files[] = basename($file->getRealPath(), '.php');
+            $files[] = \basename($file->getRealPath(), '.php');
         }
 
         return $files;

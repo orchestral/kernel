@@ -64,7 +64,7 @@ class FileLoader implements LoaderInterface
         // as any environment folders with their specific configuration items.
         $path = $this->getPath($namespace);
 
-        if (is_null($path)) {
+        if (\is_null($path)) {
             return $items;
         }
 
@@ -99,7 +99,7 @@ class FileLoader implements LoaderInterface
      */
     protected function mergeEnvironment(array $items, $file)
     {
-        return array_replace_recursive($items, $this->files->getRequire($file));
+        return \array_replace_recursive($items, $this->files->getRequire($file));
     }
 
     /**
@@ -123,7 +123,7 @@ class FileLoader implements LoaderInterface
             // To check if a group exists, we will simply get the path based on the
             // namespace, and then check to see if this files exists within that
             // namespace. False is returned if no path exists for a namespace.
-            if (is_null($path)) {
+            if (\is_null($path)) {
                 return $this->exists[$key] = false;
             }
 
@@ -156,7 +156,7 @@ class FileLoader implements LoaderInterface
         $file = "packages/{$package}/{$group}.php";
 
         if ($this->files->exists($path = $this->defaultPath.'/'.$file)) {
-            $items = array_merge($items, $this->getRequire($path));
+            $items = \array_merge($items, $this->getRequire($path));
         }
 
         // Once we have merged the regular package configuration we need to look for
@@ -165,7 +165,7 @@ class FileLoader implements LoaderInterface
         $path = $this->getPackagePath($env, $package, $group);
 
         if ($this->files->exists($path)) {
-            $items = array_merge($items, $this->getRequire($path));
+            $items = \array_merge($items, $this->getRequire($path));
         }
 
         return $items;
@@ -196,7 +196,7 @@ class FileLoader implements LoaderInterface
      */
     protected function getPath(?string $namespace): ?string
     {
-        if (is_null($namespace)) {
+        if (\is_null($namespace)) {
             return $this->defaultPath;
         } elseif (isset($this->hints[$namespace])) {
             return $this->hints[$namespace];

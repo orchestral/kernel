@@ -27,6 +27,6 @@ class HashServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array_merge(parent::provides(), ['hash.password']);
+        return \array_merge(parent::provides(), ['hash.password']);
     }
 }
