@@ -22,7 +22,7 @@ trait ControllerResponse
         ?string $message = null,
         string $type = 'success'
     ): RedirectResponse {
-        return redirect_with_message($to, $message, $type);
+        return \redirect_with_message($to, $message, $type);
     }
 
     /**
@@ -35,7 +35,7 @@ trait ControllerResponse
      */
     public function redirectWithErrors(string $to, $errors)
     {
-        return redirect_with_errors($to, $errors);
+        return \redirect_with_errors($to, $errors);
     }
 
     /**
@@ -47,7 +47,7 @@ trait ControllerResponse
      */
     public function redirect(string $to): RedirectResponse
     {
-        return redirect($to);
+        return \redirect($to);
     }
 
     /**

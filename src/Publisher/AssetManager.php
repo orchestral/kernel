@@ -60,7 +60,7 @@ class AssetManager implements Publisher
      */
     public function extension(string $name): bool
     {
-        if (is_null($path = $this->getPathFromExtensionName($name))) {
+        if (\is_null($path = $this->getPathFromExtensionName($name))) {
             return false;
         }
 
@@ -80,7 +80,7 @@ class AssetManager implements Publisher
      */
     public function foundation(): bool
     {
-        $path = rtrim($this->app->basePath(), '/').'/vendor/orchestra/foundation/resources/public';
+        $path = \rtrim($this->app->basePath(), '/').'/vendor/orchestra/foundation/resources/public';
 
         if (! $this->app->make('files')->isDirectory($path)) {
             return false;
@@ -108,7 +108,7 @@ class AssetManager implements Publisher
         if ($name === 'app') {
             $basePath = $this->app->basePath();
         } else {
-            $basePath = rtrim($this->app->make('orchestra.extension')->option($name, 'path'), '/');
+            $basePath = \rtrim($this->app->make('orchestra.extension')->option($name, 'path'), '/');
             $basePath = $finder->resolveExtensionPath($basePath);
         }
 

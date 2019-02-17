@@ -74,10 +74,10 @@ class MigrateManager implements Publisher
     {
         $files = $this->app->make('files');
 
-        if (method_exists($this->app, 'vendorPath')) {
-            $vendorPath = rtrim($this->app->vendorPath(), '/');
+        if (\method_exists($this->app, 'vendorPath')) {
+            $vendorPath = \rtrim($this->app->vendorPath(), '/');
         } else {
-            $basePath = rtrim($this->app->basePath(), '/');
+            $basePath = \rtrim($this->app->basePath(), '/');
             $vendorPath = "{$basePath}/vendor";
         }
 

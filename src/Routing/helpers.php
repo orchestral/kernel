@@ -2,7 +2,7 @@
 
 use Illuminate\Http\RedirectResponse;
 
-if (! function_exists('redirect_with_errors')) {
+if (! \function_exists('redirect_with_errors')) {
     /**
      * Redirect with input and errors.
      *
@@ -13,11 +13,11 @@ if (! function_exists('redirect_with_errors')) {
      */
     function redirect_with_errors(string $to, $errors): RedirectResponse
     {
-        return redirect($to)->withInput()->withErrors($errors);
+        return \redirect($to)->withInput()->withErrors($errors);
     }
 }
 
-if (! function_exists('redirect_with_message')) {
+if (! \function_exists('redirect_with_message')) {
     /**
      * Queue notification and redirect.
      *
@@ -32,8 +32,10 @@ if (! function_exists('redirect_with_message')) {
         ?string $message = null,
         string $type = 'success'
     ): RedirectResponse {
-        ! is_null($message) && app('orchestra.messages')->add($type, $message);
+        if (! \is_null($message)) {
+            \app('orchestra.messages')->add($type, $message);
+        }
 
-        return redirect($to);
+        return \redirect($to);
     }
 }

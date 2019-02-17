@@ -22,7 +22,7 @@ trait VersionedHelpers
      */
     protected function transform($instance, string $transformer, ?string $serializer = null, array $options = [])
     {
-        if (is_null($serializer)) {
+        if (\is_null($serializer)) {
             $serializer = $transformer;
         }
 
@@ -47,7 +47,7 @@ trait VersionedHelpers
     {
         $processor = $this->getVersionedResourceClassName('Processors', $name);
 
-        return app($processor)->{$method}($this, $instance, ...$parameters);
+        return \app($processor)->{$method}($this, $instance, ...$parameters);
     }
 
     /**
@@ -63,8 +63,8 @@ trait VersionedHelpers
     {
         $transformer = $this->getVersionedResourceClassName('Transformers', $name);
 
-        if (class_exists($transformer)) {
-            $transformer = resolve($transformer);
+        if (\class_exists($transformer)) {
+            $transformer = \resolve($transformer);
 
             if ($transformer instanceof Transformer) {
                 return $transformer->options($options)->handle($instance);
@@ -92,8 +92,8 @@ trait VersionedHelpers
     {
         $serializer = $this->getVersionedResourceClassName('Serializers', $name);
 
-        if (class_exists($serializer)) {
-            return call_user_func(app($serializer), $instance);
+        if (\class_exists($serializer)) {
+            return \call_user_func(app($serializer), $instance);
         }
 
         if ($instance instanceof Fluent) {

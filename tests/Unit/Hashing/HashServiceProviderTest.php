@@ -12,5 +12,4 @@ class HashServiceProviderTest extends TestCase
     {
         $this->assertContains('hash.password', (new HashServiceProvider(null))->provides());
     }
-
 }
