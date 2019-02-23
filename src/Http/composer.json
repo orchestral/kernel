@@ -16,17 +16,17 @@
         }
     },
     "require": {
-        "php": ">=7.1",
-        "orchestra/contracts": "~3.8.0",
-        "orchestra/extension": "~3.8.0",
-        "orchestra/support": "~3.8.0"
+        "php": ">=7.2",
+        "orchestra/contracts": "~3.9.0",
+        "orchestra/extension": "~3.9.0",
+        "orchestra/support": "~3.9.0"
     },
     "suggest": {
         "hashids/hashids": "Allow to use HashId as a URL id replacement (~1.0)."
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.8-dev"
+            "dev-master": "3.9-dev"
         }
     },
     "support": {
