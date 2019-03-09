@@ -56,7 +56,7 @@ class ConfigCacheCommand extends BaseCommand
      */
     protected function configToCache()
     {
-        if (! file_exists($this->laravel->basePath('composer.json')) {
+        if (! file_exists($this->laravel->basePath('composer.json'))) {
             return [];
         }
         return json_decode(file_get_contents(
