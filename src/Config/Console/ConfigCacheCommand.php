@@ -15,13 +15,13 @@ class ConfigCacheCommand extends BaseCommand
      */
     protected function getFreshConfiguration()
     {
-        $app = require $this->laravel->basePath().'/bootstrap/app.php';
+        $app = require $this->laravel->bootstrapPath('app.php');
 
         $app->make(Kernel::class)->bootstrap();
         $config = $app->make('config');
 
         $files = \array_merge(
-            $config->get('compile.config', []), $this->getConfigurationFiles()
+            $this->configToCache(), $this->getConfigurationFiles()
         );
 
         foreach ($files as $file) {
@@ -47,5 +47,20 @@ class ConfigCacheCommand extends BaseCommand
         }
 
         return $files;
+    }
+
+    /**
+     * Get all of the package names that should be ignored.
+     *
+     * @return array
+     */
+    protected function configToCache(): array
+    {
+        if (! \file_exists($this->laravel->basePath('composer.json'))) {
+            return [];
+        }
+        return \json_decode(\file_get_contents(
+            $this->laravel->basePath('composer.json')
+        ), true)['extra']['config-cache'] ?? [];
     }
 }
