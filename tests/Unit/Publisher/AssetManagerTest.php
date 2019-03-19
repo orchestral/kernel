@@ -38,14 +38,16 @@ class AssetManagerTest extends TestCase
 
         $publisher = m::mock('\Orchestra\Publisher\Publishing\Asset');
 
-        $files->shouldReceive('isDirectory')->once()->with('var/www/laravel/vendor/foo/bar/resources/public')->andReturn(false)
-            ->shouldReceive('isDirectory')->once()->with('var/www/laravel/vendor/foo/bar/public')->andReturn(true)
+        $files->shouldReceive('isDirectory')->once()->with('var/www/laravel/vendor/foo/bar/public')->andReturn(true)
             ->shouldReceive('isDirectory')->once()->with('foobar/public')->andReturn(false)
             ->shouldReceive('isDirectory')->once()->with('foobar/resources/public')->andReturn(false);
+
         $extension->shouldReceive('option')->once()->with('foo', 'path')->andReturn('var/www/laravel/vendor/foo/bar')
             ->shouldReceive('option')->once()->with('foobar', 'path')->andReturn('foobar');
+
         $finder->shouldReceive('resolveExtensionPath')->once()->with('var/www/laravel/vendor/foo/bar')->andReturn('var/www/laravel/vendor/foo/bar')
             ->shouldReceive('resolveExtensionPath')->once()->with('foobar')->andReturn('foobar');
+
         $publisher->shouldReceive('publish')->once()->with('foo', 'var/www/laravel/vendor/foo/bar/public')->andReturn(true);
 
         $stub = new AssetManager($app, $publisher);
@@ -65,7 +67,8 @@ class AssetManagerTest extends TestCase
 
         $app->shouldReceive('basePath')->once()->andReturn('/var/www/laravel');
 
-        $files->shouldReceive('isDirectory')->once()->with('/var/www/laravel/resources/public')->andReturn(true);
+        $files->shouldReceive('isDirectory')->once()->with('/var/www/laravel/public')->andReturn(false)
+            ->shouldReceive('isDirectory')->once()->with('/var/www/laravel/resources/public')->andReturn(true);
         $publisher->shouldReceive('publish')->once()->with('app', '/var/www/laravel/resources/public')->andReturn(true);
 
         $stub = new AssetManager($app, $publisher);
@@ -112,10 +115,9 @@ class AssetManagerTest extends TestCase
 
         $publisher = m::mock('\Orchestra\Publisher\Publishing\Asset');
 
-        $files->shouldReceive('isDirectory')->once()
-            ->with('/var/www/laravel/vendor/orchestra/foundation/resources/public')->andReturn(true);
+        $files->shouldReceive('isDirectory')->once()->with('/var/www/laravel/vendor/orchestra/foundation/public')->andReturn(true);
         $publisher->shouldReceive('publish')->once()
-            ->with('orchestra/foundation', '/var/www/laravel/vendor/orchestra/foundation/resources/public')->andReturn(true);
+            ->with('orchestra/foundation', '/var/www/laravel/vendor/orchestra/foundation/public')->andReturn(true);
 
         $stub = new AssetManager($app, $publisher);
         $this->assertTrue($stub->foundation());
@@ -138,7 +140,7 @@ class AssetManagerTest extends TestCase
         $publisher = m::mock('\Orchestra\Publisher\Publishing\Asset');
 
         $files->shouldReceive('isDirectory')->once()
-            ->with('/var/www/laravel/vendor/orchestra/foundation/resources/public')->andReturn(false);
+                ->with('/var/www/laravel/vendor/orchestra/foundation/public')->andReturn(false);
 
         $stub = new AssetManager($app, $publisher);
         $this->assertFalse($stub->foundation());
@@ -162,10 +164,9 @@ class AssetManagerTest extends TestCase
 
         $publisher = m::mock('\Orchestra\Publisher\Publishing\Asset');
 
-        $files->shouldReceive('isDirectory')->once()
-            ->with('/var/www/laravel/vendor/orchestra/foundation/resources/public')->andReturn(true);
+        $files->shouldReceive('isDirectory')->once()->with('/var/www/laravel/vendor/orchestra/foundation/public')->andReturn(true);
         $publisher->shouldReceive('publish')->once()
-            ->with('orchestra/foundation', '/var/www/laravel/vendor/orchestra/foundation/resources/public')->andThrow('Exception');
+            ->with('orchestra/foundation', '/var/www/laravel/vendor/orchestra/foundation/public')->andThrow('Exception');
 
         $stub = new AssetManager($app, $publisher);
         $stub->foundation();

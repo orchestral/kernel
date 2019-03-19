@@ -80,7 +80,7 @@ class AssetManager implements Publisher
      */
     public function foundation(): bool
     {
-        $path = \rtrim($this->app->basePath(), '/').'/vendor/orchestra/foundation/resources/public';
+        $path = \rtrim($this->app->basePath(), '/').'/vendor/orchestra/foundation/public';
 
         if (! $this->app->make('files')->isDirectory($path)) {
             return false;
@@ -112,7 +112,7 @@ class AssetManager implements Publisher
             $basePath = $finder->resolveExtensionPath($basePath);
         }
 
-        $paths = ["{$basePath}/resources/public", "{$basePath}/public"];
+        $paths = ["{$basePath}/public", "{$basePath}/resources/public"];
 
         foreach ($paths as $path) {
             if ($files->isDirectory($path)) {
