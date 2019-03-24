@@ -2,6 +2,20 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 3.8.0 
+
+Released: 2019-03-24
+
+### Changes
+
+* Update support for Laravel Framework v5.8.
+* Change configuration file on `Orchestra\Config\Console\ConfigCacheCommand` using composer.json `extra.config-cache` instead of `compile.php` configuration file.
+
+### Remove
+
+* Remove deprecated `Orchestra\Http\Traits\PassThrough`.
+* Remove deprecated `Orchestra\Routing\Traits\ControllerResponse`.
+
 ## 3.7.0 
 
 Released: 2018-12-25
