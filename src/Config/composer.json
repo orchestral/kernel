@@ -22,12 +22,12 @@
     },
     "require": {
         "php": ">=7.2",
-        "illuminate/filesystem": "~5.9.0",
-        "orchestra/contracts": "~3.9.0"
+        "illuminate/filesystem": "dev-master",
+        "orchestra/contracts": "~3.10.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.9-dev"
+            "dev-master": "3.10-dev"
         }
     },
     "support": {

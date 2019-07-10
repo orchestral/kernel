@@ -17,12 +17,12 @@
     },
     "require": {
         "php": ">=7.2",
-        "illuminate/notifications": "~5.9.0",
-        "orchestra/notifier": "~3.9.0"
+        "illuminate/notifications": "dev-master",
+        "orchestra/notifier": "~3.10.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.9-dev"
+            "dev-master": "3.10-dev"
         }
     },
     "support": {
