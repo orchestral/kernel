@@ -59,6 +59,7 @@ class ConfigCacheCommand extends BaseCommand
         if (! \file_exists($this->laravel->basePath('composer.json'))) {
             return [];
         }
+
         return \json_decode(\file_get_contents(
             $this->laravel->basePath('composer.json')
         ), true)['extra']['config-cache'] ?? [];
