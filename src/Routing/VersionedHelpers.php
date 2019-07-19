@@ -93,7 +93,7 @@ trait VersionedHelpers
         $serializer = $this->getVersionedResourceClassName('Serializers', $name);
 
         if (\class_exists($serializer)) {
-            return \call_user_func(app($serializer), $instance);
+            return \call_user_func(\app($serializer), $instance);
         }
 
         if ($instance instanceof Fluent) {
