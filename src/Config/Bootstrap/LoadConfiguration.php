@@ -55,7 +55,7 @@ class LoadConfiguration
     protected function setEnvironment(Application $app, ?string $env = null): void
     {
         $app->detectEnvironment(static function () use ($env) {
-            return $env ?: env('APP_ENV', 'production');
+            return $env ?: \env('APP_ENV', 'production');
         });
     }
 }
