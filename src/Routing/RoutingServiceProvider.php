@@ -14,7 +14,7 @@ class RoutingServiceProvider extends ServiceProvider
      */
     protected function registerRouter()
     {
-        $this->app->singleton('router', function (Application $app) {
+        $this->app->singleton('router', static function (Application $app) {
             return new Router($app->make('events'), $app);
         });
     }

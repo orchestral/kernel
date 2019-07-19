@@ -237,7 +237,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
         // callback so that we can cascade an application package configuration.
         $this->addNamespace($namespace, $hint);
 
-        $this->afterLoading($namespace, function (Repository $me, $group, $items) use ($package) {
+        $this->afterLoading($namespace, static function (Repository $me, $group, $items) use ($package) {
             $env = $me->getEnvironment();
 
             $loader = $me->getLoader();
