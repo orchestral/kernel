@@ -23,11 +23,11 @@
     "require": {
         "php": ">=7.2",
         "illuminate/filesystem": "dev-master",
-        "orchestra/contracts": "~3.10.0"
+        "orchestra/contracts": "~4.0.0"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.10-dev"
+            "dev-master": "4.0-dev"
         }
     },
     "support": {
