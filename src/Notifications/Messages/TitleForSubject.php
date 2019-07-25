@@ -20,9 +20,9 @@ trait TitleForSubject
      */
     public function title(string $title)
     {
-        $name = config('app.name');
+        $name = \config('app.name');
 
-        if (empty($this->subject) && ! is_null($name)) {
+        if (empty($this->subject) && ! \is_null($name)) {
             $this->subject(sprintf('[%s] %s', $name, $title));
         }
 

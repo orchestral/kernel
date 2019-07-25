@@ -58,7 +58,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerAssetPublisher(): void
     {
-        $this->app->singleton('asset.publisher', function (Application $app) {
+        $this->app->singleton('asset.publisher', static function (Application $app) {
             $publicPath = $app->publicPath();
 
             // The asset "publisher" is responsible for moving package's assets into the
@@ -79,7 +79,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerConfigPublisher(): void
     {
-        $this->app->singleton('config.publisher', function (Application $app) {
+        $this->app->singleton('config.publisher', static function (Application $app) {
             $path = $app->configPath();
 
             // Once we have created the configuration publisher, we will set the default
@@ -100,7 +100,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerViewPublisher(): void
     {
-        $this->app->singleton('view.publisher', function (Application $app) {
+        $this->app->singleton('view.publisher', static function (Application $app) {
             $viewPath = $app->basePath().'/resources/views';
 
             // Once we have created the view publisher, we will set the default packages
@@ -121,7 +121,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerAssetPublishCommand(): void
     {
-        $this->app->singleton('command.asset.publish', function (Application $app) {
+        $this->app->singleton('command.asset.publish', static function (Application $app) {
             return new AssetPublishCommand($app->make('asset.publisher'));
         });
     }
@@ -133,7 +133,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerConfigPublishCommand(): void
     {
-        $this->app->singleton('command.config.publish', function (Application $app) {
+        $this->app->singleton('command.config.publish', static function (Application $app) {
             return new ConfigPublishCommand($app->make('config.publisher'));
         });
     }
@@ -145,7 +145,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerViewPublishCommand(): void
     {
-        $this->app->singleton('command.view.publish', function (Application $app) {
+        $this->app->singleton('command.view.publish', static function (Application $app) {
             return new ViewPublishCommand($app->make('view.publisher'));
         });
     }

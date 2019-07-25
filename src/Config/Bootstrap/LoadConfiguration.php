@@ -34,7 +34,7 @@ class LoadConfiguration
 
         $this->setEnvironment($app, $items['*::app']['env'] ?? null);
 
-        \tap(new Repository($loader, $app->environment()), function ($config) use ($app, $items) {
+        \tap(new Repository($loader, $app->environment()), static function ($config) use ($app, $items) {
             $app->instance('config', $config);
             $config->setFromCache($items);
 
@@ -54,8 +54,8 @@ class LoadConfiguration
      */
     protected function setEnvironment(Application $app, ?string $env = null): void
     {
-        $app->detectEnvironment(function () use ($env) {
-            return $env ?: env('APP_ENV', 'production');
+        $app->detectEnvironment(static function () use ($env) {
+            return $env ?: \env('APP_ENV', 'production');
         });
     }
 }

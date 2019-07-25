@@ -53,8 +53,8 @@ trait Transformable
      */
     public function getRequest()
     {
-        if (is_null($this->request)) {
-            $this->setRequest(app()->refresh('request', $this, 'setRequest'));
+        if (\is_null($this->request)) {
+            $this->setRequest(\app()->refresh('request', $this, 'setRequest'));
         }
 
         return $this->request;
