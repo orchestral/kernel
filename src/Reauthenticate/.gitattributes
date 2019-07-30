@@ -1,0 +1,5 @@
+* text=auto
+
+# Ignore following folder/file.
+/.gitattributes export-ignore
+/LICENSE export-ignore
