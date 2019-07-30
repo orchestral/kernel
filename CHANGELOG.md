@@ -2,6 +2,18 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 3.8.1
+
+Released: 2019-07-30
+
+### Added
+
+* Added `Orchestra\Http\Transformer\InteractsWithDateTime` trait.
+
+### Changes
+
+* Improve performance by prefixing all global functions calls with `\` to skip the look up and resolve process and go straight to the global function.
+
 ## 3.8.0 
 
 Released: 2019-03-24
