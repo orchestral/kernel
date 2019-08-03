@@ -108,8 +108,8 @@ class RouteResolver
 
         // split URI and query string, the route resolver should not worry
         // about provided query string.
-        if (strpos($path, '?') !== false) {
-            list($path, $query) = explode('?', $path, 2);
+        if (\strpos($path, '?') !== false) {
+            list($path, $query) = \explode('?', $path, 2);
         }
 
         list($package, $route, $item) = with(new NamespacedItemResolver())->parseKey($path);
@@ -148,7 +148,7 @@ class RouteResolver
      */
     public function mode(): string
     {
-        if (is_null($this->status)) {
+        if (\is_null($this->status)) {
             return 'normal';
         }
 
@@ -189,7 +189,7 @@ class RouteResolver
      */
     protected function generateRouteByName(string $name, string $default)
     {
-        if (is_null($this->extension)) {
+        if (\is_null($this->extension)) {
             return $default;
         }
 
@@ -216,7 +216,7 @@ class RouteResolver
             $appends['_token'] = $this->getCsrfToken();
         }
 
-        if (! in_array($mode, ['normal'])) {
+        if (! \in_array($mode, ['normal'])) {
             $appends['_mode'] = $mode;
         }
 
@@ -240,7 +240,7 @@ class RouteResolver
     protected function prepareHttpQueryString(string $query, array $appends = []): string
     {
         if (! empty($appends)) {
-            $query .= (! empty($query) ? '&' : '').http_build_query($appends);
+            $query .= (! empty($query) ? '&' : '').\http_build_query($appends);
         }
 
         return $query;
@@ -253,7 +253,7 @@ class RouteResolver
      */
     protected function getCsrfToken(): ?string
     {
-        if (is_null($this->csrfToken)) {
+        if (\is_null($this->csrfToken)) {
             $this->csrfToken = $this->app->make('session')->token();
         }
 

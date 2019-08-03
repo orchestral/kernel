@@ -116,7 +116,7 @@ class MigrateManager implements Publisher
         // We don't execute the same migration twice, this little code
         // compare both folder before appending the paths.
         if ($basePath !== $sourcePath && ! empty($sourcePath)) {
-            $paths = array_merge($paths, [
+            $paths = \array_merge($paths, [
                 "{$sourcePath}/resources/database/migrations/",
                 "{$sourcePath}/resources/migrations/",
                 "{$sourcePath}/database/migrations/",
@@ -160,8 +160,8 @@ class MigrateManager implements Publisher
         if ($name === 'app') {
             $basePath = $sourcePath = $this->app->basePath();
         } else {
-            $basePath = $finder->resolveExtensionPath(rtrim($extension->option($name, 'path'), '/'));
-            $sourcePath = $finder->resolveExtensionPath(rtrim($extension->option($name, 'source-path'), '/'));
+            $basePath = $finder->resolveExtensionPath(\rtrim($extension->option($name, 'path'), '/'));
+            $sourcePath = $finder->resolveExtensionPath(\rtrim($extension->option($name, 'source-path'), '/'));
         }
 
         return [$basePath, $sourcePath];

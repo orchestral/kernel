@@ -51,7 +51,7 @@ class VersionControl
      */
     public function setDefaultVersion(string $code)
     {
-        if (! array_key_exists($code, $this->supportedVersions)) {
+        if (! \array_key_exists($code, $this->supportedVersions)) {
             throw new InvalidArgumentException("Unable to set [{$code}] as default version!");
         }
 
@@ -72,12 +72,12 @@ class VersionControl
      */
     public function resolve(string $namespace, string $version, string $name): string
     {
-        $class = str_replace('.', '\\', $name);
+        $class = \str_replace('.', '\\', $name);
 
-        if (! array_key_exists($version, $this->supportedVersions)) {
+        if (! \array_key_exists($version, $this->supportedVersions)) {
             $version = $this->defaultVersion;
         }
 
-        return sprintf('%s\%s\%s\%s', $namespace, $this->supportedVersions[$version], $class);
+        return \sprintf('%s\%s\%s\%s', $namespace, $this->supportedVersions[$version], $class);
     }
 }

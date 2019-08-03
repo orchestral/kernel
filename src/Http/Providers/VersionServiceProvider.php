@@ -29,7 +29,7 @@ class VersionServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('orchestra.http.version', function (Application $app) {
-            return tap(new VersionControl(), function ($version) {
+            return \tap(new VersionControl(), function ($version) {
                 $this->registerSupportedVersions($version);
             });
         });
@@ -48,7 +48,7 @@ class VersionServiceProvider extends ServiceProvider
             $version->addVersion($code, $namespace);
         }
 
-        if (! is_null($this->defaultVersion)) {
+        if (! \is_null($this->defaultVersion)) {
             $version->setDefaultVersion($this->defaultVersion);
         }
     }

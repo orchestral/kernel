@@ -19,7 +19,7 @@ class NotModified
         $response = $next($request);
 
         if (! $response->headers->has('Etag')) {
-            $response->setEtag(md5($response->getContent()));
+            $response->setEtag(\md5($response->getContent()));
         }
 
         $response->isNotModified($request);

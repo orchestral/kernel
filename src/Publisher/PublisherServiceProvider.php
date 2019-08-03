@@ -4,16 +4,10 @@ namespace Orchestra\Publisher;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
-class PublisherServiceProvider extends ServiceProvider
+class PublisherServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * Register the service provider.
      *
@@ -33,7 +27,7 @@ class PublisherServiceProvider extends ServiceProvider
      */
     protected function registerMigration(): void
     {
-        $this->app->singleton('orchestra.publisher.migrate', function (Application $app) {
+        $this->app->singleton('orchestra.publisher.migrate', static function (Application $app) {
             // In order to use migration, we need to boot 'migration.repository' instance.
             $app->make('migration.repository');
 
@@ -48,7 +42,7 @@ class PublisherServiceProvider extends ServiceProvider
      */
     protected function registerAssetPublisher(): void
     {
-        $this->app->singleton('orchestra.publisher.asset', function (Application $app) {
+        $this->app->singleton('orchestra.publisher.asset', static function (Application $app) {
             return new AssetManager($app, $app->make('asset.publisher'));
         });
     }

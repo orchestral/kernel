@@ -15,7 +15,7 @@ class HashServiceProvider extends ServiceProvider
     {
         parent::register();
 
-        $this->app->singleton('hash.password', function ($app) {
+        $this->app->singleton('hash.password', static function ($app) {
             return new PasswordHasher($app['hash']);
         });
     }
