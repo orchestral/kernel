@@ -32,10 +32,12 @@ if (! \function_exists('redirect_with_message')) {
         ?string $message = null,
         string $type = 'success'
     ): RedirectResponse {
-        if (! \is_null($message)) {
-            \app('orchestra.messages')->add($type, $message);
+        $bag = \app('orchestra.messages');
+
+        if (! empty($message)) {
+            $bag->add($type, $message);
         }
 
-        return \redirect($to);
+        return \redirect($to)->with('message', $bag->getMessages());
     }
 }

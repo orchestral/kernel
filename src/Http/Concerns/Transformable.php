@@ -84,18 +84,18 @@ trait Transformable
      */
     protected function merge($meta, array $options = []): array
     {
-        if (is_array($meta) && empty($options)) {
+        if (\is_array($meta) && empty($options)) {
             $options = $meta;
             $meta = null;
         }
 
-        $options = array_merge(['includes' => [], 'excludes' => []], $options);
+        $options = \array_merge(['includes' => [], 'excludes' => []], $options);
 
         foreach ($options as $key => $value) {
-            $filtered = Arr::expand(array_flip($value));
-            $parent = Arr::get($this->options, is_null($meta) ? $key : "{$key}.{$meta}", []);
+            $filtered = Arr::expand(\array_flip($value));
+            $parent = Arr::get($this->options, \is_null($meta) ? $key : "{$key}.{$meta}", []);
 
-            $options[$key] = array_keys(Arr::dot(array_merge_recursive($filtered, $parent)));
+            $options[$key] = \array_keys(Arr::dot(\array_merge_recursive($filtered, $parent)));
         }
 
         return $options;
@@ -120,13 +120,13 @@ trait Transformable
         }
 
         foreach ($types as $type => $index) {
-            if (is_array($type)) {
+            if (\is_array($type)) {
                 continue;
             }
 
             $method = $name.Str::studly($type);
 
-            if (method_exists($this, $method)) {
+            if (\method_exists($this, $method)) {
                 $data = $this->{$method}($data, ...$parameters);
             }
         }
@@ -145,10 +145,10 @@ trait Transformable
     {
         $types = $this->options[$name] ?? $this->getRequest()->input($name);
 
-        if (is_string($types)) {
-            $types = explode(',', $types);
+        if (\is_string($types)) {
+            $types = \explode(',', $types);
         }
 
-        $this->options[$name] = is_array($types) ? Arr::expand(array_flip($types)) : [];
+        $this->options[$name] = \is_array($types) ? Arr::expand(\array_flip($types)) : [];
     }
 }

@@ -51,7 +51,7 @@ class FormRequest extends Request
             'DELETE' => 'destroy',
         ];
 
-        if (in_array($current, $available)) {
+        if (\in_array($current, $available)) {
             $this->onValidationScenario($available[$current]);
         }
     }

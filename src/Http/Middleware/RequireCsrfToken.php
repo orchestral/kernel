@@ -67,7 +67,7 @@ class RequireCsrfToken
             $token = $this->encrypter->decrypt($header);
         }
 
-        return hash_equals((string) $request->session()->token(), (string) $token);
+        return \hash_equals((string) $request->session()->token(), (string) $token);
     }
 
     /**

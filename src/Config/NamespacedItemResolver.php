@@ -91,7 +91,7 @@ abstract class NamespacedItemResolver extends Resolver
      */
     protected function parsePackageSegments($key, $namespace, $item)
     {
-        $itemSegments = explode('.', $item);
+        $itemSegments = \explode('.', $item);
 
         // If the configuration file doesn't exist for the given package group we can
         // assume that we should implicitly use the config file matching the name

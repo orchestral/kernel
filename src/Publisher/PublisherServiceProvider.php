@@ -4,16 +4,10 @@ namespace Orchestra\Publisher;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
-class PublisherServiceProvider extends ServiceProvider
+class PublisherServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * Register the service provider.
      *

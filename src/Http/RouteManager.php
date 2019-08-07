@@ -38,13 +38,9 @@ abstract class RouteManager implements RouteManagerContract
      */
     public function __construct(Application $app, ?RouteResolver $resolver = null)
     {
-        if (is_null($resolver)) {
-            $resolver = new RouteResolver($app);
-        }
-
         $this->app = $app;
         $this->router = $this->resolveApplicationRouter($app);
-        $this->resolver = $resolver;
+        $this->resolver = $resolver instanceof RouteResolver ? $resolver : new RouteResolver($app);
     }
 
     /**
@@ -78,9 +74,9 @@ abstract class RouteManager implements RouteManagerContract
             $attributes = [];
         }
 
-        $attributes = array_merge($attributes, $route->group());
+        $attributes = \array_merge($attributes, $route->group());
 
-        if (! is_null($callback)) {
+        if (! \is_null($callback)) {
             $this->router->group($attributes, $callback);
         }
 
