@@ -2,7 +2,17 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 3.8.4
+
+Released: 2019-08-14
+
+### Fixes
+
+* Fallback to query from database when cache driver throws an exception.
+
 ## 3.8.3
+
+Released: 2019-08-09
 
 ### Fixes
 
