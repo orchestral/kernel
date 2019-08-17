@@ -2,7 +2,7 @@
 
 namespace Orchestra\Routing;
 
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Routing\RoutingServiceProvider as ServiceProvider;
 
 class RoutingServiceProvider extends ServiceProvider
@@ -14,7 +14,7 @@ class RoutingServiceProvider extends ServiceProvider
      */
     protected function registerRouter()
     {
-        $this->app->singleton('router', static function (Application $app) {
+        $this->app->singleton('router', static function (Container $app) {
             return new Router($app->make('events'), $app);
         });
     }

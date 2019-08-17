@@ -5,6 +5,7 @@ namespace Orchestra\Publisher;
 use Orchestra\Publisher\Publishing\View;
 use Orchestra\Publisher\Publishing\Asset;
 use Orchestra\Publisher\Publishing\Config;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Publisher\Console\ViewPublishCommand;
 use Orchestra\Publisher\Console\AssetPublishCommand;
@@ -115,7 +116,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerAssetPublishCommand(): void
     {
-        $this->app->singleton('command.asset.publish', static function (Application $app) {
+        $this->app->singleton('command.asset.publish', static function (Container $app) {
             return new AssetPublishCommand($app->make('asset.publisher'));
         });
     }
@@ -127,7 +128,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerConfigPublishCommand(): void
     {
-        $this->app->singleton('command.config.publish', static function (Application $app) {
+        $this->app->singleton('command.config.publish', static function (Container $app) {
             return new ConfigPublishCommand($app->make('config.publisher'));
         });
     }
@@ -139,7 +140,7 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerViewPublishCommand(): void
     {
-        $this->app->singleton('command.view.publish', static function (Application $app) {
+        $this->app->singleton('command.view.publish', static function (Container $app) {
             return new ViewPublishCommand($app->make('view.publisher'));
         });
     }

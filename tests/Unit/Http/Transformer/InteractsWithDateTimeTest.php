@@ -2,10 +2,10 @@
 
 namespace Orchestra\TestCase\Unit\Http\Transformer;
 
-use Carbon\Carbon;
-use Orchestra\Http\Transformer\InteractsWithDateTime;
 use Mockery as m;
+use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
+use Orchestra\Http\Transformer\InteractsWithDateTime;
 
 class InteractsWithDateTimeTest extends TestCase
 {

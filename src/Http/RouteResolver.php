@@ -2,15 +2,15 @@
 
 namespace Orchestra\Http;
 
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\NamespacedItemResolver;
-use Illuminate\Contracts\Foundation\Application;
 
 class RouteResolver
 {
     /**
-     * Application instance.
+     * Container implementation.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var \Illuminate\Contracts\Container\Container
      */
     protected $app;
 
@@ -52,9 +52,9 @@ class RouteResolver
     /**
      * Construct a new instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Illuminate\Contracts\Container\Container  $app
      */
-    public function __construct(Application $app)
+    public function __construct(Container $app)
     {
         $this->app = $app;
         $this->urlGenerator = $app->make('url');
@@ -65,11 +65,11 @@ class RouteResolver
     /**
      * Integrate with Orchestra Extension.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Illuminate\Contracts\Container\Container  $app
      *
      * @return void
      */
-    protected function integrateWithExtension(Application $app): void
+    protected function integrateWithExtension(Container $app): void
     {
         if ($app->bound('orchestra.extension')) {
             $this->extension = $app->make('orchestra.extension');

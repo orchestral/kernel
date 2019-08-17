@@ -3,18 +3,12 @@
 namespace Orchestra\Http;
 
 use Hashids\Hashids;
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Container\Container;
 use Orchestra\Support\Providers\ServiceProvider;
+use Illuminate\Contracts\Support\DeferrableProvider;
 
-class HashIdServiceProvider extends ServiceProvider
+class HashIdServiceProvider extends ServiceProvider implements DeferrableProvider
 {
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
     /**
      * Register the service provider.
      *
@@ -22,7 +16,7 @@ class HashIdServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('orchestra.hashid', static function (Application $app) {
+        $this->app->singleton('orchestra.hashid', static function (Container $app) {
             return new Hashids($app->make('config')->get('app.key'));
         });
     }

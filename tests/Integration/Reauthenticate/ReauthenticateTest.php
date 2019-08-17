@@ -5,7 +5,6 @@ namespace Orchestra\Tests\Integration\Reauthenticate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Orchestra\Testbench\TestCase;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 use Orchestra\Reauthenticate\Middleware\Reauthenticate as ReauthenticateMiddleware;
 
@@ -101,7 +100,7 @@ class ReauthenticateTest extends TestCase
     }
 
     /**
-     * Set the session for tests in a backwards compatible way
+     * Set the session for tests in a backwards compatible way.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \IlluminateSession\Store  $session

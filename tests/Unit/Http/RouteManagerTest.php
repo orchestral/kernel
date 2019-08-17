@@ -30,7 +30,7 @@ class RouteManagerTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->app = m::mock('\Illuminate\Contracts\Foundation\Application');
+        $this->app = m::mock('\Illuminate\Contracts\Container\Container');
         $this->request = m::mock('\Illuminate\Http\Request');
 
         $this->request->shouldReceive('root')->andReturn('http://localhost')

@@ -83,7 +83,7 @@ class ReauthenticateControllerTest extends TestCase
     }
 
     /**
-     * Set the session for tests in a backwards compatible way
+     * Set the session for tests in a backwards compatible way.
      *
      * @param \Illuminate\Http\Request $request
      * @param Illuminate\Session\Store $session

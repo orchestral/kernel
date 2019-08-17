@@ -2,7 +2,7 @@
 
 namespace Orchestra\Notifications;
 
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Notifications\ChannelManager as Manager;
 use Illuminate\Contracts\Notifications\Factory as FactoryContract;
 use Illuminate\Contracts\Notifications\Dispatcher as DispatcherContract;
@@ -17,7 +17,7 @@ class NotificationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(ChannelManager::class, static function (Application $app) {
+        $this->app->singleton(ChannelManager::class, static function (Container $app) {
             return new ChannelManager($app);
         });
 

@@ -4,15 +4,15 @@ namespace Orchestra\Http;
 
 use Closure;
 use Illuminate\Routing\Events\RouteMatched;
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Container\Container;
 use Orchestra\Contracts\Http\RouteManager as RouteManagerContract;
 
 abstract class RouteManager implements RouteManagerContract
 {
     /**
-     * Application instance.
+     * Container implementation.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var \Illuminate\Contracts\Container\Container
      */
     protected $app;
 
@@ -33,10 +33,10 @@ abstract class RouteManager implements RouteManagerContract
     /**
      * Construct a new instance.
      *
-     * @param \Illuminate\Contracts\Foundation\Application  $app
+     * @param \Illuminate\Contracts\Container\Container  $app
      * @param \Orchestra\Http\RouteResolver|null  $resolver
      */
-    public function __construct(Application $app, ?RouteResolver $resolver = null)
+    public function __construct(Container $app, ?RouteResolver $resolver = null)
     {
         $this->app = $app;
         $this->router = $this->resolveApplicationRouter($app);
@@ -46,11 +46,11 @@ abstract class RouteManager implements RouteManagerContract
     /**
      * Resolve application router.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
+     * @param  \Illuminate\Contracts\Container\Container  $app
      *
      * @return mixed
      */
-    protected function resolveApplicationRouter(Application $app)
+    protected function resolveApplicationRouter(Container $app)
     {
         return $app->make('router');
     }
