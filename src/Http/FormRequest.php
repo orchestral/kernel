@@ -2,10 +2,10 @@
 
 namespace Orchestra\Http;
 
-use Orchestra\Support\Concerns\Validation;
-use Illuminate\Foundation\Http\FormRequest as Request;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Contracts\Validation\Factory as ValidationContract;
+use Illuminate\Foundation\Http\FormRequest as Request;
+use Orchestra\Support\Concerns\Validation;
 
 class FormRequest extends Request
 {

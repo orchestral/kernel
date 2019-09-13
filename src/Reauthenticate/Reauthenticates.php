@@ -4,8 +4,8 @@ namespace Orchestra\Reauthenticate;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
 
 trait Reauthenticates
 {

@@ -2,9 +2,9 @@
 
 namespace Orchestra\Hashing;
 
-use RuntimeException;
-use Illuminate\Hashing\AbstractHasher;
 use Illuminate\Contracts\Hashing\Hasher as HasherContract;
+use Illuminate\Hashing\AbstractHasher;
+use RuntimeException;
 
 class PasswordHasher extends AbstractHasher implements HasherContract
 {

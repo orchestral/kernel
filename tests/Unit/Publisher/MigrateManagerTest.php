@@ -2,10 +2,10 @@
 
 namespace Orchestra\TestCase\Unit\Publisher;
 
-use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
+use Mockery as m;
 use Orchestra\Publisher\MigrateManager;
+use PHPUnit\Framework\TestCase;
 
 class MigrateManagerTest extends TestCase
 {

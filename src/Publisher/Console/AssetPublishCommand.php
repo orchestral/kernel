@@ -3,8 +3,8 @@
 namespace Orchestra\Publisher\Console;
 
 use Orchestra\Publisher\Publishing\Asset;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class AssetPublishCommand extends Command
 {

@@ -2,8 +2,8 @@
 
 namespace Orchestra\TestCase\Unit\Hashing;
 
-use PHPUnit\Framework\TestCase;
 use Orchestra\Hashing\HashServiceProvider;
+use PHPUnit\Framework\TestCase;
 
 class HashServiceProviderTest extends TestCase
 {

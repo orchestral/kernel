@@ -3,9 +3,9 @@
 namespace Orchestra\Config;
 
 use ArrayAccess;
+use Illuminate\Contracts\Config\Repository as ConfigContract;
 use Illuminate\Support\Arr;
 use Orchestra\Contracts\Config\PackageRepository;
-use Illuminate\Contracts\Config\Repository as ConfigContract;
 
 class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigContract, PackageRepository
 {

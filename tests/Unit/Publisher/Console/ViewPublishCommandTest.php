@@ -3,10 +3,10 @@
 namespace Orchestra\TestCase\Unit\Publisher\Console;
 
 use Mockery as m;
+use Orchestra\Publisher\Console\ViewPublishCommand;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
-use Orchestra\Publisher\Console\ViewPublishCommand;
 
 class ViewPublishCommandTest extends TestCase
 {

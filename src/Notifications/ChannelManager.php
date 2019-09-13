@@ -2,8 +2,8 @@
 
 namespace Orchestra\Notifications;
 
-use Illuminate\Notifications\Channels\MailChannel;
 use Illuminate\Notifications\ChannelManager as Manager;
+use Illuminate\Notifications\Channels\MailChannel;
 
 class ChannelManager extends Manager
 {

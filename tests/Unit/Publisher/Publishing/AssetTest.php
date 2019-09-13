@@ -3,8 +3,8 @@
 namespace Orchestra\TestCase\Unit\Publisher\Publishing;
 
 use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Orchestra\Publisher\Publishing\Asset;
+use PHPUnit\Framework\TestCase;
 
 class AssetTest extends TestCase
 {

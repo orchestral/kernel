@@ -4,8 +4,8 @@ namespace Orchestra\Publisher\Console;
 
 use Illuminate\Console\ConfirmableTrait;
 use Orchestra\Publisher\Publishing\Config;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class ConfigPublishCommand extends Command
 {

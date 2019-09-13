@@ -3,8 +3,8 @@
 namespace Orchestra\TestCase\Unit\Publisher\Publishing;
 
 use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Orchestra\Publisher\Publishing\Config;
+use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase
 {

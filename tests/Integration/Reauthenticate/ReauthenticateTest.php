@@ -4,9 +4,9 @@ namespace Orchestra\Tests\Integration\Reauthenticate;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Orchestra\Testbench\TestCase;
 use Illuminate\Support\Facades\Session;
 use Orchestra\Reauthenticate\Middleware\Reauthenticate as ReauthenticateMiddleware;
+use Orchestra\Testbench\TestCase;
 
 class ReauthenticateTest extends TestCase
 {

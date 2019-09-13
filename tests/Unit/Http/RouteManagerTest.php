@@ -2,12 +2,12 @@
 
 namespace Orchestra\TestCase\Unit\Http;
 
-use Mockery as m;
-use PHPUnit\Framework\TestCase;
-use Orchestra\Http\RouteManager;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Support\Facades\Facade;
 use Illuminate\Routing\Events\RouteMatched;
+use Illuminate\Support\Facades\Facade;
+use Mockery as m;
+use Orchestra\Http\RouteManager;
+use PHPUnit\Framework\TestCase;
 
 class RouteManagerTest extends TestCase
 {

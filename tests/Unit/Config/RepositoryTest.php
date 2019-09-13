@@ -3,8 +3,8 @@
 namespace Orchestra\TestCase\Unit\Config;
 
 use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Orchestra\Config\Repository;
+use PHPUnit\Framework\TestCase;
 
 class RepositoryTest extends TestCase
 {

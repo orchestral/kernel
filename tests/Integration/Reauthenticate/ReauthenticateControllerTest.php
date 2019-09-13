@@ -2,11 +2,11 @@
 
 namespace Orchestra\Tests\Integration\Reauthenticate;
 
-use Illuminate\Http\Request;
-use Orchestra\Testbench\TestCase;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Orchestra\Testbench\TestCase;
 
 class ReauthenticateControllerTest extends TestCase
 {
