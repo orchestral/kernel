@@ -15,12 +15,13 @@ trait PassThrough
      * Determine if the request has a URI that should pass through CSRF verification.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param   array  $routesToExclude
      *
      * @return bool
      */
-    protected function shouldPassThrough($request)
+    protected function shouldPassThrough($request, array $routesToExclude)
     {
-        foreach ($this->except as $except) {
+        foreach ($routesToExclude as $except) {
             if ($this->foundation->is($except)) {
                 return true;
             }
