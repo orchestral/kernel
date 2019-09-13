@@ -3,10 +3,10 @@
 namespace Orchestra\Publisher;
 
 use Exception;
-use Orchestra\Publisher\Publishing\Asset;
-use Orchestra\Contracts\Publisher\Publisher;
 use Illuminate\Contracts\Container\Container;
 use Orchestra\Contracts\Publisher\FilePermissionException;
+use Orchestra\Contracts\Publisher\Publisher;
+use Orchestra\Publisher\Publishing\Asset;
 
 class AssetManager implements Publisher
 {

@@ -2,9 +2,9 @@
 
 namespace Orchestra\Config\Console;
 
-use Symfony\Component\Finder\Finder;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Console\ConfigCacheCommand as BaseCommand;
+use Symfony\Component\Finder\Finder;
 
 class ConfigCacheCommand extends BaseCommand
 {

@@ -2,8 +2,8 @@
 
 namespace Orchestra\Http\Providers;
 
-use Orchestra\Http\VersionControl;
 use Illuminate\Support\ServiceProvider;
+use Orchestra\Http\VersionControl;
 
 class VersionServiceProvider extends ServiceProvider
 {

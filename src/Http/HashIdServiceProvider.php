@@ -4,8 +4,8 @@ namespace Orchestra\Http;
 
 use Hashids\Hashids;
 use Illuminate\Contracts\Container\Container;
-use Orchestra\Support\Providers\ServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Orchestra\Support\Providers\ServiceProvider;
 
 class HashIdServiceProvider extends ServiceProvider implements DeferrableProvider
 {

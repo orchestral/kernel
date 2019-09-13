@@ -2,9 +2,9 @@
 
 namespace Orchestra\Publisher;
 
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Database\Migrations\Migrator;
 use Orchestra\Contracts\Publisher\Publisher;
-use Illuminate\Contracts\Container\Container;
 
 class MigrateManager implements Publisher
 {

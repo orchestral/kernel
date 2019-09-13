@@ -2,10 +2,10 @@
 
 namespace Orchestra\TestCase\Unit\Publisher;
 
-use Mockery as m;
-use PHPUnit\Framework\TestCase;
 use Illuminate\Container\Container;
+use Mockery as m;
 use Orchestra\Publisher\AssetManager;
+use PHPUnit\Framework\TestCase;
 
 class AssetManagerTest extends TestCase
 {

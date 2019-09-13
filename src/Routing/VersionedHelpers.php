@@ -2,10 +2,10 @@
 
 namespace Orchestra\Routing;
 
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Fluent;
 use Orchestra\Http\Transformer;
-use Illuminate\Support\Collection;
-use Illuminate\Contracts\Support\Arrayable;
 use Orchestra\Support\Transformer as BaseTransformer;
 
 trait VersionedHelpers

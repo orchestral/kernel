@@ -3,8 +3,8 @@
 namespace Orchestra\Http;
 
 use Closure;
-use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Routing\Events\RouteMatched;
 use Orchestra\Contracts\Http\RouteManager as RouteManagerContract;
 
 abstract class RouteManager implements RouteManagerContract

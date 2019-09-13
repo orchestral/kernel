@@ -3,9 +3,9 @@
 namespace Orchestra\Notifications;
 
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Notifications\ChannelManager as Manager;
-use Illuminate\Contracts\Notifications\Factory as FactoryContract;
 use Illuminate\Contracts\Notifications\Dispatcher as DispatcherContract;
+use Illuminate\Contracts\Notifications\Factory as FactoryContract;
+use Illuminate\Notifications\ChannelManager as Manager;
 use Illuminate\Notifications\NotificationServiceProvider as ServiceProvider;
 
 class NotificationServiceProvider extends ServiceProvider

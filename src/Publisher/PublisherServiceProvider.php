@@ -2,9 +2,9 @@
 
 namespace Orchestra\Publisher;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Support\DeferrableProvider;
+use Illuminate\Support\ServiceProvider;
 
 class PublisherServiceProvider extends ServiceProvider implements DeferrableProvider
 {

@@ -2,9 +2,9 @@
 
 namespace Orchestra\Routing;
 
+use Illuminate\Routing\ResourceRegistrar as BaseResourceRegistrar;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router as BaseRouter;
-use Illuminate\Routing\ResourceRegistrar as BaseResourceRegistrar;
 
 class Router extends BaseRouter
 {

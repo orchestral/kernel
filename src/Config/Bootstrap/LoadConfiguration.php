@@ -2,10 +2,10 @@
 
 namespace Orchestra\Config\Bootstrap;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Filesystem\Filesystem;
 use Orchestra\Config\FileLoader;
 use Orchestra\Config\Repository;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Contracts\Foundation\Application;
 
 class LoadConfiguration
 {

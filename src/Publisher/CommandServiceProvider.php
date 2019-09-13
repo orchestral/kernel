@@ -2,14 +2,14 @@
 
 namespace Orchestra\Publisher;
 
-use Orchestra\Publisher\Publishing\View;
-use Orchestra\Publisher\Publishing\Asset;
-use Orchestra\Publisher\Publishing\Config;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Foundation\Application;
-use Orchestra\Publisher\Console\ViewPublishCommand;
 use Orchestra\Publisher\Console\AssetPublishCommand;
 use Orchestra\Publisher\Console\ConfigPublishCommand;
+use Orchestra\Publisher\Console\ViewPublishCommand;
+use Orchestra\Publisher\Publishing\Asset;
+use Orchestra\Publisher\Publishing\Config;
+use Orchestra\Publisher\Publishing\View;
 use Orchestra\Support\Providers\CommandServiceProvider as ServiceProvider;
 
 class CommandServiceProvider extends ServiceProvider
