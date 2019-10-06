@@ -31,7 +31,6 @@
     },
     "require-dev": {
         "hashids/hashids": "^1.0",
-        "mockery/mockery": "^1.2",
         "orchestra/testbench": "^5.0"
     },
     "replace": {
