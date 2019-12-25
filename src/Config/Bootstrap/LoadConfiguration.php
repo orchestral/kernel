@@ -4,6 +4,7 @@ namespace Orchestra\Config\Bootstrap;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Env;
 use Orchestra\Config\FileLoader;
 use Orchestra\Config\Repository;
 
@@ -55,7 +56,7 @@ class LoadConfiguration
     protected function setEnvironment(Application $app, ?string $env = null): void
     {
         $app->detectEnvironment(static function () use ($env) {
-            return $env ?: \env('APP_ENV', 'production');
+            return $env ?: Env::get('APP_ENV', 'production');
         });
     }
 }
