@@ -44,13 +44,15 @@ class AssetPublishCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
         $package = $this->input->getArgument('package');
 
         $this->publishAssets($package);
+
+        return 0;
     }
 
     /**
