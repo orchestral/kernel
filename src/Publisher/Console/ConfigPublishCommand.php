@@ -47,7 +47,7 @@ class ConfigPublishCommand extends Command
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return int
      */
     public function handle()
     {
@@ -58,16 +58,18 @@ class ConfigPublishCommand extends Command
         });
 
         if (! $proceed) {
-            return;
+            return 0;
         }
 
-        if (! is_null($path = $this->getPath())) {
+        if (! \is_null($path = $this->getPath())) {
             $this->config->publish($package, $path);
         } else {
             $this->config->publishPackage($package);
         }
 
         $this->output->writeln('<info>Configuration published for package:</info> '.$package);
+
+        return 0;
     }
 
     /**
