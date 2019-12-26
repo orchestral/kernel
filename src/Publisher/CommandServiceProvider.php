@@ -2,18 +2,22 @@
 
 namespace Orchestra\Publisher;
 
-use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Publisher\Console\AssetPublishCommand;
 use Orchestra\Publisher\Console\ConfigPublishCommand;
 use Orchestra\Publisher\Console\ViewPublishCommand;
 use Orchestra\Publisher\Publishing\Asset;
+use Orchestra\Publisher\Publishing\Asset as AssetPublishingContract;
 use Orchestra\Publisher\Publishing\Config;
+use Orchestra\Publisher\Publishing\Config as ConfigPublishingContract;
 use Orchestra\Publisher\Publishing\View;
+use Orchestra\Publisher\Publishing\View as ViewPublishingContract;
 use Orchestra\Support\Providers\CommandServiceProvider as ServiceProvider;
 
 class CommandServiceProvider extends ServiceProvider
 {
+    use AliasesProvider;
+
     /**
      * The commands to be registered.
      *
@@ -32,8 +36,22 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected $provides = [
         'asset.publisher',
+        AssetPublishingContract::class,
         'config.publisher',
+        ConfigPublishingContract::class,
         'view.publisher',
+        ViewPublishingContract::class,
+    ];
+
+    /**
+     * List of services aliases.
+     *
+     * @var array
+     */
+    protected $aliases = [
+        'asset.publisher' => [AssetPublishingContract::class],
+        'config.publisher' => [ConfigPublishingContract::class],
+        'view.publisher' => [ViewPublishingContract::class],
     ];
 
     /**
@@ -116,8 +134,8 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerAssetPublishCommand(): void
     {
-        $this->app->singleton('command.asset.publish', static function (Container $app) {
-            return new AssetPublishCommand($app->make('asset.publisher'));
+        $this->app->singleton('command.asset.publish', static function () {
+            return new AssetPublishCommand();
         });
     }
 
@@ -128,8 +146,8 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerConfigPublishCommand(): void
     {
-        $this->app->singleton('command.config.publish', static function (Container $app) {
-            return new ConfigPublishCommand($app->make('config.publisher'));
+        $this->app->singleton('command.config.publish', static function () {
+            return new ConfigPublishCommand();
         });
     }
 
@@ -140,8 +158,8 @@ class CommandServiceProvider extends ServiceProvider
      */
     protected function registerViewPublishCommand(): void
     {
-        $this->app->singleton('command.view.publish', static function (Container $app) {
-            return new ViewPublishCommand($app->make('view.publisher'));
+        $this->app->singleton('command.view.publish', static function () {
+            return new ViewPublishCommand();
         });
     }
 }

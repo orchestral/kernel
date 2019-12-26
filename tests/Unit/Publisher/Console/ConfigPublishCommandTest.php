@@ -21,11 +21,12 @@ class ConfigPublishCommandTest extends TestCase
     public function testCommandCallsPublisherWithProperPackageName()
     {
         $laravel = m::mock('\Illuminate\Foundation\Application[call]');
-        $laravel->shouldReceive('call')->once()->andReturnUsing(function ($method, $parameters = []) {
-            return call_user_func_array($method, $parameters);
+        $pub = m::mock('\Orchestra\Publisher\Publishing\Config');
+        $laravel->shouldReceive('call')->once()->andReturnUsing(function ($method, $parameters = []) use ($pub) {
+            return call_user_func_array($method, [$pub]);
         });
 
-        $command = new ConfigPublishCommand($pub = m::mock('\Orchestra\Publisher\Publishing\Config'));
+        $command = new ConfigPublishCommand();
         $command->setLaravel($laravel);
         $pub->shouldReceive('alreadyPublished')->andReturn(false);
         $pub->shouldReceive('publishPackage')->once()->with('foo');

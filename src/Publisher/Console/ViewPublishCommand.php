@@ -23,40 +23,23 @@ class ViewPublishCommand extends Command
     protected $description = "Publish a package's views to the application";
 
     /**
-     * The view publisher instance.
-     *
-     * @var \Orchestra\Publisher\Publishing\View
-     */
-    protected $view;
-
-    /**
-     * Create a new view publish command instance.
+     * Execute the console command.
      *
      * @param  \Orchestra\Publisher\Publishing\View  $view
-     */
-    public function __construct(View $view)
-    {
-        parent::__construct();
-
-        $this->view = $view;
-    }
-
-    /**
-     * Execute the console command.
      *
      * @return int
      */
-    public function handle()
+    public function handle(View $view)
     {
         $package = $this->input->getArgument('package');
 
         if (! \is_null($path = $this->getPath())) {
-            $this->view->publish($package, $path);
+            $view->publish($package, $path);
         } else {
-            $this->view->publishPackage($package);
+            $view->publishPackage($package);
         }
 
-        $this->output->writeln('<info>Views published for package:</info> '.$package);
+        $this->line('<info>Views published for package:</info> '.$package);
 
         return 0;
     }

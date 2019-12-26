@@ -21,11 +21,12 @@ class ViewPublishCommandTest extends TestCase
     public function testCommandCallsPublisherWithProperPackageName()
     {
         $laravel = m::mock('\Illuminate\Foundation\Application[call]');
-        $laravel->shouldReceive('call')->once()->andReturnUsing(function ($method, $parameters = []) {
-            return call_user_func_array($method, $parameters);
+        $pub = m::mock('\Orchestra\Publisher\Publishing\View');
+        $laravel->shouldReceive('call')->once()->andReturnUsing(function ($method, $parameters = []) use ($pub) {
+            return call_user_func_array($method, [$pub]);
         });
 
-        $command = new ViewPublishCommand($pub = m::mock('\Orchestra\Publisher\Publishing\View'));
+        $command = new ViewPublishCommand();
         $command->setLaravel($laravel);
         $pub->shouldReceive('publishPackage')->once()->with('foo');
         $command->run(new ArrayInput(['package' => 'foo']), new NullOutput());

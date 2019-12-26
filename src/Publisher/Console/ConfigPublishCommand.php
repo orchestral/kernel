@@ -26,35 +26,18 @@ class ConfigPublishCommand extends Command
     protected $description = "Publish a package's configuration to the application";
 
     /**
-     * The config publisher instance.
-     *
-     * @var \Orchestra\Publisher\Publishing\Config
-     */
-    protected $config;
-
-    /**
-     * Create a new configuration publish command instance.
+     * Execute the console command.
      *
      * @param  \Orchestra\Publisher\Publishing\Config  $config
-     */
-    public function __construct(Config $config)
-    {
-        parent::__construct();
-
-        $this->config = $config;
-    }
-
-    /**
-     * Execute the console command.
      *
      * @return int
      */
-    public function handle()
+    public function handle(Config $config)
     {
         $package = $this->input->getArgument('package');
 
-        $proceed = $this->confirmToProceed('Config Already Published!', function () use ($package) {
-            return $this->config->alreadyPublished($package);
+        $proceed = $this->confirmToProceed('Config Already Published!', static function () use ($config, $package) {
+            return $config->alreadyPublished($package);
         });
 
         if (! $proceed) {
@@ -62,12 +45,12 @@ class ConfigPublishCommand extends Command
         }
 
         if (! \is_null($path = $this->getPath())) {
-            $this->config->publish($package, $path);
+            $config->publish($package, $path);
         } else {
-            $this->config->publishPackage($package);
+            $config->publishPackage($package);
         }
 
-        $this->output->writeln('<info>Configuration published for package:</info> '.$package);
+        $this->line('<info>Configuration published for package:</info> '.$package);
 
         return 0;
     }
