@@ -6,13 +6,14 @@ use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Publisher\Console\AssetPublishCommand;
 use Orchestra\Publisher\Console\ConfigPublishCommand;
 use Orchestra\Publisher\Console\ViewPublishCommand;
-use Orchestra\Publisher\Publishing\Asset;
 use Orchestra\Publisher\Publishing\Asset as AssetPublishingContract;
-use Orchestra\Publisher\Publishing\Config;
+use Orchestra\Publisher\Publishing\Asset;
 use Orchestra\Publisher\Publishing\Config as ConfigPublishingContract;
-use Orchestra\Publisher\Publishing\View;
+use Orchestra\Publisher\Publishing\Config;
 use Orchestra\Publisher\Publishing\View as ViewPublishingContract;
+use Orchestra\Publisher\Publishing\View;
 use Orchestra\Support\Providers\CommandServiceProvider as ServiceProvider;
+use Orchestra\Support\Providers\Concerns\AliasesProvider;
 
 class CommandServiceProvider extends ServiceProvider
 {
