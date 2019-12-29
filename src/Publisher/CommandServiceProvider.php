@@ -68,6 +68,8 @@ class CommandServiceProvider extends ServiceProvider
 
         $this->registerViewPublisher();
 
+        $this->registerCoreContainerAliases();
+
         parent::register();
     }
 
