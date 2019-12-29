@@ -51,6 +51,7 @@
         },
         "laravel": {
             "providers": [
+                "Orchestra\\Database\\CachableQueryServiceProvider",
                 "Orchestra\\Database\\SearchServiceProvider"
             ]
         }
