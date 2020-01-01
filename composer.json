@@ -25,6 +25,7 @@
     },
     "require": {
         "php": ">=7.2",
+        "laravie/query-filter": "^1.5",
         "orchestra/contracts": "^4.0",
         "orchestra/notifier": "^4.0",
         "orchestra/support": "^4.0"
@@ -47,6 +48,12 @@
     "extra": {
         "branch-alias": {
             "dev-master": "5.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Orchestra\\Database\\CachableQueryServiceProvider",
+                "Orchestra\\Database\\SearchServiceProvider"
+            ]
         }
     },
     "config": {
