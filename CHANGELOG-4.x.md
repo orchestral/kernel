@@ -2,6 +2,14 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 4.2.0
+
+Released: 2020-01-04
+
+### Added 
+
+* Added `Orchestra\Database\SearchServiceProvider`.
+
 ## 4.1.0
 
 Released: 2019-12-29
