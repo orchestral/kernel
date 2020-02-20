@@ -62,7 +62,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function hasGroup($key)
     {
-        list($namespace, $group) = $this->parseKey($key);
+        [$namespace, $group] = $this->parseKey($key);
 
         return $this->loader->exists($group, $namespace);
     }
@@ -77,7 +77,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function get($key, $default = null)
     {
-        list($namespace, $group, $item) = $this->parseKey($key);
+        [$namespace, $group, $item] = $this->parseKey($key);
 
         // Configuration items are actually keyed by "collection", which is simply a
         // combination of each namespace and groups, which allows a unique way to
@@ -167,7 +167,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     protected function setSingleItem($key, $value = null, $load = true)
     {
-        list($namespace, $group, $item) = $this->parseKey($key);
+        [$namespace, $group, $item] = $this->parseKey($key);
 
         $collection = $this->getCollection($group, $namespace);
 
@@ -257,7 +257,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     protected function getPackageNamespace(string $package, ?string $namespace): string
     {
         if (\is_null($namespace)) {
-            list(, $namespace) = \explode('/', $package);
+            [, $namespace] = \explode('/', $package);
         }
 
         return $namespace;

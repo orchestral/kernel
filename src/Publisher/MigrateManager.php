@@ -105,7 +105,7 @@ class MigrateManager implements Publisher
     {
         $files = $this->app->make('files');
 
-        list($basePath, $sourcePath) = $this->getPathFromExtensionName($name);
+        [$basePath, $sourcePath] = $this->getPathFromExtensionName($name);
 
         $paths = [
             "{$basePath}/resources/database/migrations/",

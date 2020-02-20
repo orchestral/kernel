@@ -89,7 +89,7 @@ class RouteResolver
      */
     public function is(string $path): bool
     {
-        list($package, $route) = $this->locate($path);
+        [$package, $route] = $this->locate($path);
 
         return $this->route($package)->is($route);
     }
@@ -109,10 +109,10 @@ class RouteResolver
         // split URI and query string, the route resolver should not worry
         // about provided query string.
         if (\strpos($path, '?') !== false) {
-            list($path, $query) = \explode('?', $path, 2);
+            [$path, $query] = \explode('?', $path, 2);
         }
 
-        list($package, $route, $item) = with(new NamespacedItemResolver())->parseKey($path);
+        [$package, $route, $item] = (new NamespacedItemResolver())->parseKey($path);
 
         $route = $this->prepareValidRoute($route, $item, $query, $options);
 
@@ -169,7 +169,7 @@ class RouteResolver
             return $path;
         }
 
-        list($package, $route) = $this->locate($path, $options);
+        [$package, $route] = $this->locate($path, $options);
 
         // Get the path from route configuration, and append route.
         $locate = $this->route($package)->to($route);
