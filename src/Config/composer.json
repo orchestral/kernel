@@ -21,9 +21,9 @@
         }
     },
     "require": {
-        "php": ">=7.2",
-        "illuminate/filesystem": "^7.0",
-        "orchestra/contracts": "^5.0"
+        "php": ">=7.3",
+        "illuminate/filesystem": "^8.0",
+        "orchestra/contracts": "^6.0"
     },
     "extra": {
         "branch-alias": {

@@ -19,10 +19,10 @@
         ]
     },
     "require": {
-        "php": ">=7.2",
-        "illuminate/routing": "^7.0",
-        "orchestra/contracts": "^5.0",
-        "orchestra/support-core": "^5.0"
+        "php": ">=7.3",
+        "illuminate/routing": "^8.0",
+        "orchestra/contracts": "^6.0",
+        "orchestra/support-core": "^6.0"
     },
     "extra": {
         "branch-alias": {
