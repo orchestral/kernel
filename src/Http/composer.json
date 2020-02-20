@@ -18,10 +18,10 @@
     "require": {
         "php": ">=7.2",
         "orchestra/contracts": "^4.0",
-        "orchestra/extension": "^4.0",
         "orchestra/support": "^4.0"
     },
     "suggest": {
+        "orchestra/extension": "Allow to use Orchestra Extension route resolver (^4.0).",
         "hashids/hashids": "Allow to use HashId as a URL id replacement (^1.0)."
     },
     "extra": {
