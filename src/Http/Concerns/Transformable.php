@@ -2,8 +2,8 @@
 
 namespace Orchestra\Http\Concerns;
 
+use Illuminate\Support\Str;
 use Orchestra\Support\Arr;
-use Orchestra\Support\Str;
 
 trait Transformable
 {
