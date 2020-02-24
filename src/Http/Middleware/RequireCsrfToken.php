@@ -12,7 +12,7 @@ class RequireCsrfToken
     /**
      * The application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var \Illuminate\Contracts\Foundation\Application
      */
     protected $app;
 
@@ -25,9 +25,6 @@ class RequireCsrfToken
 
     /**
      * Create a new filter instance.
-     *
-     * @param  \Illuminate\Foundation\Application  $app
-     * @param  \Illuminate\Contracts\Encryption\Encrypter  $encrypter
      */
     public function __construct(Application $app, Encrypter $encrypter)
     {
@@ -39,7 +36,6 @@ class RequireCsrfToken
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      *
      * @return mixed
      */

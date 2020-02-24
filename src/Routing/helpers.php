@@ -6,10 +6,7 @@ if (! \function_exists('redirect_with_errors')) {
     /**
      * Redirect with input and errors.
      *
-     * @param  string  $to
      * @param  \Illuminate\Contracts\Support\MessageBag|array  $errors
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     function redirect_with_errors(string $to, $errors): RedirectResponse
     {
@@ -20,10 +17,6 @@ if (! \function_exists('redirect_with_errors')) {
 if (! \function_exists('redirect_with_message')) {
     /**
      * Queue notification and redirect.
-     *
-     * @param  string  $to
-     * @param  string|null  $message
-     * @param  string  $type
      *
      * @return mixed
      */

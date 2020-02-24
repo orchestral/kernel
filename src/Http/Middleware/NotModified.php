@@ -10,7 +10,6 @@ class NotModified
      * Handle the given request and get the response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      *
      * @return \Illuminate\Http\Response
      */

@@ -17,8 +17,6 @@ class PasswordHasher extends AbstractHasher implements HasherContract
 
     /**
      * Construct a new password hasher.
-     *
-     * @param \Illuminate\Contracts\Hashing\Hasher  $hasher
      */
     public function __construct(HasherContract $hasher)
     {
@@ -29,7 +27,6 @@ class PasswordHasher extends AbstractHasher implements HasherContract
      * Hash the given value.
      *
      * @param  string  $value
-     * @param  array   $options
      *
      * @return string
      */
@@ -55,7 +52,6 @@ class PasswordHasher extends AbstractHasher implements HasherContract
      *
      * @param  string  $value
      * @param  string  $hashedValue
-     * @param  array   $options
      *
      * @return bool
      */
@@ -72,7 +68,6 @@ class PasswordHasher extends AbstractHasher implements HasherContract
      * Check if the given hash has been hashed using the given options.
      *
      * @param  string  $hashedValue
-     * @param  array   $options
      *
      * @return bool
      */

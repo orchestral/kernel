@@ -28,8 +28,6 @@ class ConfigPublishCommand extends Command
     /**
      * Execute the console command.
      *
-     * @param  \Orchestra\Publisher\Publishing\Config  $config
-     *
      * @return int
      */
     public function handle(Config $config)

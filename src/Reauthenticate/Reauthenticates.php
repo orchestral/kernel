@@ -20,8 +20,6 @@ trait Reauthenticates
     /**
      * Handle the reauthentication request to the application.
      *
-     * @param \Illuminate\Http\Request $request
-     *
      * @return \Illuminate\Http\Response
      */
     public function postReauthenticate(Request $request)

@@ -9,12 +9,7 @@ class Config extends Publisher
     /**
      * Get the source configuration directory to publish.
      *
-     * @param  string  $package
-     * @param  string  $packagePath
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return string
      */
     protected function getSource(string $package, string $packagePath): string
     {

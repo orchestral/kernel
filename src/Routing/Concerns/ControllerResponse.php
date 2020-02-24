@@ -10,12 +10,6 @@ trait ControllerResponse
 {
     /**
      * Queue notification and redirect.
-     *
-     * @param  string  $to
-     * @param  string|null  $message
-     * @param  string  $type
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function redirectWithMessage(
         string $to,
@@ -28,7 +22,6 @@ trait ControllerResponse
     /**
      * Redirect with input and errors.
      *
-     * @param  string  $to
      * @param  \Illuminate\Contracts\Support\MessageBag|array  $errors
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -40,10 +33,6 @@ trait ControllerResponse
 
     /**
      * Redirect.
-     *
-     * @param  string  $to
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function redirect(string $to): RedirectResponse
     {
@@ -53,14 +42,8 @@ trait ControllerResponse
     /**
      * Halt current request using App::abort().
      *
-     * @param  int  $code
-     * @param  string  $message
-     * @param  array  $headers
-     *
      * @throws \Symfony\Component\HttpKernel\Exception\HttpException
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
-     * @return void
      */
     public function suspend(int $code, string $message = '', array $headers = []): void
     {

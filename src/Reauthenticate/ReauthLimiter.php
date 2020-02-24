@@ -32,9 +32,6 @@ class ReauthLimiter
 
     /**
      * Create a new reauth limiter instance.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param string                   $key
      */
     public function __construct(Request $request, string $key = null)
     {
@@ -44,10 +41,6 @@ class ReauthLimiter
 
     /**
      * Attempt to Reauthenticate the user.
-     *
-     * @param string $password
-     *
-     * @return bool
      */
     public function attempt(string $password, ?string $guard = null): bool
     {
@@ -63,8 +56,6 @@ class ReauthLimiter
 
     /**
      * Validate a reauthenticated Session data.
-     *
-     * @return bool
      */
     public function check(): bool
     {

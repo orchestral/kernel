@@ -29,9 +29,6 @@ abstract class Publisher
 
     /**
      * Create a new publisher instance.
-     *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
-     * @param  string  $publishPath
      */
     public function __construct(Filesystem $files, string $publishPath)
     {
@@ -42,22 +39,12 @@ abstract class Publisher
     /**
      * Get the source directory to publish.
      *
-     * @param  string  $package
-     * @param  string  $packagePath
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return string
      */
     abstract protected function getSource(string $package, string $packagePath): string;
 
     /**
      * Publish files from a given path.
-     *
-     * @param  string  $package
-     * @param  string  $source
-     *
-     * @return bool
      */
     public function publish(string $package, string $source): bool
     {
@@ -70,11 +57,6 @@ abstract class Publisher
 
     /**
      * Publish the files for a package.
-     *
-     * @param  string  $package
-     * @param  string|null  $packagePath
-     *
-     * @return bool
      */
     public function publishPackage(string $package, ?string $packagePath = null): bool
     {
@@ -85,10 +67,6 @@ abstract class Publisher
 
     /**
      * Create the destination directory if it doesn't exist.
-     *
-     * @param  string  $destination
-     *
-     * @return void
      */
     protected function makeDestination(string $destination): void
     {
@@ -99,10 +77,6 @@ abstract class Publisher
 
     /**
      * Determine if a given package has already been published.
-     *
-     * @param  string  $package
-     *
-     * @return bool
      */
     public function alreadyPublished(string $package): bool
     {
@@ -111,10 +85,6 @@ abstract class Publisher
 
     /**
      * Get the target destination path for the files.
-     *
-     * @param  string  $package
-     *
-     * @return string
      */
     public function getDestinationPath(string $package): string
     {
@@ -123,10 +93,6 @@ abstract class Publisher
 
     /**
      * Set the default package path.
-     *
-     * @param  string  $packagePath
-     *
-     * @return void
      */
     public function setPackagePath(string $packagePath): void
     {

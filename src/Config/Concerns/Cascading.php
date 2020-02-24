@@ -22,11 +22,6 @@ trait Cascading
 
     /**
      * Add a new namespace to the loader.
-     *
-     * @param  string  $namespace
-     * @param  string  $hint
-     *
-     * @return void
      */
     public function addNamespace(string $namespace, string $hint): void
     {
@@ -36,8 +31,6 @@ trait Cascading
     /**
      * Returns all registered namespaces with the config
      * loader.
-     *
-     * @return array
      */
     public function getNamespaces(): array
     {
@@ -46,8 +39,6 @@ trait Cascading
 
     /**
      * Get the loader implementation.
-     *
-     * @return \Orchestra\Config\LoaderInterface
      */
     public function getLoader(): LoaderInterface
     {
@@ -56,8 +47,6 @@ trait Cascading
 
     /**
      * Set the loader implementation.
-     *
-     * @param  \Orchestra\Config\LoaderInterface  $loader
      *
      * @return void
      */
@@ -68,8 +57,6 @@ trait Cascading
 
     /**
      * Get the current configuration environment.
-     *
-     * @return string
      */
     public function getEnvironment(): string
     {

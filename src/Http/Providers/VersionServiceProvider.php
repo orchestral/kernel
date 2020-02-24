@@ -37,10 +37,6 @@ class VersionServiceProvider extends ServiceProvider
 
     /**
      * Register supported version.
-     *
-     * @param  \Orchestra\Http\VersionControl  $version
-     *
-     * @return void
      */
     protected function registerSupportedVersions(VersionControl $version): void
     {

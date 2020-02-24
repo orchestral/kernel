@@ -12,7 +12,6 @@ abstract class Transformer extends BaseTransformer
      * Invoke the transformation.
      *
      * @param  mixed  $instance
-     * @param  array  $options
      *
      * @return mixed
      */

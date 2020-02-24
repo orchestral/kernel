@@ -51,8 +51,6 @@ class RouteResolver
 
     /**
      * Construct a new instance.
-     *
-     * @param  \Illuminate\Contracts\Container\Container  $app
      */
     public function __construct(Container $app)
     {
@@ -64,10 +62,6 @@ class RouteResolver
 
     /**
      * Integrate with Orchestra Extension.
-     *
-     * @param  \Illuminate\Contracts\Container\Container  $app
-     *
-     * @return void
      */
     protected function integrateWithExtension(Container $app): void
     {
@@ -82,10 +76,6 @@ class RouteResolver
 
     /**
      *  Return if handles URL match given string.
-     *
-     * @param  string  $path
-     *
-     * @return bool
      */
     public function is(string $path): bool
     {
@@ -96,11 +86,6 @@ class RouteResolver
 
     /**
      *  Return locate handles configuration for a package/app.
-     *
-     * @param  string  $path
-     * @param  array   $options
-     *
-     * @return array
      */
     public function locate(string $path, array $options = []): array
     {
@@ -127,9 +112,6 @@ class RouteResolver
     /**
      * Get extension route.
      *
-     * @param  string  $name
-     * @param  string  $default
-     *
      * @return \Orchestra\Contracts\Extension\UrlGenerator
      */
     public function route(string $name, string $default = '/')
@@ -143,8 +125,6 @@ class RouteResolver
 
     /**
      * Get application mode.
-     *
-     * @return string
      */
     public function mode(): string
     {
@@ -157,11 +137,6 @@ class RouteResolver
 
     /**
      *  Return handles URL for a package/app.
-     *
-     * @param  string  $path
-     * @param  array   $options
-     *
-     * @return string
      */
     public function to(string $path, array $options = []): string
     {
@@ -182,9 +157,6 @@ class RouteResolver
     /**
      * Generate route by name.
      *
-     * @param  string  $name
-     * @param  string  $default
-     *
      * @return \Orchestra\Contracts\Extension\UrlGenerator
      */
     protected function generateRouteByName(string $name, string $default)
@@ -199,13 +171,6 @@ class RouteResolver
     /**
      * Prepare valid route, since we already extract package from route
      * we can re-append query string to route value.
-     *
-     * @param  string  $route
-     * @param  string|null  $item
-     * @param  string  $query
-     * @param  array   $options
-     *
-     * @return string
      */
     protected function prepareValidRoute(string $route, ?string $item, string $query, array $options): string
     {
@@ -231,11 +196,6 @@ class RouteResolver
 
     /**
      * Prepare HTTP query string.
-     *
-     * @param  string  $query
-     * @param  array   $appends
-     *
-     * @return string
      */
     protected function prepareHttpQueryString(string $query, array $appends = []): string
     {
@@ -248,8 +208,6 @@ class RouteResolver
 
     /**
      * Get CSRF Token.
-     *
-     * @return string|null
      */
     protected function getCsrfToken(): ?string
     {

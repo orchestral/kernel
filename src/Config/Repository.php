@@ -28,9 +28,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
 
     /**
      * Create a new configuration repository.
-     *
-     * @param  \Orchestra\Config\LoaderInterface  $loader
-     * @param  string  $environment
      */
     public function __construct(LoaderInterface $loader, string $environment)
     {
@@ -145,8 +142,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     /**
      * Set a given collections of configuration value from cache.
      *
-     * @param  array  $items
-     *
      * @return $this
      */
     public function setFromCache(array $items)
@@ -219,12 +214,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
 
     /**
      * Register a package for cascading configuration.
-     *
-     * @param  string  $package
-     * @param  string  $hint
-     * @param  string|null  $namespace
-     *
-     * @return void
      */
     public function package(string $package, string $hint, ?string $namespace = null): void
     {
@@ -248,11 +237,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
 
     /**
      * Get the configuration namespace for a package.
-     *
-     * @param  string  $package
-     * @param  string|null  $namespace
-     *
-     * @return string
      */
     protected function getPackageNamespace(string $package, ?string $namespace): string
     {
@@ -265,11 +249,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
 
     /**
      * Get the collection identifier.
-     *
-     * @param  string  $group
-     * @param  string|null  $namespace
-     *
-     * @return string
      */
     protected function getCollection(string $group, ?string $namespace = null): string
     {

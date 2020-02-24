@@ -11,8 +11,6 @@ class Router extends BaseRouter
     /**
      * Register the typical authentication routes for an application.
      *
-     * @param  array  $options
-     *
      * @return void
      */
     public function auth(array $options = [])
@@ -45,7 +43,6 @@ class Router extends BaseRouter
      *
      * @param  string  $name
      * @param  string  $controller
-     * @param  array   $options
      *
      * @return void
      */

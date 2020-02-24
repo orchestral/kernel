@@ -22,8 +22,6 @@ class PublisherServiceProvider extends ServiceProvider implements DeferrableProv
 
     /**
      * Register the service provider for Orchestra Platform migrator.
-     *
-     * @return void
      */
     protected function registerMigration(): void
     {
@@ -37,8 +35,6 @@ class PublisherServiceProvider extends ServiceProvider implements DeferrableProv
 
     /**
      * Register the service provider for Orchestra Platform asset publisher.
-     *
-     * @return void
      */
     protected function registerAssetPublisher(): void
     {

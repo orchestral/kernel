@@ -42,8 +42,6 @@ abstract class NamespacedItemResolver extends Resolver
     /**
      * Parse an array of basic segments.
      *
-     * @param  array  $segments
-     *
      * @return array
      */
     protected function parseCustomSegments(array $segments)

@@ -32,9 +32,6 @@ abstract class RouteManager implements RouteManagerContract
 
     /**
      * Construct a new instance.
-     *
-     * @param \Illuminate\Contracts\Container\Container  $app
-     * @param \Orchestra\Http\RouteResolver|null  $resolver
      */
     public function __construct(Container $app, ?RouteResolver $resolver = null)
     {
@@ -46,8 +43,6 @@ abstract class RouteManager implements RouteManagerContract
     /**
      * Resolve application router.
      *
-     * @param  \Illuminate\Contracts\Container\Container  $app
-     *
      * @return mixed
      */
     protected function resolveApplicationRouter(Container $app)
@@ -58,12 +53,7 @@ abstract class RouteManager implements RouteManagerContract
     /**
      * Return route group dispatch for a package/app.
      *
-     * @param  string  $name
-     * @param  string  $default
      * @param  array|\Closure  $attributes
-     * @param  \Closure|null  $callback
-     *
-     * @return array
      */
     public function group(string $name, string $default, $attributes = [], Closure $callback = null): array
     {
@@ -85,11 +75,6 @@ abstract class RouteManager implements RouteManagerContract
 
     /**
      *  Return locate handles configuration for a package/app.
-     *
-     * @param  string  $path
-     * @param  array   $options
-     *
-     * @return array
      */
     public function locate(string $path, array $options = []): array
     {
@@ -98,11 +83,6 @@ abstract class RouteManager implements RouteManagerContract
 
     /**
      *  Return handles URL for a package/app.
-     *
-     * @param  string  $path
-     * @param  array   $options
-     *
-     * @return string
      */
     public function handles(string $path, array $options = []): string
     {
@@ -111,10 +91,6 @@ abstract class RouteManager implements RouteManagerContract
 
     /**
      *  Return if handles URL match given string.
-     *
-     * @param  string  $path
-     *
-     * @return bool
      */
     public function is(string $path): bool
     {
@@ -123,15 +99,11 @@ abstract class RouteManager implements RouteManagerContract
 
     /**
      * Get installation status.
-     *
-     * @return bool
      */
     abstract public function installed(): bool;
 
     /**
      * Get application status.
-     *
-     * @return string
      */
     public function mode(): string
     {
@@ -140,9 +112,6 @@ abstract class RouteManager implements RouteManagerContract
 
     /**
      * Get extension route.
-     *
-     * @param  string  $name
-     * @param  string  $default
      *
      * @return \Orchestra\Contracts\Extension\UrlGenerator
      */
@@ -154,10 +123,7 @@ abstract class RouteManager implements RouteManagerContract
     /**
      * Run the callback when route is matched.
      *
-     * @param  string  $path
      * @param  mixed   $listener
-     *
-     * @return void
      */
     public function when(string $path, $listener): void
     {
@@ -167,11 +133,7 @@ abstract class RouteManager implements RouteManagerContract
     /**
      * Run the callback when route is matched.
      *
-     * @param  string  $path
-     * @param  string  $on
      * @param  mixed   $listener
-     *
-     * @return void
      */
     public function whenOn(string $path, string $on, $listener): void
     {

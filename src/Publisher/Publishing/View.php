@@ -9,12 +9,7 @@ class View extends Publisher
     /**
      * Get the source views directory to publish.
      *
-     * @param  string  $package
-     * @param  string  $packagePath
-     *
      * @throws \InvalidArgumentException
-     *
-     * @return string
      */
     protected function getSource(string $package, string $packagePath): string
     {

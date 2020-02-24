@@ -23,10 +23,6 @@ class VersionControl
     /**
      * Add version.
      *
-     * @param  string  $code
-     * @param  string  $namespace
-     * @param  bool  $default
-     *
      * @return $this
      */
     public function addVersion(string $code, string $namespace, bool $default = false)
@@ -42,8 +38,6 @@ class VersionControl
 
     /**
      * Set default version.
-     *
-     * @param  string  $code
      *
      * @throws \InvalidArgumentException
      *
@@ -62,13 +56,6 @@ class VersionControl
 
     /**
      * Resolve version for requested class.
-     *
-     * @param  string  $namespace
-     * @param  string  $version
-     * @param  string  $group
-     * @param  string  $name
-     *
-     * @return string
      */
     public function resolve(string $namespace, string $version, string $name): string
     {

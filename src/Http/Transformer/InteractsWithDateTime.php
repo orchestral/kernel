@@ -15,8 +15,6 @@ trait InteractsWithDateTime
 
     /**
      * Get timezone from request header.
-     *
-     * @return string
      */
     protected function getTimezoneFromRequestHeader(): string
     {
@@ -30,8 +28,6 @@ trait InteractsWithDateTime
     /**
      * Convert Carbon to datetime string or return null.
      *
-     * @param \Carbon\Carbon|null $datetime
-     *
      * @return string|null
      */
     protected function toDateString(Carbon $datetime = null)
@@ -43,8 +39,6 @@ trait InteractsWithDateTime
 
     /**
      * Convert Carbon to datetime string or return null.
-     *
-     * @param \Carbon\Carbon|null $datetime
      *
      * @return string|null
      */
