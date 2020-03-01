@@ -2,6 +2,15 @@
 
 This changelog references the relevant changes (bug and security fixes) done to `orchestra/kernel`.
 
+## 4.3.0
+
+Released: 2020-03-01
+
+### Added
+
+* Added `Orchestra\Http\Concerns\DisableBuffering`.
+
+
 ## 4.2.0
 
 Released: 2020-01-04

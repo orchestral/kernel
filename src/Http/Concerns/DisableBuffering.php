@@ -2,8 +2,6 @@
 
 namespace Orchestra\Http\Concerns;
 
-use Throwable;
-
 trait DisableBuffering
 {
     /**
@@ -22,11 +20,9 @@ trait DisableBuffering
         }
 
         // Turn off PHP output compression
-        try {
+        \rescue(static function () {
             \ini_set('zlib.output_compression', false);
-        } catch (Throwable $e) {
-            //
-        }
+        }, null, false);
 
         // Implicitly flush the buffer(s)
         \ini_set('implicit_flush', true);
