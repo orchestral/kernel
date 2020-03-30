@@ -14,8 +14,8 @@ class ChannelManager extends Manager
      */
     protected function createMailDriver()
     {
-        $mailer = $this->app->make('orchestra.postal');
+        $mailer = $this->container->make('orchestra.postal');
 
-        return $this->app->make(MailChannel::class, [$mailer->getMailer()]);
+        return $this->container->make(MailChannel::class, [$mailer->getMailer()]);
     }
 }
