@@ -15,7 +15,6 @@ trait PassThrough
      * Determine if the request has a URI that should pass through CSRF verification.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param   array  $routesToExclude
      *
      * @return bool
      */

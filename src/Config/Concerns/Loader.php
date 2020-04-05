@@ -15,11 +15,6 @@ trait Loader
 
     /**
      * Register an after load callback for a given namespace.
-     *
-     * @param  string  $namespace
-     * @param  \Closure  $callback
-     *
-     * @return void
      */
     public function afterLoading(string $namespace, Closure $callback): void
     {
@@ -28,8 +23,6 @@ trait Loader
 
     /**
      * Get the after load callback array.
-     *
-     * @return array
      */
     public function getAfterLoadCallbacks(): array
     {
@@ -38,12 +31,6 @@ trait Loader
 
     /**
      * Call the after load callback for a namespace.
-     *
-     * @param  string  $namespace
-     * @param  string  $group
-     * @param  array   $items
-     *
-     * @return array
      */
     protected function callAfterLoad(string $namespace, string $group, array $items): array
     {

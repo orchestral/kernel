@@ -22,6 +22,7 @@
         "orchestra/support": "^6.0"
     },
     "suggest": {
+        "orchestra/extension": "Allow to use Orchestra Extension route resolver (^5.0).",
         "hashids/hashids": "Allow to use HashId as a URL id replacement (^1.0)."
     },
     "extra": {

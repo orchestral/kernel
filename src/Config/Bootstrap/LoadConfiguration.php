@@ -12,10 +12,6 @@ class LoadConfiguration
 {
     /**
      * Bootstrap the given application.
-     *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     *
-     * @return void
      */
     public function bootstrap(Application $app): void
     {
@@ -47,11 +43,6 @@ class LoadConfiguration
 
     /**
      * Set application environment.
-     *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @param  string|null  $env
-     *
-     * @return void
      */
     protected function setEnvironment(Application $app, ?string $env = null): void
     {

@@ -36,9 +36,6 @@ class FileLoader implements LoaderInterface
 
     /**
      * Create a new file configuration loader.
-     *
-     * @param  \Illuminate\Filesystem\Filesystem  $files
-     * @param  string  $defaultPath
      */
     public function __construct(Filesystem $files, string $defaultPath)
     {
@@ -48,12 +45,6 @@ class FileLoader implements LoaderInterface
 
     /**
      * Load the given configuration group.
-     *
-     * @param  string  $environment
-     * @param  string  $group
-     * @param  string  $namespace
-     *
-     * @return array
      */
     public function load(string $environment, string $group, ?string $namespace = null): array
     {
@@ -91,24 +82,14 @@ class FileLoader implements LoaderInterface
 
     /**
      * Merge the items in the given file into the items.
-     *
-     * @param  array   $items
-     * @param  string  $file
-     *
-     * @return array
      */
-    protected function mergeEnvironment(array $items, $file)
+    protected function mergeEnvironment(array $items, string $file): array
     {
         return \array_replace_recursive($items, $this->files->getRequire($file));
     }
 
     /**
      * Determine if the given group exists.
-     *
-     * @param  string  $group
-     * @param  string|null  $namespace
-     *
-     * @return bool
      */
     public function exists(string $group, ?string $namespace = null): bool
     {
@@ -140,13 +121,6 @@ class FileLoader implements LoaderInterface
 
     /**
      * Apply any cascades to an array of package options.
-     *
-     * @param  string  $env
-     * @param  string  $package
-     * @param  string  $group
-     * @param  array   $items
-     *
-     * @return array
      */
     public function cascadePackage(string $env, string $package, string $group, array $items): array
     {
@@ -173,12 +147,6 @@ class FileLoader implements LoaderInterface
 
     /**
      * Get the package path for an environment and group.
-     *
-     * @param  string  $env
-     * @param  string  $package
-     * @param  string  $group
-     *
-     * @return string
      */
     protected function getPackagePath(string $env, string $package, string $group): string
     {
@@ -189,10 +157,6 @@ class FileLoader implements LoaderInterface
 
     /**
      * Get the configuration path for a namespace.
-     *
-     * @param  string|null  $namespace
-     *
-     * @return string|null
      */
     protected function getPath(?string $namespace): ?string
     {
@@ -207,11 +171,6 @@ class FileLoader implements LoaderInterface
 
     /**
      * Add a new namespace to the loader.
-     *
-     * @param  string  $namespace
-     * @param  string  $hint
-     *
-     * @return void
      */
     public function addNamespace(string $namespace, string $hint): void
     {
@@ -221,8 +180,6 @@ class FileLoader implements LoaderInterface
     /**
      * Returns all registered namespaces with the config
      * loader.
-     *
-     * @return array
      */
     public function getNamespaces(): array
     {
@@ -231,8 +188,6 @@ class FileLoader implements LoaderInterface
 
     /**
      * Get a file's contents by requiring it.
-     *
-     * @param  string  $path
      *
      * @return mixed
      */
@@ -243,8 +198,6 @@ class FileLoader implements LoaderInterface
 
     /**
      * Get the Filesystem instance.
-     *
-     * @return \Illuminate\Filesystem\Filesystem
      */
     public function getFilesystem(): Filesystem
     {

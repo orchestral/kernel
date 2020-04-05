@@ -2,8 +2,8 @@
 
 namespace Orchestra\Http\Concerns;
 
+use Illuminate\Support\Str;
 use Orchestra\Support\Arr;
-use Orchestra\Support\Str;
 
 trait Transformable
 {
@@ -30,8 +30,6 @@ trait Transformable
 
     /**
      * Add options.
-     *
-     * @param  array  $options
      *
      * @return $this
      */
@@ -78,9 +76,6 @@ trait Transformable
      * Merge meta options.
      *
      * @param string|array $meta
-     * @param array        $options
-     *
-     * @return array
      */
     protected function merge($meta, array $options = []): array
     {
@@ -104,11 +99,7 @@ trait Transformable
     /**
      * Resolve includes for transformer.
      *
-     * @param  string  $group
-     * @param  array  $data
      * @param  mixed  $parameters
-     *
-     * @return array
      */
     protected function transformByMeta(string $meta, array $data, ...$parameters): array
     {
@@ -136,10 +127,6 @@ trait Transformable
 
     /**
      * Get option by group.
-     *
-     * @param  string  $name
-     *
-     * @return void
      */
     protected function filterMetaType(string $name): void
     {

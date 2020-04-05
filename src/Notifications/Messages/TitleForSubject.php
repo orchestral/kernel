@@ -14,8 +14,6 @@ trait TitleForSubject
     /**
      * Get the title of the notification.
      *
-     * @param  string  $title
-     *
      * @return $this
      */
     public function title(string $title)

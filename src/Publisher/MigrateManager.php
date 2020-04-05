@@ -24,9 +24,6 @@ class MigrateManager implements Publisher
 
     /**
      * Construct a new instance.
-     *
-     * @param  \Illuminate\Contracts\Container\Container  $app
-     * @param  \Illuminate\Database\Migrations\Migrator  $migrator
      */
     public function __construct(Container $app, Migrator $migrator)
     {
@@ -36,8 +33,6 @@ class MigrateManager implements Publisher
 
     /**
      * Create migration repository if it's not available.
-     *
-     * @return void
      */
     protected function createMigrationRepository(): void
     {
@@ -50,10 +45,6 @@ class MigrateManager implements Publisher
 
     /**
      * Run migration for an extension or application.
-     *
-     * @param  string  $path
-     *
-     * @return void
      */
     public function run(string $path): void
     {
@@ -65,10 +56,6 @@ class MigrateManager implements Publisher
 
     /**
      * Migrate package.
-     *
-     * @param  string  $name
-     *
-     * @return void
      */
     public function package(string $name): void
     {
@@ -96,16 +83,12 @@ class MigrateManager implements Publisher
 
     /**
      * Migrate extension.
-     *
-     * @param  string  $name
-     *
-     * @return bool
      */
     public function extension(string $name): bool
     {
         $files = $this->app->make('files');
 
-        list($basePath, $sourcePath) = $this->getPathFromExtensionName($name);
+        [$basePath, $sourcePath] = $this->getPathFromExtensionName($name);
 
         $paths = [
             "{$basePath}/resources/database/migrations/",
@@ -134,8 +117,6 @@ class MigrateManager implements Publisher
 
     /**
      * Migrate Orchestra Platform.
-     *
-     * @return bool
      */
     public function foundation(): bool
     {
@@ -147,10 +128,6 @@ class MigrateManager implements Publisher
 
     /**
      * Get path from extension name.
-     *
-     * @param  string  $name
-     *
-     * @return array
      */
     protected function getPathFromExtensionName(string $name): array
     {

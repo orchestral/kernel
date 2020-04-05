@@ -28,9 +28,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
 
     /**
      * Create a new configuration repository.
-     *
-     * @param  \Orchestra\Config\LoaderInterface  $loader
-     * @param  string  $environment
      */
     public function __construct(LoaderInterface $loader, string $environment)
     {
@@ -62,7 +59,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function hasGroup($key)
     {
-        list($namespace, $group) = $this->parseKey($key);
+        [$namespace, $group] = $this->parseKey($key);
 
         return $this->loader->exists($group, $namespace);
     }
@@ -77,7 +74,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     public function get($key, $default = null)
     {
-        list($namespace, $group, $item) = $this->parseKey($key);
+        [$namespace, $group, $item] = $this->parseKey($key);
 
         // Configuration items are actually keyed by "collection", which is simply a
         // combination of each namespace and groups, which allows a unique way to
@@ -145,8 +142,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
     /**
      * Set a given collections of configuration value from cache.
      *
-     * @param  array  $items
-     *
      * @return $this
      */
     public function setFromCache(array $items)
@@ -167,7 +162,7 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
      */
     protected function setSingleItem($key, $value = null, $load = true)
     {
-        list($namespace, $group, $item) = $this->parseKey($key);
+        [$namespace, $group, $item] = $this->parseKey($key);
 
         $collection = $this->getCollection($group, $namespace);
 
@@ -219,12 +214,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
 
     /**
      * Register a package for cascading configuration.
-     *
-     * @param  string  $package
-     * @param  string  $hint
-     * @param  string|null  $namespace
-     *
-     * @return void
      */
     public function package(string $package, string $hint, ?string $namespace = null): void
     {
@@ -248,16 +237,11 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
 
     /**
      * Get the configuration namespace for a package.
-     *
-     * @param  string  $package
-     * @param  string|null  $namespace
-     *
-     * @return string
      */
     protected function getPackageNamespace(string $package, ?string $namespace): string
     {
         if (\is_null($namespace)) {
-            list(, $namespace) = \explode('/', $package);
+            [, $namespace] = \explode('/', $package);
         }
 
         return $namespace;
@@ -265,11 +249,6 @@ class Repository extends NamespacedItemResolver implements ArrayAccess, ConfigCo
 
     /**
      * Get the collection identifier.
-     *
-     * @param  string  $group
-     * @param  string|null  $namespace
-     *
-     * @return string
      */
     protected function getCollection(string $group, ?string $namespace = null): string
     {

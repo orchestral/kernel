@@ -17,8 +17,6 @@ class MailMessage extends Message
 
     /**
      * Get an array representation of the message.
-     *
-     * @return array
      */
     public function toArray(): array
     {

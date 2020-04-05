@@ -51,8 +51,6 @@ class ConfigCacheCommand extends BaseCommand
 
     /**
      * Get all of the package names that should be ignored.
-     *
-     * @return array
      */
     protected function configToCache(): array
     {

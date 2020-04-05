@@ -102,7 +102,6 @@ class ReauthenticateTest extends TestCase
     /**
      * Set the session for tests in a backwards compatible way.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \IlluminateSession\Store  $session
      *
      * @return void

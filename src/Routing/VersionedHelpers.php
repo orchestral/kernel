@@ -14,9 +14,6 @@ trait VersionedHelpers
      * Transform and serialize the instance.
      *
      * @param  \Orchestra\Model\Eloquent|\Illuminate\Support\Collection  $instance
-     * @param  string  $transformer
-     * @param  string|null  $serializer
-     * @param  array  $options
      *
      * @return array
      */
@@ -37,8 +34,6 @@ trait VersionedHelpers
      * Process the instance.
      *
      * @param  \Orchestra\Model\Eloquent|\Illuminate\Support\Collection  $instance
-     * @param  string  $name
-     * @param  string  $method
      * @param  mixed  $parameters
      *
      * @return mixed
@@ -54,8 +49,6 @@ trait VersionedHelpers
      * Transform the instance.
      *
      * @param  \Orchestra\Model\Eloquent|\Illuminate\Support\Collection  $instance
-     * @param  string  $name
-     * @param  array  $options
      *
      * @return mixed
      */
@@ -84,7 +77,6 @@ trait VersionedHelpers
      * Serialize the instance.
      *
      * @param  mixed  $instance
-     * @param  string  $name
      *
      * @return array
      */
@@ -109,11 +101,6 @@ trait VersionedHelpers
 
     /**
      * Get versioned resource class name.
-     *
-     * @param  string  $group
-     * @param  string  $name
-     *
-     * @return string
      */
     abstract public function getVersionedResourceClassName(string $group, string $name): string;
 }

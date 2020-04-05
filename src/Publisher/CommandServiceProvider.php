@@ -6,12 +6,12 @@ use Illuminate\Contracts\Foundation\Application;
 use Orchestra\Publisher\Console\AssetPublishCommand;
 use Orchestra\Publisher\Console\ConfigPublishCommand;
 use Orchestra\Publisher\Console\ViewPublishCommand;
-use Orchestra\Publisher\Publishing\Asset as AssetPublishingContract;
 use Orchestra\Publisher\Publishing\Asset;
-use Orchestra\Publisher\Publishing\Config as ConfigPublishingContract;
+use Orchestra\Publisher\Publishing\Asset as AssetPublishingContract;
 use Orchestra\Publisher\Publishing\Config;
-use Orchestra\Publisher\Publishing\View as ViewPublishingContract;
+use Orchestra\Publisher\Publishing\Config as ConfigPublishingContract;
 use Orchestra\Publisher\Publishing\View;
+use Orchestra\Publisher\Publishing\View as ViewPublishingContract;
 use Orchestra\Support\Providers\CommandServiceProvider as ServiceProvider;
 use Orchestra\Support\Providers\Concerns\AliasesProvider;
 
@@ -75,8 +75,6 @@ class CommandServiceProvider extends ServiceProvider
 
     /**
      * Register the asset publisher service and command.
-     *
-     * @return void
      */
     protected function registerAssetPublisher(): void
     {
@@ -94,8 +92,6 @@ class CommandServiceProvider extends ServiceProvider
 
     /**
      * Register the configuration publisher class and command.
-     *
-     * @return void
      */
     protected function registerConfigPublisher(): void
     {
@@ -113,8 +109,6 @@ class CommandServiceProvider extends ServiceProvider
 
     /**
      * Register the view publisher class and command.
-     *
-     * @return void
      */
     protected function registerViewPublisher(): void
     {
@@ -132,8 +126,6 @@ class CommandServiceProvider extends ServiceProvider
 
     /**
      * Register the asset publish console command.
-     *
-     * @return void
      */
     protected function registerAssetPublishCommand(): void
     {
@@ -144,8 +136,6 @@ class CommandServiceProvider extends ServiceProvider
 
     /**
      * Register the configuration publish console command.
-     *
-     * @return void
      */
     protected function registerConfigPublishCommand(): void
     {
@@ -156,8 +146,6 @@ class CommandServiceProvider extends ServiceProvider
 
     /**
      * Register the view publish console command.
-     *
-     * @return void
      */
     protected function registerViewPublishCommand(): void
     {

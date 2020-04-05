@@ -42,8 +42,6 @@ abstract class NamespacedItemResolver extends Resolver
     /**
      * Parse an array of basic segments.
      *
-     * @param  array  $segments
-     *
      * @return array
      */
     protected function parseCustomSegments(array $segments)
@@ -68,7 +66,7 @@ abstract class NamespacedItemResolver extends Resolver
      */
     protected function parseNamespacedSegments($key)
     {
-        list($namespace, $item) = \explode('::', $key);
+        [$namespace, $item] = \explode('::', $key);
 
         // If the namespace is registered as a package, we will just assume the group
         // is equal to the namespace since all packages cascade in this way having

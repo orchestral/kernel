@@ -6,8 +6,6 @@ trait PublishingPath
 {
     /**
      * Get the specified path to the files.
-     *
-     * @return string|null
      */
     protected function getPath(): ?string
     {

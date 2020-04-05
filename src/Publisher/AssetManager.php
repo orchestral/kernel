@@ -26,9 +26,6 @@ class AssetManager implements Publisher
 
     /**
      * Construct a new instance.
-     *
-     * @param  \Illuminate\Contracts\Container\Container  $app
-     * @param  \Orchestra\Publisher\Publishing\Asset  $publisher
      */
     public function __construct(Container $app, Asset $publisher)
     {
@@ -38,9 +35,6 @@ class AssetManager implements Publisher
 
     /**
      * Run migration for an extension or application.
-     *
-     * @param  string  $name
-     * @param  string  $destinationPath
      *
      * @return mixed
      */
@@ -52,11 +46,7 @@ class AssetManager implements Publisher
     /**
      * Migrate extension.
      *
-     * @param  string  $name
-     *
      * @throws \Orchestra\Contracts\Publisher\FilePermissionException
-     *
-     * @return bool
      */
     public function extension(string $name): bool
     {
@@ -75,8 +65,6 @@ class AssetManager implements Publisher
      * Migrate Orchestra Platform.
      *
      * @throws \Orchestra\Contracts\Publisher\FilePermissionException
-     *
-     * @return bool
      */
     public function foundation(): bool
     {
@@ -95,10 +83,6 @@ class AssetManager implements Publisher
 
     /**
      * Get path from extension name.
-     *
-     * @param  string  $name
-     *
-     * @return string|null
      */
     protected function getPathFromExtensionName(string $name): ?string
     {

@@ -25,8 +25,6 @@ class ViewPublishCommand extends Command
     /**
      * Execute the console command.
      *
-     * @param  \Orchestra\Publisher\Publishing\View  $view
-     *
      * @return int
      */
     public function handle(View $view)

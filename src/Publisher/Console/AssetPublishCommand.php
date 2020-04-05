@@ -25,8 +25,6 @@ class AssetPublishCommand extends Command
     /**
      * Execute the console command.
      *
-     * @param  \Orchestra\Publisher\Publishing\Asset  $assets
-     *
      * @return int
      */
     public function handle(Asset $assets)
