@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\TestCase\Unit\Publisher\Publishing;
+namespace Orchestra\Tests\Unit\Publisher\Publishing;
 
 use Mockery as m;
 use Orchestra\Publisher\Publishing\View;

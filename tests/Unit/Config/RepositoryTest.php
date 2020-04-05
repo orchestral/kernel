@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\TestCase\Unit\Config;
+namespace Orchestra\Tests\Unit\Config;
 
 use Mockery as m;
 use Orchestra\Config\Repository;

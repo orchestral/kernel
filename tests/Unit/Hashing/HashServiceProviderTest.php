@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\TestCase\Unit\Hashing;
+namespace Orchestra\Tests\Unit\Hashing;
 
 use Orchestra\Hashing\HashServiceProvider;
 use PHPUnit\Framework\TestCase;

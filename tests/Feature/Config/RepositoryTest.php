@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\TestCase\Integration\Config;
+namespace Orchestra\Tests\Feature\Config;
 
 use Orchestra\Config\Repository;
 use Orchestra\Testbench\TestCase;

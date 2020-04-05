@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\TestCase\Unit\Http\Transformer;
+namespace Orchestra\Tests\Unit\Http\Transformer;
 
 use Carbon\Carbon;
 use Mockery as m;

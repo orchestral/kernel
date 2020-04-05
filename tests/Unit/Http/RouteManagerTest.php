@@ -1,6 +1,6 @@
 <?php
 
-namespace Orchestra\TestCase\Unit\Http;
+namespace Orchestra\Tests\Unit\Http;
 
 use Illuminate\Events\Dispatcher;
 use Illuminate\Routing\Events\RouteMatched;
