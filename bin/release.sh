@@ -2,7 +2,7 @@
 
 set -e
 
-CURRENT_BRANCH="6.x"
+CURRENT_BRANCH="master"
 COMPONENTS=("config" "database" "hashing" "http" "notifications" "routing")
 
 if (( "$#" != 1 ))
