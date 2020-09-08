@@ -17,8 +17,8 @@
     },
     "require": {
         "php": ">=7.3",
-        "illuminate/notifications": "^8.0",
-        "orchestra/notifier": "^6.0"
+        "illuminate/notifications": "^9.0",
+        "orchestra/notifier": "^7.0"
     },
     "extra": {
         "branch-alias": {
