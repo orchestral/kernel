@@ -58,14 +58,17 @@ class AssetManagerTest extends TestCase
     /** @test */
     public function it_cant_publish_assets_for_extension_when_given_an_extension()
     {
-        $app = m::mock('\Illuminate\Container\Container')->makePartial();
+        $app = new class extends Container {
+            public function basePath() {
+                return '/var/www/laravel';
+            }
+        };
+
         $app['files'] = $files = m::mock('\Illuminate\Filesystem\Filesystem');
         $app['orchestra.extension'] = $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
         $app['orchestra.extension.finder'] = $finder = m::mock('\Orchestra\Contracts\Extension\Finder');
 
         $publisher = m::mock('\Orchestra\Publisher\Publishing\Asset');
-
-        $app->shouldReceive('basePath')->once()->andReturn('/var/www/laravel');
 
         $files->shouldReceive('isDirectory')->once()->with('/var/www/laravel/public')->andReturn(false)
             ->shouldReceive('isDirectory')->once()->with('/var/www/laravel/resources/public')->andReturn(true);
@@ -107,11 +110,13 @@ class AssetManagerTest extends TestCase
      */
     public function testFoundationMethod()
     {
-        $app = m::mock('\Illuminate\Container\Container, \Illuminate\Contracts\Foundation\Application');
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
+        $app = new class extends Container {
+            public function basePath() {
+                return '/var/www/laravel';
+            }
+        };
 
-        $app->shouldReceive('basePath')->once()->andReturn('/var/www/laravel')
-            ->shouldReceive('make')->once()->with('files')->andReturn($files);
+        $app['files'] = $files = m::mock('\Illuminate\Filesystem\Filesystem');
 
         $publisher = m::mock('\Orchestra\Publisher\Publishing\Asset');
 
@@ -131,11 +136,13 @@ class AssetManagerTest extends TestCase
      */
     public function testFoundationMethodWhenPublicDirectoryDoesNotExists()
     {
-        $app = m::mock('\Illuminate\Container\Container, \Illuminate\Contracts\Foundation\Application');
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
+        $app = new class extends Container {
+            public function basePath() {
+                return '/var/www/laravel';
+            }
+        };
 
-        $app->shouldReceive('basePath')->once()->andReturn('/var/www/laravel')
-            ->shouldReceive('make')->once()->with('files')->andReturn($files);
+        $app['files'] = $files = m::mock('\Illuminate\Filesystem\Filesystem');
 
         $publisher = m::mock('\Orchestra\Publisher\Publishing\Asset');
 
@@ -156,11 +163,13 @@ class AssetManagerTest extends TestCase
     {
         $this->expectException('Orchestra\Contracts\Publisher\FilePermissionException');
 
-        $app = m::mock('\Illuminate\Container\Container, \Illuminate\Contracts\Foundation\Application');
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
+        $app = new class extends Container {
+            public function basePath() {
+                return '/var/www/laravel';
+            }
+        };
 
-        $app->shouldReceive('basePath')->once()->andReturn('/var/www/laravel/')
-            ->shouldReceive('make')->once()->with('files')->andReturn($files);
+        $app['files'] = $files = m::mock('\Illuminate\Filesystem\Filesystem');
 
         $publisher = m::mock('\Orchestra\Publisher\Publishing\Asset');
 
