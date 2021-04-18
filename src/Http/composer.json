@@ -16,13 +16,13 @@
         }
     },
     "require": {
-        "php": ">=7.3",
+        "php": "^7.4 || ^8.0",
         "orchestra/contracts": "^7.0",
         "orchestra/extension": "^7.0",
         "orchestra/support": "^7.0"
     },
     "suggest": {
-        "orchestra/extension": "Allow to use Orchestra Extension route resolver (^5.0).",
+        "orchestra/extension": "Allow to use Orchestra Extension route resolver (^7.0).",
         "hashids/hashids": "Allow to use HashId as a URL id replacement (^1.0)."
     },
     "extra": {

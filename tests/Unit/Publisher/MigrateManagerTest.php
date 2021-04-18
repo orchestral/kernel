@@ -73,15 +73,18 @@ class MigrateManagerTest extends TestCase
     /** @test */
     public function it_can_run_migrations_for_app_as_extension()
     {
-        $app = m::mock('\Illuminate\Container\Container')->makePartial();
+        $app = new class extends Container {
+            public function basePath() {
+                return '/var/www/laravel';
+            }
+        };
+
         $app['migrator'] = $migrator = m::mock('\Illuminate\Database\Migrations\Migrator');
         $app['files'] = $files = m::mock('\Illuminate\Filesystem\Filesystem');
         $app['orchestra.extension'] = $extension = m::mock('\Orchestra\Contracts\Extension\Factory');
         $app['orchestra.extension.finder'] = $finder = m::mock('\Orchestra\Contracts\Extension\Finder');
 
         $repository = m::mock('\Illuminate\Database\Migrations\DatabaseMigrationRepository');
-
-        $app->shouldReceive('basePath')->once()->andReturn('/var/www/laravel');
 
         $files->shouldReceive('isDirectory')->once()->with('/var/www/laravel/resources/database/migrations/')->andReturn(true)
             ->shouldReceive('isDirectory')->once()->with('/var/www/laravel/resources/migrations/')->andReturn(false)
@@ -98,12 +101,14 @@ class MigrateManagerTest extends TestCase
     /** @test */
     public function it_can_run_migrations_for_foundation()
     {
-        $app = m::mock('\Illuminate\Container\Container, \Illuminate\Contracts\Foundation\Application');
-        $files = m::mock('\Illuminate\Filesystem\Filesystem');
-        $migrator = m::mock('\Illuminate\Database\Migrations\Migrator');
+        $app = new class extends Container {
+            public function basePath() {
+                return '/var/www/laravel';
+            }
+        };
 
-        $app->shouldReceive('basePath')->twice()->andReturn('/var/www/laravel')
-            ->shouldReceive('make')->twice()->with('files')->andReturn($files);
+        $app['files'] = $files = m::mock('\Illuminate\Filesystem\Filesystem');
+        $migrator = m::mock('\Illuminate\Database\Migrations\Migrator');
 
         $repository = m::mock('\Illuminate\Database\Migrations\DatabaseMigrationRepository');
 
